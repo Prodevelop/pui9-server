@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_0oGCYHl7EeaA78uDelJbVQ" name="RootElement">
+  <packagedElement xmi:type="uml:Package" xmi:id="_Nx9mEEmZEeqACsFYZxuD1g" name="PUI9">
+    <packagedElement xmi:type="uml:Interface" xmi:id="_ijVjQEmZEeqACsFYZxuD1g" name="IDao">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_2IgzEEmZEeqACsFYZxuD1g" name="count" concurrency="guarded">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_UAxm0EmbEeqACsFYZxuD1g" name="Long" type="_Oa6xkEmbEeqACsFYZxuD1g" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_2USlQEmZEeqACsFYZxuD1g" name="count">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_urkq8EmaEeqACsFYZxuD1g" name="filterBuilder" type="_Hp2GYEmbEeqACsFYZxuD1g"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_Okb58EmbEeqACsFYZxuD1g" name="Long" type="_Oa6xkEmbEeqACsFYZxuD1g" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_2Xvh4EmZEeqACsFYZxuD1g" name="count">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_ZVEyAEmbEeqACsFYZxuD1g" name="column">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_bQR6cEmbEeqACsFYZxuD1g" name="distinct">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_dx2fUEmbEeqACsFYZxuD1g" name="filterBuilder" type="_Hp2GYEmbEeqACsFYZxuD1g"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_fWe60EmbEeqACsFYZxuD1g" name="long" type="_Oa6xkEmbEeqACsFYZxuD1g" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_2aiXMEmZEeqACsFYZxuD1g" name="getNextValue">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_1i3dcEmbEeqACsFYZxuD1g" name="number" type="_1KW20EmbEeqACsFYZxuD1g" direction="return"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_4Tw3wEmbEeqACsFYZxuD1g" name="columnName">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_5cmvIEmbEeqACsFYZxuD1g" name="filterBuilder" type="_Hp2GYEmbEeqACsFYZxuD1g"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_2dqjsEmZEeqACsFYZxuD1g" name="getMaxValue">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_9dM2wEmbEeqACsFYZxuD1g" name="number" type="_1KW20EmbEeqACsFYZxuD1g" direction="return"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="__C8skEmbEeqACsFYZxuD1g" name="columnName">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_AOggwEmcEeqACsFYZxuD1g" name="filterBuilder" type="_Hp2GYEmbEeqACsFYZxuD1g"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_2g8hMEmZEeqACsFYZxuD1g" name="findOne">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_Jyta4EmcEeqACsFYZxuD1g" name="filterBuilder" type="_Hp2GYEmbEeqACsFYZxuD1g"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_O6a7kEmcEeqACsFYZxuD1g" name="dto" type="_OjFZoEmcEeqACsFYZxuD1g" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_2kmSIEmZEeqACsFYZxuD1g" name="findOne">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_Rdt-wEmcEeqACsFYZxuD1g" name="filterBuilder" type="_Hp2GYEmbEeqACsFYZxuD1g"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_TzrJgEmcEeqACsFYZxuD1g" name="orderBuilder" type="_TrHDYEmcEeqACsFYZxuD1g"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_ZrQn8EmcEeqACsFYZxuD1g" type="_OjFZoEmcEeqACsFYZxuD1g" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_2n4PoEmZEeqACsFYZxuD1g" name="findOne">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_bgd2EEmcEeqACsFYZxuD1g" name="filterBuilder" type="_Hp2GYEmbEeqACsFYZxuD1g"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_fHr0YEmcEeqACsFYZxuD1g" name="language" type="_e5mVEEmcEeqACsFYZxuD1g"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_gTs7kEmcEeqACsFYZxuD1g" type="_OjFZoEmcEeqACsFYZxuD1g" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_2roHMEmZEeqACsFYZxuD1g" name="findAll">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_nnKiIEmcEeqACsFYZxuD1g" type="_nVC3YEmcEeqACsFYZxuD1g" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_2urbMEmZEeqACsFYZxuD1g" name="findAll">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_Yz33gEmdEeqACsFYZxuD1g" type="_nVC3YEmcEeqACsFYZxuD1g" direction="return"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_dPAmEEmdEeqACsFYZxuD1g" name="language" type="_e5mVEEmcEeqACsFYZxuD1g"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_2x4gMEmZEeqACsFYZxuD1g" name="findAll">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_hUDv4EmdEeqACsFYZxuD1g" type="_nVC3YEmcEeqACsFYZxuD1g" direction="return"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_jBFSYEmdEeqACsFYZxuD1g" name="orderBuilder" type="_TrHDYEmcEeqACsFYZxuD1g"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_200fcEmZEeqACsFYZxuD1g" name="findAll">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_Vf_PcEmeEeqACsFYZxuD1g" name="orderBuilder" type="_TrHDYEmcEeqACsFYZxuD1g"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_W1fCwEmeEeqACsFYZxuD1g" name="language" type="_e5mVEEmcEeqACsFYZxuD1g"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_X7-wwEmeEeqACsFYZxuD1g" type="_nVC3YEmcEeqACsFYZxuD1g" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_25DfMEmZEeqACsFYZxuD1g" name="executePaginagedOperation" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_r7gaQEmeEeqACsFYZxuD1g" name="req" type="_jJ92sEmfEeqACsFYZxuD1g"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_1hL7EEmeEeqACsFYZxuD1g" name="consumer" type="_pLe7QCxZEe6dyod91EeCtw"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_ts-JcCxZEe6dyod91EeCtw" name="bulkConsumer" type="_pLe7QCxZEe6dyod91EeCtw"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_28GzMEmZEeqACsFYZxuD1g" name="findWhere">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_8P2LcEmeEeqACsFYZxuD1g" name="filterBuilder" type="_Hp2GYEmbEeqACsFYZxuD1g"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_9S8AIEmeEeqACsFYZxuD1g" type="_nVC3YEmcEeqACsFYZxuD1g" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_2_OYoEmZEeqACsFYZxuD1g" name="findWhere">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="__eGQIEmeEeqACsFYZxuD1g" name="filterBuilder" type="_Hp2GYEmbEeqACsFYZxuD1g"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_AozvwEmfEeqACsFYZxuD1g" name="orderBuilder" type="_TrHDYEmcEeqACsFYZxuD1g"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_Bsk54EmfEeqACsFYZxuD1g" type="_nVC3YEmcEeqACsFYZxuD1g" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_3Ca2kEmZEeqACsFYZxuD1g" name="findWhere">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_Dn5-IEmfEeqACsFYZxuD1g" name="filterBuilder" type="_Hp2GYEmbEeqACsFYZxuD1g"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_E_rpYEmfEeqACsFYZxuD1g" name="language" type="_e5mVEEmcEeqACsFYZxuD1g"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_GKxjgEmfEeqACsFYZxuD1g" type="_nVC3YEmcEeqACsFYZxuD1g" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_3FGXIEmZEeqACsFYZxuD1g" name="findWhere">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_ISWUAEmfEeqACsFYZxuD1g" name="filterBuilder" type="_Hp2GYEmbEeqACsFYZxuD1g"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_JkAwMEmfEeqACsFYZxuD1g" name="orderBuilder" type="_TrHDYEmcEeqACsFYZxuD1g"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_KstdoEmfEeqACsFYZxuD1g" name="language" type="_e5mVEEmcEeqACsFYZxuD1g"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_L5eywEmfEeqACsFYZxuD1g" type="_nVC3YEmcEeqACsFYZxuD1g" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_3IebQEmZEeqACsFYZxuD1g" name="executeCustomQuery">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_OIQ-gEmfEeqACsFYZxuD1g" name="quer" type="_DAm7oCxZEe6dyod91EeCtw"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_O-LS0EmfEeqACsFYZxuD1g" type="_nVC3YEmcEeqACsFYZxuD1g" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_3L47oEmZEeqACsFYZxuD1g" name="executeCustomQueryWithParameters">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_RlFqsEmfEeqACsFYZxuD1g" name="query" type="_DAm7oCxZEe6dyod91EeCtw"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_T63PQEmfEeqACsFYZxuD1g" name="parameters" type="_T0zDgEmfEeqACsFYZxuD1g"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_VW2sIEmfEeqACsFYZxuD1g" type="_nVC3YEmcEeqACsFYZxuD1g" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_3QRFUEmZEeqACsFYZxuD1g" name="getDtoClass">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_ZRZ2IEmfEeqACsFYZxuD1g" type="_YwoEUEmfEeqACsFYZxuD1g" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_3VZc8EmZEeqACsFYZxuD1g" name="getDaoClass">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_dKuREEmfEeqACsFYZxuD1g" type="_dDj5IEmfEeqACsFYZxuD1g" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_3ZocsEmZEeqACsFYZxuD1g" name="findPaginated">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_g-UegEmfEeqACsFYZxuD1g" type="_g4kb0EmfEeqACsFYZxuD1g" direction="return"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_javdoEmfEeqACsFYZxuD1g" name="req" type="_jJ92sEmfEeqACsFYZxuD1g"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_u8cKECxVEe6uf7gFfDj4Kg" name="sum" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_2wII0CxVEe6uf7gFfDj4Kg" name="column">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_Ik5yACxWEe6uf7gFfDj4Kg" type="_Oa6xkEmbEeqACsFYZxuD1g" direction="out"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_9SRnMCxVEe6uf7gFfDj4Kg" name="sum" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_9SRnMSxVEe6uf7gFfDj4Kg" name="column">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_DE5GECxWEe6uf7gFfDj4Kg" name="filterBuilder" type="_Hp2GYEmbEeqACsFYZxuD1g"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_LTsTgCxWEe6uf7gFfDj4Kg" type="_Oa6xkEmbEeqACsFYZxuD1g" direction="out"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_8FVLkCxYEe6dyod91EeCtw" name="executeQuery">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_8FVLkSxYEe6dyod91EeCtw" name="query" type="_DAm7oCxZEe6dyod91EeCtw"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_mhO8MEmZEeqACsFYZxuD1g" name="ITableDao">
+      <generalization xmi:type="uml:Generalization" xmi:id="_pDFN4EmZEeqACsFYZxuD1g" general="_ijVjQEmZEeqACsFYZxuD1g"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_7J6QYEmZEeqACsFYZxuD1g" name="exists">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_0S34YEmfEeqACsFYZxuD1g" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_4_pJgEmfEeqACsFYZxuD1g" name="dtoPk" type="_4uVXEEmfEeqACsFYZxuD1g"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_7OVdYEmZEeqACsFYZxuD1g" name="insert">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_mf4NIEmgEeqACsFYZxuD1g" type="_mVEEQEmgEeqACsFYZxuD1g" direction="return"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_ofab8EmgEeqACsFYZxuD1g" name="dto" type="_mVEEQEmgEeqACsFYZxuD1g"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_7SDfwEmZEeqACsFYZxuD1g" name="bulkInsert">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zp9o0EmgEeqACsFYZxuD1g" type="_ziQeUEmgEeqACsFYZxuD1g" direction="return"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_1Y4owEmgEeqACsFYZxuD1g" name="dtoList" type="_ziQeUEmgEeqACsFYZxuD1g"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_7WvLcEmZEeqACsFYZxuD1g" name="bulkUpdate">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_4Ij7EEmgEeqACsFYZxuD1g" type="_ziQeUEmgEeqACsFYZxuD1g" direction="return"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_4yUCsEmgEeqACsFYZxuD1g" name="dtoList" type="_ziQeUEmgEeqACsFYZxuD1g"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_7bFf8EmZEeqACsFYZxuD1g" name="patch">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_9_NlYEmgEeqACsFYZxuD1g" type="_4uVXEEmfEeqACsFYZxuD1g" direction="return"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_FaMJMEmhEeqACsFYZxuD1g" name="dtoPk" type="_4uVXEEmfEeqACsFYZxuD1g"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_IBXm0EmhEeqACsFYZxuD1g" name="fieldValuesMap" type="_H5HpwEmhEeqACsFYZxuD1g"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_7e_vkEmZEeqACsFYZxuD1g" name="delete">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_LGYP8EmhEeqACsFYZxuD1g" type="_4uVXEEmfEeqACsFYZxuD1g" direction="return"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_NDv7kEmhEeqACsFYZxuD1g" name="dtoPk" type="_4uVXEEmfEeqACsFYZxuD1g"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_7iaP8EmZEeqACsFYZxuD1g" name="bulkDelete">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_T_TYcEmhEeqACsFYZxuD1g" name="dtoPkList" type="_TvezwEmhEeqACsFYZxuD1g"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_Ve1RgEmhEeqACsFYZxuD1g" type="_TvezwEmhEeqACsFYZxuD1g" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_7mEn8EmZEeqACsFYZxuD1g" name="deleteAll"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_7rfTcEmZEeqACsFYZxuD1g" name="deleteAll">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_aCxWwEmhEeqACsFYZxuD1g" name="language" type="_e5mVEEmcEeqACsFYZxuD1g"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_7vxWgEmZEeqACsFYZxuD1g" name="deleteWhere">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_ccC7QEmhEeqACsFYZxuD1g" name="filterBuilder" type="_Hp2GYEmbEeqACsFYZxuD1g"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_7z0wEEmZEeqACsFYZxuD1g" name="findOne">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_e4kBAEmhEeqACsFYZxuD1g" name="dtoPk" type="_4uVXEEmfEeqACsFYZxuD1g"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_hxRTgEmhEeqACsFYZxuD1g" type="_mVEEQEmgEeqACsFYZxuD1g" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_73ZogEmZEeqACsFYZxuD1g" name="findOne">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_jjzBEEmhEeqACsFYZxuD1g" name="dtoPk" type="_4uVXEEmfEeqACsFYZxuD1g"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_mWHXsEmhEeqACsFYZxuD1g" name="lang" type="_e5mVEEmcEeqACsFYZxuD1g"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_narzEEmhEeqACsFYZxuD1g" type="_mVEEQEmgEeqACsFYZxuD1g" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_9BpOEEmZEeqACsFYZxuD1g" name="getDtoPkClass">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_sePzkEmhEeqACsFYZxuD1g" type="_sX5T8EmhEeqACsFYZxuD1g" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_x-qBECxZEe6dyod91EeCtw" name="update">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_x-qBESxZEe6dyod91EeCtw" type="_mVEEQEmgEeqACsFYZxuD1g" direction="return"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_x-qBEixZEe6dyod91EeCtw" name="dto" type="_mVEEQEmgEeqACsFYZxuD1g"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_6lvysCxZEe6dyod91EeCtw" name="bulkPatch" concurrency="guarded">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_6lvysixZEe6dyod91EeCtw" name="dtoPkList" type="_TvezwEmhEeqACsFYZxuD1g"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_6lvysyxZEe6dyod91EeCtw" name="fieldValuesMap" type="_H5HpwEmhEeqACsFYZxuD1g"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_mmvHQEmZEeqACsFYZxuD1g" name="IViewDao">
+      <generalization xmi:type="uml:Generalization" xmi:id="_pUKW0EmZEeqACsFYZxuD1g" general="_ijVjQEmZEeqACsFYZxuD1g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_sJFVgEmZEeqACsFYZxuD1g" name="AbstractDao" isAbstract="true">
+      <generalization xmi:type="uml:Generalization" xmi:id="_9ext8CxcEe6dyod91EeCtw" general="_ijVjQEmZEeqACsFYZxuD1g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_sQ84EEmZEeqACsFYZxuD1g" name="AbstractTableDao" isAbstract="true">
+      <generalization xmi:type="uml:Generalization" xmi:id="_vZNpgEmZEeqACsFYZxuD1g" general="_ynFysCxcEe6dyod91EeCtw"/>
+      <generalization xmi:type="uml:Generalization" xmi:id="_v1_FEEmZEeqACsFYZxuD1g" general="_mhO8MEmZEeqACsFYZxuD1g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_sX-GEEmZEeqACsFYZxuD1g" name="AbstractViewDao" isAbstract="true">
+      <generalization xmi:type="uml:Generalization" xmi:id="_vmaYAEmZEeqACsFYZxuD1g" general="_ynFysCxcEe6dyod91EeCtw"/>
+      <generalization xmi:type="uml:Generalization" xmi:id="_wg1Y4EmZEeqACsFYZxuD1g" general="_mmvHQEmZEeqACsFYZxuD1g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_ynFysCxcEe6dyod91EeCtw" name="AbstractDatabaseDao" isAbstract="true">
+      <generalization xmi:type="uml:Generalization" xmi:id="_7L0M0CxcEe6dyod91EeCtw" general="_sJFVgEmZEeqACsFYZxuD1g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_2c6NsCxcEe6dyod91EeCtw" name="AbstractElasticSearchTableDao" isAbstract="true">
+      <generalization xmi:type="uml:Generalization" xmi:id="_7rkq8CxcEe6dyod91EeCtw" general="_sJFVgEmZEeqACsFYZxuD1g"/>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_fHd5UEmZEeqACsFYZxuD1g" name="APP">
+    <packagedElement xmi:type="uml:Interface" xmi:id="_NMzUcEmiEeqACsFYZxuD1g" name="IMyTableDao">
+      <generalization xmi:type="uml:Generalization" xmi:id="_X4wg0EmiEeqACsFYZxuD1g" general="_mhO8MEmZEeqACsFYZxuD1g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_Nopi8EmiEeqACsFYZxuD1g" name="IMyViewDao">
+      <generalization xmi:type="uml:Generalization" xmi:id="_YOW9YEmiEeqACsFYZxuD1g" general="_mmvHQEmZEeqACsFYZxuD1g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_PBlEwEmiEeqACsFYZxuD1g" name="MyTableDao">
+      <generalization xmi:type="uml:Generalization" xmi:id="_Yk-toEmiEeqACsFYZxuD1g" general="_sQ84EEmZEeqACsFYZxuD1g"/>
+      <generalization xmi:type="uml:Generalization" xmi:id="_oyQNgEmiEeqACsFYZxuD1g" general="_NMzUcEmiEeqACsFYZxuD1g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_PJYV4EmiEeqACsFYZxuD1g" name="MyViewDao">
+      <generalization xmi:type="uml:Generalization" xmi:id="_ZFDU0EmiEeqACsFYZxuD1g" general="_sX-GEEmZEeqACsFYZxuD1g"/>
+      <generalization xmi:type="uml:Generalization" xmi:id="_pDnDQEmiEeqACsFYZxuD1g" general="_Nopi8EmiEeqACsFYZxuD1g"/>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_Hp2GYEmbEeqACsFYZxuD1g" name="FilterBuilder"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_Oa6xkEmbEeqACsFYZxuD1g" name="Long"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_1KW20EmbEeqACsFYZxuD1g" name="Number"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_OjFZoEmcEeqACsFYZxuD1g" name="IDto"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_TrHDYEmcEeqACsFYZxuD1g" name="OrderBuilder"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_e5mVEEmcEeqACsFYZxuD1g" name="PuiLanguage"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_nVC3YEmcEeqACsFYZxuD1g" name="List&lt;IDto>"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_yZH98EmeEeqACsFYZxuD1g" name="Integer"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_T0zDgEmfEeqACsFYZxuD1g" name="List&lt;Object>"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_YwoEUEmfEeqACsFYZxuD1g" name="Class&lt;IDto>"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_dDj5IEmfEeqACsFYZxuD1g" name="Class&lt;? extends IDao&lt;IDto>>"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_g4kb0EmfEeqACsFYZxuD1g" name="SearchResponse&lt;IDto>"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_jJ92sEmfEeqACsFYZxuD1g" name="SearchRequest"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_mrZ9IEmfEeqACsFYZxuD1g" name="IListAdapter&lt;IDto>"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_4uVXEEmfEeqACsFYZxuD1g" name="ITableDtoPK"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_mVEEQEmgEeqACsFYZxuD1g" name="ITableDto"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_ziQeUEmgEeqACsFYZxuD1g" name="List&lt;ITableDto>"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_H5HpwEmhEeqACsFYZxuD1g" name="Map&lt;String, Object>"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_TvezwEmhEeqACsFYZxuD1g" name="List&lt;ITableDtoPk>"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_sX5T8EmhEeqACsFYZxuD1g" name="Class&lt;ITableDtoPk>"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_DAm7oCxZEe6dyod91EeCtw" name="Query"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_pLe7QCxZEe6dyod91EeCtw" name="Consumer"/>
+</uml:Model>

@@ -1,0 +1,683 @@
+{
+  "projectId": "PUI 9 Alerts",
+  "pui9Version": "1.18.0",
+  "database": {
+    "type": "POSTGRE_SQL",
+    "host": "svlpgsql01.prodevelop.es",
+    "port": 5432,
+    "name": "PUI9",
+    "schema": "public",
+    "user": "PUI9",
+    "password": "PUI9"
+  },
+  "server": {
+    "generate": true,
+    "geoProject": false,
+    "dtoProject": "es.prodevelop.pui9.alerts.dto",
+    "daoProject": "es.prodevelop.pui9.alerts.dao",
+    "boProject": "es.prodevelop.pui9.alerts.bo",
+    "webProject": "es.prodevelop.pui9.alerts.web",
+    "basePackage": "",
+    "superController": "AbstractCommonController"
+  },
+  "client": {
+    "generate": false,
+    "clientProject": "es.prodevelop.pui9.client"
+  },
+  "tables": [
+    {
+      "translationTableName": "",
+      "dbName": "PUI_ALERTS_CONFIGURATION",
+      "columns": [
+        {
+          "dbName": "id",
+          "columnVisibility": "completelyhidden",
+          "nullable": false,
+          "autoincrementable": true,
+          "javaDefaultValue": "",
+          "position": 0
+        },
+        {
+          "dbName": "description",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 1
+        },
+        {
+          "dbName": "model",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 2
+        },
+        {
+          "dbName": "column_name",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 3
+        },
+        {
+          "dbName": "type",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "\"MODEL\"",
+          "position": 4
+        },
+        {
+          "dbName": "time_value",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 5
+        },
+        {
+          "dbName": "time_unit",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 6
+        },
+        {
+          "dbName": "time_before_after",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 7
+        },
+        {
+          "dbName": "content",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 8
+        },
+        {
+          "dbName": "emails",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 9
+        },
+        {
+          "dbName": "usr",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 10
+        },
+        {
+          "dbName": "datetime",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 11
+        }
+      ]
+    },
+    {
+      "translationTableName": "",
+      "dbName": "PUI_ALERTS",
+      "columns": [
+        {
+          "dbName": "id",
+          "columnVisibility": "completelyhidden",
+          "nullable": false,
+          "autoincrementable": true,
+          "javaDefaultValue": "",
+          "position": 0
+        },
+        {
+          "dbName": "alert_config_id",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 1
+        },
+        {
+          "dbName": "pk",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 2
+        },
+        {
+          "dbName": "processed",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "0",
+          "position": 3
+        },
+        {
+          "dbName": "launching_datetime",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 4
+        }
+      ]
+    },
+    {
+      "translationTableName": "",
+      "dbName": "PUI_ALERT",
+      "columns": [
+        {
+          "dbName": "id",
+          "columnVisibility": "completelyhidden",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 0
+        },
+        {
+          "dbName": "alert_config_id",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 1
+        },
+        {
+          "dbName": "pk",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 2
+        },
+        {
+          "dbName": "processed",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "0",
+          "position": 3
+        },
+        {
+          "dbName": "launching_datetime",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 4
+        },
+        {
+          "dbName": "read",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "0",
+          "position": 5
+        }
+      ]
+    },
+    {
+      "translationTableName": "",
+      "dbName": "PUI_ALERT_CONFIGURATION",
+      "columns": [
+        {
+          "dbName": "id",
+          "columnVisibility": "completelyhidden",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 0
+        },
+        {
+          "dbName": "description",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 1
+        },
+        {
+          "dbName": "model",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 2
+        },
+        {
+          "dbName": "column_name",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 3
+        },
+        {
+          "dbName": "type",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "\"MODEL\"",
+          "position": 4
+        },
+        {
+          "dbName": "time_value",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 5
+        },
+        {
+          "dbName": "time_unit",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 6
+        },
+        {
+          "dbName": "time_before_after",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 7
+        },
+        {
+          "dbName": "content",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 8
+        },
+        {
+          "dbName": "emails",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 9
+        },
+        {
+          "dbName": "usr",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 10
+        },
+        {
+          "dbName": "datetime",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 11
+        },
+        {
+          "dbName": "is_content_html",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "0",
+          "position": 12
+        }
+      ]
+    }
+  ],
+  "views": [
+    {
+      "dbName": "V_PUI_ALERTS_CONFIGURATION",
+      "columns": [
+        {
+          "dbName": "id",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 0
+        },
+        {
+          "dbName": "description",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 1
+        },
+        {
+          "dbName": "model",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 2
+        },
+        {
+          "dbName": "column_name",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 3
+        },
+        {
+          "dbName": "type",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 4
+        },
+        {
+          "dbName": "time_value",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 5
+        },
+        {
+          "dbName": "time_unit",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 6
+        },
+        {
+          "dbName": "time_before_after",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 7
+        },
+        {
+          "dbName": "content",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 8
+        },
+        {
+          "dbName": "emails",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 9
+        },
+        {
+          "dbName": "usr",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 10
+        },
+        {
+          "dbName": "datetime",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 11
+        }
+      ]
+    },
+    {
+      "dbName": "V_PUI_ALERTS",
+      "columns": [
+        {
+          "dbName": "id",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 0
+        },
+        {
+          "dbName": "alert_config_id",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 1
+        },
+        {
+          "dbName": "pk",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 2
+        },
+        {
+          "dbName": "processed",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 3
+        },
+        {
+          "dbName": "launching_datetime",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 4
+        }
+      ]
+    },
+    {
+      "dbName": "V_PUI_ALERT",
+      "columns": [
+        {
+          "dbName": "id",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 0
+        },
+        {
+          "dbName": "description",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 1
+        },
+        {
+          "dbName": "type",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 2
+        },
+        {
+          "dbName": "model",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 3
+        },
+        {
+          "dbName": "column_name",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 4
+        },
+        {
+          "dbName": "pk",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 5
+        },
+        {
+          "dbName": "launching_datetime",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 6
+        },
+        {
+          "dbName": "processed",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 7
+        },
+        {
+          "dbName": "read",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 8
+        },
+        {
+          "dbName": "content",
+          "columnVisibility": "hidden",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 9
+        },
+        {
+          "dbName": "emails",
+          "columnVisibility": "hidden",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 10
+        }
+      ]
+    },
+    {
+      "dbName": "V_PUI_ALERT_CONFIGURATION",
+      "columns": [
+        {
+          "dbName": "id",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 0
+        },
+        {
+          "dbName": "description",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 1
+        },
+        {
+          "dbName": "type",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 2
+        },
+        {
+          "dbName": "model",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 3
+        },
+        {
+          "dbName": "column_name",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 4
+        },
+        {
+          "dbName": "time_value",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 5
+        },
+        {
+          "dbName": "time_unit",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 6
+        },
+        {
+          "dbName": "time_before_after",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 7
+        },
+        {
+          "dbName": "content",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 8
+        },
+        {
+          "dbName": "emails",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 9
+        },
+        {
+          "dbName": "usr",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 10
+        },
+        {
+          "dbName": "datetime",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 11
+        }
+      ]
+    }
+  ]
+}

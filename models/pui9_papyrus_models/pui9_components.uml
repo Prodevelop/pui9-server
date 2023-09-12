@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_t4BgkBeCEeaDHoCJKrEk6w" name="pui9">
+  <packagedElement xmi:type="uml:Component" xmi:id="_N2DDwJtWEeajUJi6EKjOKA" name="PUI9 GEO (es.prodevelop.pui9.geo)">
+    <packagedElement xmi:type="uml:Component" xmi:id="_dqzFQCfvEeaOQ-PXBXkKrw" name="dao.oracle">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_kxBQMJ1dEemh-vxNOYARBA" client="_dqzFQCfvEeaOQ-PXBXkKrw" supplier="_la_eQJwmEeaNPtWIhXDyag"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_KnYYYJ1eEemh-vxNOYARBA" client="_dqzFQCfvEeaOQ-PXBXkKrw" supplier="_WgOloCZ_EeeKPe7QKZMw_w"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_eT1bMCfvEeaOQ-PXBXkKrw" name="dao.postgresql">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_lKdq8J1dEemh-vxNOYARBA" client="_eT1bMCfvEeaOQ-PXBXkKrw" supplier="_loSTYJwmEeaNPtWIhXDyag"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_LCK28J1eEemh-vxNOYARBA" client="_eT1bMCfvEeaOQ-PXBXkKrw" supplier="_WgOloCZ_EeeKPe7QKZMw_w"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_eiMAQCfvEeaOQ-PXBXkKrw" name="dao.sqlserver">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_lelg0J1dEemh-vxNOYARBA" client="_eiMAQCfvEeaOQ-PXBXkKrw" supplier="_l0Q54JwmEeaNPtWIhXDyag"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_LUDRIJ1eEemh-vxNOYARBA" client="_eiMAQCfvEeaOQ-PXBXkKrw" supplier="_WgOloCZ_EeeKPe7QKZMw_w"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_UmL60CZ_EeeKPe7QKZMw_w" name="CopyOf_geo_1"/>
+    <packagedElement xmi:type="uml:Component" xmi:id="_WJReMCZ_EeeKPe7QKZMw_w" name="CopyOf_dto_1"/>
+    <packagedElement xmi:type="uml:Component" xmi:id="_WgOloCZ_EeeKPe7QKZMw_w" name="dao">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_EJWhwFobEeqdG8HOuna36w" client="_WgOloCZ_EeeKPe7QKZMw_w" supplier="_3a7acJq5EeawRJTILsA7-g"/>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Component" xmi:id="_anmqsJtWEeajUJi6EKjOKA" name="PUI9 Independent Components (es.prodevelop.pui9)">
+    <packagedElement xmi:type="uml:Component" xmi:id="_k7nXgBeIEeaDHoCJKrEk6w" name="reportlauncher">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_9k1NsFYEEem3N8p0WB_3Tg" client="_k7nXgBeIEeaDHoCJKrEk6w" supplier="_Gp7UMJq6EeawRJTILsA7-g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_Su6hEBeJEeaDHoCJKrEk6w" name="openapi">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_XQka8ITyEeiE-JRBJ3PyZg" client="_Su6hEBeJEeaDHoCJKrEk6w" supplier="_Wln-kKDeEea_tt0PQrmEDg"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_n4vBsEUMEeeMPoCdR0R3dw" name="CopyOf_swagger_1"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Component" xmi:id="_fx5lUJtWEeajUJi6EKjOKA" name="PUI9 Common (es.prodevelop.pui9.common)">
+    <packagedElement xmi:type="uml:Component" xmi:id="_4Efs4BeIEeaDHoCJKrEk6w" name="elasticsearch.synch">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_7tW-MJ1fEemh-vxNOYARBA" client="_4Efs4BeIEeaDHoCJKrEk6w" supplier="_Wln-kKDeEea_tt0PQrmEDg"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_8GrdIJ1fEemh-vxNOYARBA" client="_4Efs4BeIEeaDHoCJKrEk6w" supplier="_cBNncJ1dEemh-vxNOYARBA"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_qXOakMrlEeyc5qqhTN9c5w" client="_4Efs4BeIEeaDHoCJKrEk6w" supplier="_YSlwcMrlEeyc5qqhTN9c5w"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_b2sZgJ1dEemh-vxNOYARBA" name="dto">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_uAiTwJ1dEemh-vxNOYARBA" client="_b2sZgJ1dEemh-vxNOYARBA" supplier="_vKGMcBeCEeaDHoCJKrEk6w"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_b8dqUJ1dEemh-vxNOYARBA" name="dao">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_ugqlUJ1dEemh-vxNOYARBA" client="_b8dqUJ1dEemh-vxNOYARBA" supplier="_b2sZgJ1dEemh-vxNOYARBA"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_u3hmIJ1dEemh-vxNOYARBA" client="_b8dqUJ1dEemh-vxNOYARBA" supplier="_3a7acJq5EeawRJTILsA7-g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_cBNncJ1dEemh-vxNOYARBA" name="bo">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_vRzHUJ1dEemh-vxNOYARBA" client="_cBNncJ1dEemh-vxNOYARBA" supplier="_b8dqUJ1dEemh-vxNOYARBA"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_vkG_UJ1dEemh-vxNOYARBA" client="_cBNncJ1dEemh-vxNOYARBA" supplier="_aHI5MBK7EeezuP-IgVVpzA"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_cHvGMJ1dEemh-vxNOYARBA" name="web">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_v7m5UJ1dEemh-vxNOYARBA" client="_cHvGMJ1dEemh-vxNOYARBA" supplier="_cBNncJ1dEemh-vxNOYARBA"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_wOagkJ1dEemh-vxNOYARBA" client="_cHvGMJ1dEemh-vxNOYARBA" supplier="_Wln-kKDeEea_tt0PQrmEDg"/>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Component" xmi:id="_hbvQ8JtWEeajUJi6EKjOKA" name="PUI9 Base (es.prodevelop.pui9)">
+    <packagedElement xmi:type="uml:Component" xmi:id="_vKGMcBeCEeaDHoCJKrEk6w" name="model.dto">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_xIxN8Jq7EeawRJTILsA7-g" client="_vKGMcBeCEeaDHoCJKrEk6w" supplier="_Gp7UMJq6EeawRJTILsA7-g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_3a7acJq5EeawRJTILsA7-g" name="model.dao">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_qnohsIZwEeiYSpSdWNdt9A" client="_3a7acJq5EeawRJTILsA7-g" supplier="_mJLZYIZwEeiYSpSdWNdt9A"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_3olIEDw6EeqSiITpJZEEqA" client="_3a7acJq5EeawRJTILsA7-g" supplier="_z7YdkDw6EeqSiITpJZEEqA"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_Gp7UMJq6EeawRJTILsA7-g" name="utils"/>
+    <packagedElement xmi:type="uml:Component" xmi:id="_la_eQJwmEeaNPtWIhXDyag" name="model.dao.oracle">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_MDNIEJ1cEemh-vxNOYARBA" client="_la_eQJwmEeaNPtWIhXDyag" supplier="_3a7acJq5EeawRJTILsA7-g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_loSTYJwmEeaNPtWIhXDyag" name="model.dao.postgresql">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_MVtNUJ1cEemh-vxNOYARBA" client="_loSTYJwmEeaNPtWIhXDyag" supplier="_3a7acJq5EeawRJTILsA7-g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_l0Q54JwmEeaNPtWIhXDyag" name="model.dao.sqlserver">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_MlShcJ1cEemh-vxNOYARBA" client="_l0Q54JwmEeaNPtWIhXDyag" supplier="_3a7acJq5EeawRJTILsA7-g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_Wln-kKDeEea_tt0PQrmEDg" name="controllers">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_fFjT8BK7EeezuP-IgVVpzA" client="_Wln-kKDeEea_tt0PQrmEDg" supplier="_aHI5MBK7EeezuP-IgVVpzA"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_aHI5MBK7EeezuP-IgVVpzA" name="services">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_eFbTsBK7EeezuP-IgVVpzA" client="_aHI5MBK7EeezuP-IgVVpzA" supplier="_3a7acJq5EeawRJTILsA7-g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_mJLZYIZwEeiYSpSdWNdt9A" name="elasticsearch">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_ubXSAIZwEeiYSpSdWNdt9A" client="_mJLZYIZwEeiYSpSdWNdt9A" supplier="_vKGMcBeCEeaDHoCJKrEk6w"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_z7YdkDw6EeqSiITpJZEEqA" name="model.codegen"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Component" xmi:id="_XQpggJtXEeajUJi6EKjOKA" name="PUI9 Documentos (es.prodevelop.pui9.documentos)">
+    <packagedElement xmi:type="uml:Component" xmi:id="_iYrPwJtVEeajUJi6EKjOKA" name="dto">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_BMcnoJ1hEemh-vxNOYARBA" client="_iYrPwJtVEeajUJi6EKjOKA" supplier="_vKGMcBeCEeaDHoCJKrEk6w"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_gjZJIJtVEeajUJi6EKjOKA" name="dao">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_yQxw4JtVEeajUJi6EKjOKA" client="_gjZJIJtVEeajUJi6EKjOKA" supplier="_iYrPwJtVEeajUJi6EKjOKA"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="__WoVgJ1gEemh-vxNOYARBA" client="_gjZJIJtVEeajUJi6EKjOKA" supplier="_3a7acJq5EeawRJTILsA7-g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_uaiJABeIEeaDHoCJKrEk6w" name="bo">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="___RhMJtVEeajUJi6EKjOKA" client="_uaiJABeIEeaDHoCJKrEk6w" supplier="_gjZJIJtVEeajUJi6EKjOKA"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_0I1nYJ1gEemh-vxNOYARBA" client="_uaiJABeIEeaDHoCJKrEk6w" supplier="_cBNncJ1dEemh-vxNOYARBA"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_rpbyIJ1gEemh-vxNOYARBA" name="web">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_tyTjIJ1gEemh-vxNOYARBA" client="_rpbyIJ1gEemh-vxNOYARBA" supplier="_uaiJABeIEeaDHoCJKrEk6w"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_x49PcJ1gEemh-vxNOYARBA" client="_rpbyIJ1gEemh-vxNOYARBA" supplier="_cHvGMJ1dEemh-vxNOYARBA"/>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Component" xmi:id="_dE4I8JtXEeajUJi6EKjOKA" name="PUI9 Alerts (es.prodevelop.pui9.alerts)">
+    <packagedElement xmi:type="uml:Component" xmi:id="_mIskwJtVEeajUJi6EKjOKA" name="dto">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_wNN_AJ1jEemh-vxNOYARBA" client="_mIskwJtVEeajUJi6EKjOKA" supplier="_vKGMcBeCEeaDHoCJKrEk6w"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_k7lRYJtVEeajUJi6EKjOKA" name="dao">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_yoEPgJtVEeajUJi6EKjOKA" client="_k7lRYJtVEeajUJi6EKjOKA" supplier="_mIskwJtVEeajUJi6EKjOKA"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_yY9d0J1jEemh-vxNOYARBA" client="_k7lRYJtVEeajUJi6EKjOKA" supplier="_3a7acJq5EeawRJTILsA7-g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_dbBQ0CxMEe6uf7gFfDj4Kg" name="bo">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_g_UeACxMEe6uf7gFfDj4Kg" client="_dbBQ0CxMEe6uf7gFfDj4Kg" supplier="_k7lRYJtVEeajUJi6EKjOKA"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_pRHVECxMEe6uf7gFfDj4Kg" client="_dbBQ0CxMEe6uf7gFfDj4Kg" supplier="_cBNncJ1dEemh-vxNOYARBA"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_fBuI4CxMEe6uf7gFfDj4Kg" name="web">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_hnAJECxMEe6uf7gFfDj4Kg" client="_fBuI4CxMEe6uf7gFfDj4Kg" supplier="_dbBQ0CxMEe6uf7gFfDj4Kg"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_qYOHECxMEe6uf7gFfDj4Kg" client="_fBuI4CxMEe6uf7gFfDj4Kg" supplier="_cHvGMJ1dEemh-vxNOYARBA"/>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Component" xmi:id="_1oLBYNfYEea6pfXhzk0ZDQ" name="PUI9 Docgen (es.prodevelop.pui9.docgen)">
+    <packagedElement xmi:type="uml:Component" xmi:id="_ALVeINfZEea6pfXhzk0ZDQ" name="dto">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_fPu_oJ1iEemh-vxNOYARBA" client="_ALVeINfZEea6pfXhzk0ZDQ" supplier="_vKGMcBeCEeaDHoCJKrEk6w"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_AepbsNfZEea6pfXhzk0ZDQ" name="dao">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_MlstENfZEea6pfXhzk0ZDQ" client="_AepbsNfZEea6pfXhzk0ZDQ" supplier="_ALVeINfZEea6pfXhzk0ZDQ"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_kLAm0J1iEemh-vxNOYARBA" client="_AepbsNfZEea6pfXhzk0ZDQ" supplier="_3a7acJq5EeawRJTILsA7-g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_BBSOsNfZEea6pfXhzk0ZDQ" name="bo">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_NzWzANfZEea6pfXhzk0ZDQ" client="_BBSOsNfZEea6pfXhzk0ZDQ" supplier="_AepbsNfZEea6pfXhzk0ZDQ"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_l81JwJ1iEemh-vxNOYARBA" client="_BBSOsNfZEea6pfXhzk0ZDQ" supplier="_cBNncJ1dEemh-vxNOYARBA"/>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Component" xmi:id="_i4CCEGhlEeeDsdtNLN6YWg" name="es.prodevelop.pui9.parent"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_YzPdUJ1iEemh-vxNOYARBA" name="web">
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_YzPdUZ1iEemh-vxNOYARBA" client="_YzPdUJ1iEemh-vxNOYARBA" supplier="_AepbsNfZEea6pfXhzk0ZDQ"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_abje8J1iEemh-vxNOYARBA" client="_YzPdUJ1iEemh-vxNOYARBA" supplier="_BBSOsNfZEea6pfXhzk0ZDQ"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_n6H84J1iEemh-vxNOYARBA" client="_YzPdUJ1iEemh-vxNOYARBA" supplier="_cHvGMJ1dEemh-vxNOYARBA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Component" xmi:id="_eXhSUPo1Eem5OdgcoyEFmA" name="PUI9 Notifications (es.prodevelop.pui9.notifications)">
+    <packagedElement xmi:type="uml:Component" xmi:id="_eXhSUfo1Eem5OdgcoyEFmA" name="dto">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_eXhSUvo1Eem5OdgcoyEFmA" client="_eXhSUfo1Eem5OdgcoyEFmA" supplier="_vKGMcBeCEeaDHoCJKrEk6w"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_eXhSU_o1Eem5OdgcoyEFmA" name="dao">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_eXhSVPo1Eem5OdgcoyEFmA" client="_eXhSU_o1Eem5OdgcoyEFmA" supplier="_eXhSUfo1Eem5OdgcoyEFmA"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_eXhSVfo1Eem5OdgcoyEFmA" client="_eXhSU_o1Eem5OdgcoyEFmA" supplier="_3a7acJq5EeawRJTILsA7-g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_eXhSVvo1Eem5OdgcoyEFmA" name="bo">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_eXhSV_o1Eem5OdgcoyEFmA" client="_eXhSVvo1Eem5OdgcoyEFmA" supplier="_eXhSU_o1Eem5OdgcoyEFmA"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_eXhSWPo1Eem5OdgcoyEFmA" client="_eXhSVvo1Eem5OdgcoyEFmA" supplier="_cBNncJ1dEemh-vxNOYARBA"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_l1A-oPo1Eem5OdgcoyEFmA" name="dto">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_4yNBYPo1Eem5OdgcoyEFmA" client="_l1A-oPo1Eem5OdgcoyEFmA" supplier="_vKGMcBeCEeaDHoCJKrEk6w"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_mGV_MPo1Eem5OdgcoyEFmA" name="dao">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_3KwicPo1Eem5OdgcoyEFmA" client="_mGV_MPo1Eem5OdgcoyEFmA" supplier="_l1A-oPo1Eem5OdgcoyEFmA"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_6XQToPo1Eem5OdgcoyEFmA" client="_mGV_MPo1Eem5OdgcoyEFmA" supplier="_3a7acJq5EeawRJTILsA7-g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_ma9kUPo1Eem5OdgcoyEFmA" name="bo">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_2-j5gPo1Eem5OdgcoyEFmA" client="_ma9kUPo1Eem5OdgcoyEFmA" supplier="_mGV_MPo1Eem5OdgcoyEFmA"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_-HoN8Po1Eem5OdgcoyEFmA" client="_ma9kUPo1Eem5OdgcoyEFmA" supplier="_cBNncJ1dEemh-vxNOYARBA"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_mmEoIPo1Eem5OdgcoyEFmA" name="web">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_2xwzoPo1Eem5OdgcoyEFmA" client="_mmEoIPo1Eem5OdgcoyEFmA" supplier="_ma9kUPo1Eem5OdgcoyEFmA"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_BT7x4Po2Eem5OdgcoyEFmA" client="_mmEoIPo1Eem5OdgcoyEFmA" supplier="_cHvGMJ1dEemh-vxNOYARBA"/>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Component" xmi:id="_KguWcKGLEeq3nsDqGwkTnw" name="pui9_translations"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_PS_yoKGLEeq3nsDqGwkTnw" name="pui9_store"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_RY8ygKGLEeq3nsDqGwkTnw" name="pui9_server_utils"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_r00icKGNEeq3nsDqGwkTnw" name="pui9_notifications"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_tDXZMKGNEeq3nsDqGwkTnw" name="pui9_base"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_tyqIIKGNEeq3nsDqGwkTnw" name="pui9_requests"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_vFuSgKGNEeq3nsDqGwkTnw" name="pui_components"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_wJwiYKGNEeq3nsDqGwkTnw" name="pui9_login"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_w4G2IKGNEeq3nsDqGwkTnw" name="pui9_menu"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_yDfrMKGNEeq3nsDqGwkTnw" name="pui9_admin">
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_EESWIKGZEeq3nsDqGwkTnw" client="_yDfrMKGNEeq3nsDqGwkTnw" supplier="_y1gW8KGNEeq3nsDqGwkTnw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Component" xmi:id="_y1gW8KGNEeq3nsDqGwkTnw" name="pui9_datatables">
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_FDzMAKGREeq3nsDqGwkTnw" client="_y1gW8KGNEeq3nsDqGwkTnw" supplier="_r00icKGNEeq3nsDqGwkTnw"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_FoOuwKGREeq3nsDqGwkTnw" client="_y1gW8KGNEeq3nsDqGwkTnw" supplier="_tyqIIKGNEeq3nsDqGwkTnw"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_yVNsUKGYEeq3nsDqGwkTnw" client="_y1gW8KGNEeq3nsDqGwkTnw" supplier="_vFuSgKGNEeq3nsDqGwkTnw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Component" xmi:id="_zmz4EKGNEeq3nsDqGwkTnw" name="pui9_docgen">
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_JbS3EKGZEeq3nsDqGwkTnw" client="_zmz4EKGNEeq3nsDqGwkTnw" supplier="_y1gW8KGNEeq3nsDqGwkTnw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Component" xmi:id="_tJ4lAKGaEeq3nsDqGwkTnw" name="pui9_documents">
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_ukSGcKGaEeq3nsDqGwkTnw" client="_tJ4lAKGaEeq3nsDqGwkTnw" supplier="_y1gW8KGNEeq3nsDqGwkTnw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Component" xmi:id="_AepaQKGbEeq3nsDqGwkTnw" name="pui9_mixins"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_5dbQ4AsHEeypR6rANR3Fyw" name="PUI9 Dashboards (es.prodevelop.pui9.dashboards)">
+    <packagedElement xmi:type="uml:Component" xmi:id="_5dbQ4QsHEeypR6rANR3Fyw" name="dto">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_5dbQ4gsHEeypR6rANR3Fyw" client="_5dbQ4QsHEeypR6rANR3Fyw" supplier="_vKGMcBeCEeaDHoCJKrEk6w"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_5dbQ4wsHEeypR6rANR3Fyw" name="dao">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_5dbQ5AsHEeypR6rANR3Fyw" client="_5dbQ4wsHEeypR6rANR3Fyw" supplier="_5dbQ4QsHEeypR6rANR3Fyw"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_5dbQ5QsHEeypR6rANR3Fyw" client="_5dbQ4wsHEeypR6rANR3Fyw" supplier="_3a7acJq5EeawRJTILsA7-g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_5dbQ5gsHEeypR6rANR3Fyw" name="bo">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_5dbQ5wsHEeypR6rANR3Fyw" client="_5dbQ5gsHEeypR6rANR3Fyw" supplier="_5dbQ4wsHEeypR6rANR3Fyw"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_5dbQ6AsHEeypR6rANR3Fyw" client="_5dbQ5gsHEeypR6rANR3Fyw" supplier="_cBNncJ1dEemh-vxNOYARBA"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_5dbQ6QsHEeypR6rANR3Fyw" name="web">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_5dbQ6wsHEeypR6rANR3Fyw" client="_5dbQ6QsHEeypR6rANR3Fyw" supplier="_5dbQ5gsHEeypR6rANR3Fyw"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_5dbQ7AsHEeypR6rANR3Fyw" client="_5dbQ6QsHEeypR6rANR3Fyw" supplier="_cHvGMJ1dEemh-vxNOYARBA"/>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Component" xmi:id="_YSlwcMrlEeyc5qqhTN9c5w" name="model.dao.elasticsearch">
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_YSlwccrlEeyc5qqhTN9c5w" client="_YSlwcMrlEeyc5qqhTN9c5w" supplier="_3a7acJq5EeawRJTILsA7-g"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Component" xmi:id="_7joqMCxMEe6uf7gFfDj4Kg" name="PUI9 Keycloak (es.prodevelop.pui9.keycloak)">
+    <packagedElement xmi:type="uml:Component" xmi:id="__A4NICxMEe6uf7gFfDj4Kg" name="bo">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_EOEDsCxNEe6uf7gFfDj4Kg" client="__A4NICxMEe6uf7gFfDj4Kg" supplier="_cBNncJ1dEemh-vxNOYARBA"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="__U6jcCxMEe6uf7gFfDj4Kg" name="web">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_FVHLUCxNEe6uf7gFfDj4Kg" client="__U6jcCxMEe6uf7gFfDj4Kg" supplier="_Wln-kKDeEea_tt0PQrmEDg"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_Izq84CxNEe6uf7gFfDj4Kg" client="__U6jcCxMEe6uf7gFfDj4Kg" supplier="__A4NICxMEe6uf7gFfDj4Kg"/>
+    </packagedElement>
+  </packagedElement>
+</uml:Model>

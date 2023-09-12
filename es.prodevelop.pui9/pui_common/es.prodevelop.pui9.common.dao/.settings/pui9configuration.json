@@ -1,0 +1,532 @@
+{
+  "projectId": "PUI 9 Common",
+  "pui9Version": "1.18.0",
+  "database": {
+    "type": "ORACLE",
+    "host": "orc19c11g.prodevelop.es",
+    "port": 1521,
+    "name": "orc19c11g",
+    "schema": "PETSTORE",
+    "user": "PETSTORE",
+    "password": "PETSTORE"
+  },
+  "server": {
+    "generate": true,
+    "geoProject": false,
+    "dtoProject": "es.prodevelop.pui9.common.dto",
+    "daoProject": "es.prodevelop.pui9.common.dao",
+    "boProject": "es.prodevelop.pui9.common.bo",
+    "webProject": "es.prodevelop.pui9.common.web",
+    "basePackage": "",
+    "superController": "AbstractCommonController"
+  },
+  "client": {
+    "generate": false,
+    "clientProject": "es.prodevelop.pui9.client"
+  },
+  "tables": [
+    {
+      "translationTableName": "",
+      "dbName": "PUI_SESSION",
+      "columns": [
+        {
+          "dbName": "uuid",
+          "columnVisibility": "completelyhidden",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 0
+        },
+        {
+          "dbName": "created",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 1
+        },
+        {
+          "dbName": "expiration",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 2
+        },
+        {
+          "dbName": "lastuse",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 3
+        },
+        {
+          "dbName": "persistent",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "0",
+          "position": 4
+        },
+        {
+          "dbName": "jwt",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 5
+        }
+      ]
+    },
+    {
+      "translationTableName": "",
+      "dbName": "PUI_USER",
+      "columns": [
+        {
+          "dbName": "usr",
+          "columnVisibility": "completelyhidden",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 0
+        },
+        {
+          "dbName": "name",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 1
+        },
+        {
+          "dbName": "password",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 2
+        },
+        {
+          "dbName": "language",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 3
+        },
+        {
+          "dbName": "email",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 4
+        },
+        {
+          "dbName": "disabled",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "0",
+          "position": 5
+        },
+        {
+          "dbName": "disabled_date",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 6
+        },
+        {
+          "dbName": "dateformat",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "\"dd/MM/yyyy\"",
+          "position": 7
+        },
+        {
+          "dbName": "reset_password_token",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 8
+        },
+        {
+          "dbName": "last_access_time",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 9
+        },
+        {
+          "dbName": "last_access_ip",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 10
+        },
+        {
+          "dbName": "last_password_change",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 11
+        }
+      ]
+    },
+    {
+      "translationTableName": "",
+      "dbName": "PUI_PARALLEL_PROCESS",
+      "columns": [
+        {
+          "dbName": "id",
+          "columnVisibility": "completelyhidden",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 0
+        },
+        {
+          "dbName": "instance_assingnee_uuid",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 1
+        },
+        {
+          "dbName": "last_execution",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 2
+        },
+        {
+          "dbName": "last_heartbeat",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 3
+        }
+      ]
+    },
+    {
+      "translationTableName": "",
+      "dbName": "PUI_MULTI_INSTANCE_PROCESS",
+      "columns": [
+        {
+          "dbName": "id",
+          "columnVisibility": "completelyhidden",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 0
+        },
+        {
+          "dbName": "period",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 1
+        },
+        {
+          "dbName": "time_unit",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 2
+        },
+        {
+          "dbName": "instance_assignee_uuid",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 3
+        },
+        {
+          "dbName": "latest_execution",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 4
+        },
+        {
+          "dbName": "latest_heartbeat",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 5
+        }
+      ]
+    },
+    {
+      "translationTableName": "",
+      "dbName": "PUI_MODEL",
+      "columns": [
+        {
+          "dbName": "model",
+          "columnVisibility": "completelyhidden",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 0
+        },
+        {
+          "dbName": "entity",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 1
+        },
+        {
+          "dbName": "filter",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 2
+        },
+        {
+          "dbName": "configuration",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 3
+        }
+      ]
+    },
+    {
+      "translationTableName": "",
+      "dbName": "PUI_API_KEY",
+      "columns": [
+        {
+          "dbName": "api_key",
+          "columnVisibility": "completelyhidden",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 0
+        },
+        {
+          "dbName": "name",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 1
+        },
+        {
+          "dbName": "description",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 2
+        },
+        {
+          "dbName": "profile",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 3
+        }
+      ]
+    },
+    {
+      "translationTableName": "",
+      "dbName": "PUI_USER_MODEL_FILTER",
+      "columns": [
+        {
+          "dbName": "id",
+          "columnVisibility": "completelyhidden",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 0
+        },
+        {
+          "dbName": "usr",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 1
+        },
+        {
+          "dbName": "model",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 2
+        },
+        {
+          "dbName": "label",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 3
+        },
+        {
+          "dbName": "filter",
+          "javaClassName": "es.prodevelop.pui9.filter.FilterGroup",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 4
+        },
+        {
+          "dbName": "isdefault",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "0",
+          "position": 5
+        }
+      ]
+    }
+  ],
+  "views": [
+    {
+      "dbName": "V_PUI_USER",
+      "columns": [
+        {
+          "dbName": "usr",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 0
+        },
+        {
+          "dbName": "name",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 1
+        },
+        {
+          "dbName": "email",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 2
+        },
+        {
+          "dbName": "language",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 3
+        },
+        {
+          "dbName": "dateformat",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 4
+        },
+        {
+          "dbName": "disabled",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 5
+        },
+        {
+          "dbName": "disabled_date",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 6
+        },
+        {
+          "dbName": "last_access_time",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 7
+        },
+        {
+          "dbName": "last_access_ip",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 8
+        },
+        {
+          "dbName": "last_password_change",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 9
+        }
+      ]
+    },
+    {
+      "dbName": "V_PUI_MODEL",
+      "columns": [
+        {
+          "dbName": "model",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 0
+        },
+        {
+          "dbName": "entity",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 1
+        },
+        {
+          "dbName": "filter",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 2
+        },
+        {
+          "dbName": "configuration",
+          "columnVisibility": "hidden",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 3
+        }
+      ]
+    }
+  ]
+}

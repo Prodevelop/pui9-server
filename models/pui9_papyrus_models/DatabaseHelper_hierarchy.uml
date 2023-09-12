@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_0oGCYHl7EeaA78uDelJbVQ" name="RootElement">
+  <packagedElement xmi:type="uml:DataType" xmi:id="_Hp2GYEmbEeqACsFYZxuD1g" name="FilterBuilder"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_Oa6xkEmbEeqACsFYZxuD1g" name="Long"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_1KW20EmbEeqACsFYZxuD1g" name="Number"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_OjFZoEmcEeqACsFYZxuD1g" name="IDto"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_TrHDYEmcEeqACsFYZxuD1g" name="OrderBuilder"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_e5mVEEmcEeqACsFYZxuD1g" name="PuiLanguage"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_nVC3YEmcEeqACsFYZxuD1g" name="List&lt;IDto>"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_yZH98EmeEeqACsFYZxuD1g" name="Integer"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_T0zDgEmfEeqACsFYZxuD1g" name="List&lt;Object>"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_dDj5IEmfEeqACsFYZxuD1g" name="Class&lt;? extends IDao&lt;IDto>>"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_g4kb0EmfEeqACsFYZxuD1g" name="SearchResponse&lt;IDto>"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_jJ92sEmfEeqACsFYZxuD1g" name="SearchRequest"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_mrZ9IEmfEeqACsFYZxuD1g" name="IListAdapter&lt;IDto>"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_4uVXEEmfEeqACsFYZxuD1g" name="ITableDtoPK"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_mVEEQEmgEeqACsFYZxuD1g" name="ITableDto"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_ziQeUEmgEeqACsFYZxuD1g" name="List&lt;ITableDto>"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_H5HpwEmhEeqACsFYZxuD1g" name="Map&lt;String, Object>"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_TvezwEmhEeqACsFYZxuD1g" name="List&lt;ITableDtoPk>"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_sX5T8EmhEeqACsFYZxuD1g" name="Class&lt;ITableDtoPk>"/>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_UsczgEm7EeqACsFYZxuD1g" name="IDatabaseHelper">
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_ifFc8Em7EeqACsFYZxuD1g" name="processSearchText">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_pzgs0Em7EeqACsFYZxuD1g" name="dtoClass" type="_pmwDMEm7EeqACsFYZxuD1g"/>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_uJwUUEm7EeqACsFYZxuD1g" name="fields" type="_t_oH8Em7EeqACsFYZxuD1g"/>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_vnv8UEm7EeqACsFYZxuD1g" name="text">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_w2XrkEm7EeqACsFYZxuD1g" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_iilc4Em7EeqACsFYZxuD1g" name="processSearchText">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_5RD_8Em7EeqACsFYZxuD1g" name="dtoClass" type="_pmwDMEm7EeqACsFYZxuD1g"/>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_88DrAEm7EeqACsFYZxuD1g" name="fieldTextMap" type="_80WggEm7EeqACsFYZxuD1g"/>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_-NCxwEm7EeqACsFYZxuD1g" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_irBAIEm7EeqACsFYZxuD1g" name="processFilters">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_ILpI4Em8EeqACsFYZxuD1g" name="dtoClass" type="_pmwDMEm7EeqACsFYZxuD1g"/>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_LHLs8Em8EeqACsFYZxuD1g" name="filters" type="_KzTHoEm8EeqACsFYZxuD1g"/>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_MklfEEm8EeqACsFYZxuD1g" name="addAlias">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_N9vqYEm8EeqACsFYZxuD1g" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_iucHkEm7EeqACsFYZxuD1g" name="getSqlForPagination">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_R8n6wEm8EeqACsFYZxuD1g" name="page" type="_yZH98EmeEeqACsFYZxuD1g"/>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_TOB4QEm8EeqACsFYZxuD1g" name="size" type="_yZH98EmeEeqACsFYZxuD1g"/>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_UHt5UEm8EeqACsFYZxuD1g" name="query">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_U8XCUEm8EeqACsFYZxuD1g" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_gs9LcFh2EeqFlI83LWajvw" name="getViewsSql">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_nL8BEFh2EeqFlI83LWajvw" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_hB5gsFh2EeqFlI83LWajvw" name="getSqlCastToJson">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_qWUSYFh2EeqFlI83LWajvw" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_WeSfgCxdEe6dyod91EeCtw" name="getDatabaseType">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_WeSfgSxdEe6dyod91EeCtw" type="_UGoroCxdEe6dyod91EeCtw" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_cD-VoCxdEe6dyod91EeCtw" name="getDSLContext" visibility="public">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_cD-VoSxdEe6dyod91EeCtw" type="_avcysCxdEe6dyod91EeCtw" direction="return"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_XBTyEEm7EeqACsFYZxuD1g" name="AbstractDatabaseHelper" isAbstract="true">
+    <generalization xmi:type="uml:Generalization" xmi:id="_kmIMgEm8EeqACsFYZxuD1g" general="_UsczgEm7EeqACsFYZxuD1g"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_YfejwEm8EeqACsFYZxuD1g" name="getSqlConvertDateIntoString" isAbstract="true">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_a1mGkEm8EeqACsFYZxuD1g" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_YjpSEEm8EeqACsFYZxuD1g" name="getSqlCastToString" isAbstract="true">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_d185MEm8EeqACsFYZxuD1g" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_YnWtYEm8EeqACsFYZxuD1g" name="getSqlConvertStringIntoDate" isAbstract="true">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_fswCwEm8EeqACsFYZxuD1g" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_YrzIgEm8EeqACsFYZxuD1g" name="getSqlTextOperation" isAbstract="true">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_iqPuoEm8EeqACsFYZxuD1g" name="isLargeStringField">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_jTop4Em8EeqACsFYZxuD1g" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_Y50y4Em7EeqACsFYZxuD1g" name="OracleDatabaseHelper">
+    <generalization xmi:type="uml:Generalization" xmi:id="_lCEhoEm8EeqACsFYZxuD1g" general="_XBTyEEm7EeqACsFYZxuD1g"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_Y85VAEm7EeqACsFYZxuD1g" name="PostgresqlDatabaseHelper">
+    <generalization xmi:type="uml:Generalization" xmi:id="_lZtlkEm8EeqACsFYZxuD1g" general="_XBTyEEm7EeqACsFYZxuD1g"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_ZBC1MEm7EeqACsFYZxuD1g" name="SqlServerDatabaseHelper">
+    <generalization xmi:type="uml:Generalization" xmi:id="_lzKnYEm8EeqACsFYZxuD1g" general="_XBTyEEm7EeqACsFYZxuD1g"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_pmwDMEm7EeqACsFYZxuD1g" name="Class&lt;IDto>"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_t_oH8Em7EeqACsFYZxuD1g" name="List&lt;String>"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_80WggEm7EeqACsFYZxuD1g" name="Map&lt;String, String>"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_KzTHoEm8EeqACsFYZxuD1g" name="FilterGroup"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_UGoroCxdEe6dyod91EeCtw" name="DatabaseType"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_avcysCxdEe6dyod91EeCtw" name="DSLContext"/>
+</uml:Model>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>pui9_moskitt_model</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+		<nature>es.cv.gvcase.ide.core.MOSKittProjectNature</nature>
+	</natures>
+</projectDescription>

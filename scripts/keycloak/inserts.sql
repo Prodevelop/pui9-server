@@ -1,0 +1,3 @@
+-- variables
+INSERT INTO pui_variable values ('KEYCLOAK_TOKEN', 'bUqJY9qXp45HfYbFVLFWdqnFrSGgpCxNUtJxK3fnhEUmpn6UdqhQtxTgqxZwZg2a', 'Token que usa Keycloak para utilizar los SW de PUI9');
+INSERT INTO pui_variable values ('SESSION_KEYCLOAK_PUBLIC', 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgBC1LSuZO16Ib/6z8uhkAvtsM5fRfME9xdl/kb0PUtL1e3ojkgYI+AgkzVbQCQqJ9Z5Qd30A3AX/CR8v1f1WTA8E/Yl+C21p4HDms/Wmxhyof7dbHz9Qbah5rnjyn9BzB9lt31JczENfJ9IISBgskRmGu4GbVxfmWww5mHkVupgndWJvoW4Nanz19MB+gcIGXSWsekhbybpEOh6TtbI+ci5FqS0awJvuLq/P+MKhK6XovMcrI4/c9pUnhXYajc2RvLmq2JjLF5Ui1B34iMktCy51JfGCwdboM0IG7M/qm/EBnGF1m0sd7LaiFLsYJpLuUsy4Z7pWeQy+SydvAd6MEwIDAQAB', 'clave pública de Keycloak para validar los tokens JWT');

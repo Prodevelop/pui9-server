@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_0oGCYHl7EeaA78uDelJbVQ" name="RootElement">
+  <packagedElement xmi:type="uml:Package" xmi:id="_Cc41YEkDEeqJh_bolIqVBQ" name="PUI9">
+    <packagedElement xmi:type="uml:Class" xmi:id="_WUojQEkAEeqJh_bolIqVBQ" name="AbstractViewDto" isAbstract="true">
+      <generalization xmi:type="uml:Generalization" xmi:id="_eiLzgEkAEeqJh_bolIqVBQ" general="_PJJM8EkAEeqJh_bolIqVBQ"/>
+      <generalization xmi:type="uml:Generalization" xmi:id="_glxb4EkAEeqJh_bolIqVBQ" general="_6QVngEj-EeqJh_bolIqVBQ"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_5MK0wEj-EeqJh_bolIqVBQ" name="ITableDto">
+      <generalization xmi:type="uml:Generalization" xmi:id="_8ZWF8Ej_EeqJh_bolIqVBQ" general="_wnBj4Ej-EeqJh_bolIqVBQ"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_uMEH4Ej_EeqJh_bolIqVBQ" name="createPK"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_PJJM8EkAEeqJh_bolIqVBQ" name="AbstractDto" isAbstract="true">
+      <generalization xmi:type="uml:Generalization" xmi:id="_fuXSwEkAEeqJh_bolIqVBQ" general="_wnBj4Ej-EeqJh_bolIqVBQ"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_Rmh1YEkAEeqJh_bolIqVBQ" name="equals"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_R1EnsEkAEeqJh_bolIqVBQ" name="hashCode"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_R6eFEEkAEeqJh_bolIqVBQ" name="toString"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_WOe38EkAEeqJh_bolIqVBQ" name="AbstractTableDto" isAbstract="true">
+      <generalization xmi:type="uml:Generalization" xmi:id="_eLS9gEkAEeqJh_bolIqVBQ" general="_PJJM8EkAEeqJh_bolIqVBQ"/>
+      <generalization xmi:type="uml:Generalization" xmi:id="_gUdCYEkAEeqJh_bolIqVBQ" general="_5MK0wEj-EeqJh_bolIqVBQ"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_wnBj4Ej-EeqJh_bolIqVBQ" name="IDto">
+      <generalization xmi:type="uml:Generalization" xmi:id="_8I2y4Ej_EeqJh_bolIqVBQ" general="_tsOmsEj-EeqJh_bolIqVBQ"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_6QVngEj-EeqJh_bolIqVBQ" name="IViewDto">
+      <generalization xmi:type="uml:Generalization" xmi:id="_8t9rEEj_EeqJh_bolIqVBQ" general="_wnBj4Ej-EeqJh_bolIqVBQ"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_tsOmsEj-EeqJh_bolIqVBQ" name="IPuiObject"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_O-q68EkDEeqJh_bolIqVBQ" name="APP">
+    <packagedElement xmi:type="uml:Interface" xmi:id="_AgEqwEkAEeqJh_bolIqVBQ" name="IMyTable">
+      <generalization xmi:type="uml:Generalization" xmi:id="_FEuhsEkAEeqJh_bolIqVBQ" general="_5MK0wEj-EeqJh_bolIqVBQ"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_a102gEkAEeqJh_bolIqVBQ" name="MyView">
+      <generalization xmi:type="uml:Generalization" xmi:id="_fKbfQEkAEeqJh_bolIqVBQ" general="_WUojQEkAEeqJh_bolIqVBQ"/>
+      <generalization xmi:type="uml:Generalization" xmi:id="_hK2e4EkAEeqJh_bolIqVBQ" general="_CHTuUEkAEeqJh_bolIqVBQ"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Z68ioEkAEeqJh_bolIqVBQ" name="MyTable">
+      <generalization xmi:type="uml:Generalization" xmi:id="_e3D3UEkAEeqJh_bolIqVBQ" general="_WOe38EkAEeqJh_bolIqVBQ"/>
+      <generalization xmi:type="uml:Generalization" xmi:id="_g2RWAEkAEeqJh_bolIqVBQ" general="_AgEqwEkAEeqJh_bolIqVBQ"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_CHTuUEkAEeqJh_bolIqVBQ" name="IMyView">
+      <generalization xmi:type="uml:Generalization" xmi:id="_FeQcAEkAEeqJh_bolIqVBQ" general="_6QVngEj-EeqJh_bolIqVBQ"/>
+    </packagedElement>
+  </packagedElement>
+</uml:Model>

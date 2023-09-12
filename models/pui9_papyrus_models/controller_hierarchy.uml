@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_0oGCYHl7EeaA78uDelJbVQ" name="RootElement">
+  <packagedElement xmi:type="uml:Package" xmi:id="_Nx9mEEmZEeqACsFYZxuD1g" name="PUI9">
+    <packagedElement xmi:type="uml:Class" xmi:id="_sJFVgEmZEeqACsFYZxuD1g" name="AbstractPuiController" isAbstract="true">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_sjyKIEm9EeqACsFYZxuD1g" name="getEventLauncher">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_n80esEnAEeqACsFYZxuD1g" type="_n3jkMEnAEeqACsFYZxuD1g" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_l2V9kEnEEeqACsFYZxuD1g" name="getInsertFunctionality">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_uFBPMEnEEeqACsFYZxuD1g" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_l5y6MEnEEeqACsFYZxuD1g" name="getUpdateFunctionality">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_uiM6cEnEEeqACsFYZxuD1g" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_l-sBQEnEEeqACsFYZxuD1g" name="getDeleteFunctionality">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_urxGIEnEEeqACsFYZxuD1g" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_mBzmsEnEEeqACsFYZxuD1g" name="getGetFunctionality">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_vGzcUEnEEeqACsFYZxuD1g" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_mHyS4EnEEeqACsFYZxuD1g" name="getListFunctionality">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_vQLawEnEEeqACsFYZxuD1g" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_mLypIEnEEeqACsFYZxuD1g" name="getReadFunctionality">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_vVmtUEnEEeqACsFYZxuD1g" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_qae3IEnEEeqACsFYZxuD1g" name="getWriteFunctionality">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_vat20EnEEeqACsFYZxuD1g" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_kKpMsCxbEe6dyod91EeCtw" name="getExportFunctionality">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_kKpMsSxbEe6dyod91EeCtw" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_tkBQYEnDEeqACsFYZxuD1g" name="AbstractCommonController" isAbstract="true">
+      <generalization xmi:type="uml:Generalization" xmi:id="_ovxW4EnGEeqACsFYZxuD1g" general="_sJFVgEmZEeqACsFYZxuD1g"/>
+      <generalization xmi:type="uml:Generalization" xmi:id="_pKztEEnGEeqACsFYZxuD1g" general="_6VosQEnEEeqACsFYZxuD1g"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_sfRdkEm9EeqACsFYZxuD1g" name="getDaoRegistry" visibility="protected">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_hXgXkEnAEeqACsFYZxuD1g" type="_hNMlAEnAEeqACsFYZxuD1g" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_yorAkEnEEeqACsFYZxuD1g" name="getService" visibility="protected">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_cOT24EnFEeqACsFYZxuD1g" type="_kfFMgEnAEeqACsFYZxuD1g" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zT-nYEnEEeqACsFYZxuD1g" name="getTableDao" visibility="protected">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_fADlwEnFEeqACsFYZxuD1g" type="_27pV0Em9EeqACsFYZxuD1g" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_0_g8IEnEEeqACsFYZxuD1g" name="getViewDao" visibility="protected">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_iFwLYEnFEeqACsFYZxuD1g" type="_6H6dgEm9EeqACsFYZxuD1g" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_RNP9MEnFEeqACsFYZxuD1g" name="fireEventGet" visibility="protected">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_j9OqYEnFEeqACsFYZxuD1g" name="dto" type="_mVEEQEmgEeqACsFYZxuD1g"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_RRaEcEnFEeqACsFYZxuD1g" name="fireEventTemplate" visibility="protected">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_lNuB4EnFEeqACsFYZxuD1g" name="dto" type="_mVEEQEmgEeqACsFYZxuD1g"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_RUra4EnFEeqACsFYZxuD1g" name="fireEventInsert" visibility="protected">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_lxAVIEnFEeqACsFYZxuD1g" name="dto" type="_mVEEQEmgEeqACsFYZxuD1g"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_RY6aoEnFEeqACsFYZxuD1g" name="fireEventUpdate" visibility="protected">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_m57sEEnFEeqACsFYZxuD1g" name="oldDto" type="_mVEEQEmgEeqACsFYZxuD1g"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_mv0GwEnFEeqACsFYZxuD1g" name="dto" type="_mVEEQEmgEeqACsFYZxuD1g"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_Rc5iwEnFEeqACsFYZxuD1g" name="fireEventPatch" visibility="protected">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_qTpZ4EnFEeqACsFYZxuD1g" name="oldDto" type="_mVEEQEmgEeqACsFYZxuD1g"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_qTr2IEnFEeqACsFYZxuD1g" name="dto" type="_mVEEQEmgEeqACsFYZxuD1g"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_RgMHUEnFEeqACsFYZxuD1g" name="fireEventDelete" visibility="protected">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_rEQ-gEnFEeqACsFYZxuD1g" name="dto" type="_mVEEQEmgEeqACsFYZxuD1g"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_RjrgMEnFEeqACsFYZxuD1g" name="fireEventList" visibility="protected">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_w5fsgEnFEeqACsFYZxuD1g" name="req" type="_jJ92sEmfEeqACsFYZxuD1g"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_0x9y4EnFEeqACsFYZxuD1g" name="res" type="_0nHNwEnFEeqACsFYZxuD1g"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_RovmYEnFEeqACsFYZxuD1g" name="hasLanguageSupport" visibility="protected">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_t1xc0EnFEeqACsFYZxuD1g" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_6VosQEnEEeqACsFYZxuD1g" name="IPuiCommonController">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_2Uxe4EnEEeqACsFYZxuD1g" name="template">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_-jeJMEnFEeqACsFYZxuD1g" type="_mVEEQEmgEeqACsFYZxuD1g" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_3IjsQEnEEeqACsFYZxuD1g" name="get">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="__QfAMEnFEeqACsFYZxuD1g" type="_mVEEQEmgEeqACsFYZxuD1g" direction="return"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_FV-XwEnGEeqACsFYZxuD1g" name="dtoPk" type="_4uVXEEmfEeqACsFYZxuD1g"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_33lVcEnEEeqACsFYZxuD1g" name="insert">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="__8ZD8EnFEeqACsFYZxuD1g" type="_mVEEQEmgEeqACsFYZxuD1g" direction="return"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_JKvC0EnGEeqACsFYZxuD1g" name="dto" type="_mVEEQEmgEeqACsFYZxuD1g"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_4bQDMEnEEeqACsFYZxuD1g" name="update">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_ADpigEnGEeqACsFYZxuD1g" type="_mVEEQEmgEeqACsFYZxuD1g" direction="return"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_MPRK0EnGEeqACsFYZxuD1g" name="dto" type="_mVEEQEmgEeqACsFYZxuD1g"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_EbndwEnFEeqACsFYZxuD1g" name="patch">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_AiAScEnGEeqACsFYZxuD1g" type="_mVEEQEmgEeqACsFYZxuD1g" direction="return"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_OGiOcEnGEeqACsFYZxuD1g" name="dtoPk" type="_4uVXEEmfEeqACsFYZxuD1g"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_QOEisEnGEeqACsFYZxuD1g" name="properties" type="_H5HpwEmhEeqACsFYZxuD1g"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_FYCpwEnFEeqACsFYZxuD1g" name="delete">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_CZA3YEnGEeqACsFYZxuD1g" type="_4uVXEEmfEeqACsFYZxuD1g" direction="return"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_RSP8gEnGEeqACsFYZxuD1g" name="dtoPk" type="_4uVXEEmfEeqACsFYZxuD1g"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_GVdUQEnFEeqACsFYZxuD1g" name="list">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_Up0VQEnGEeqACsFYZxuD1g" name="req" type="_jJ92sEmfEeqACsFYZxuD1g"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_Up2xgEnGEeqACsFYZxuD1g" name="res" type="_0nHNwEnFEeqACsFYZxuD1g" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_HJup0EnFEeqACsFYZxuD1g" name="export">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_ZQ6cMEnGEeqACsFYZxuD1g" name="req" type="_ZI6WwEnGEeqACsFYZxuD1g"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_b5bWkEnGEeqACsFYZxuD1g" type="_b1eqsEnGEeqACsFYZxuD1g"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_H2XtYEnFEeqACsFYZxuD1g" name="allowGet">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_eRTM4EnGEeqACsFYZxuD1g" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_IcKiEEnFEeqACsFYZxuD1g" name="allowTemplate">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_erlVIEnGEeqACsFYZxuD1g" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_I-ImsEnFEeqACsFYZxuD1g" name="allowInsert">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_ew1BgEnGEeqACsFYZxuD1g" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_JuvkQEnFEeqACsFYZxuD1g" name="allowUpdate">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_e3CXMEnGEeqACsFYZxuD1g" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_Ka0nIEnFEeqACsFYZxuD1g" name="allowPatch">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_fCeLIEnGEeqACsFYZxuD1g" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_K9TCEEnFEeqACsFYZxuD1g" name="allowDelete">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_fURFwEnGEeqACsFYZxuD1g" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_LllKEEnFEeqACsFYZxuD1g" name="allowList">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_fOJ2sEnGEeqACsFYZxuD1g" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_MgujsEnFEeqACsFYZxuD1g" name="allowExport">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_fIRRIEnGEeqACsFYZxuD1g" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_tapYcCxbEe6dyod91EeCtw" name="listFromTable">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_tapYcSxbEe6dyod91EeCtw" name="req" type="_jJ92sEmfEeqACsFYZxuD1g"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_tapYcixbEe6dyod91EeCtw" name="res" type="_xz4pkCxbEe6dyod91EeCtw" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_3mjy0CxbEe6dyod91EeCtw" name="allowListFromTable">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_3mjy0SxbEe6dyod91EeCtw" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_fHd5UEmZEeqACsFYZxuD1g" name="APP">
+    <packagedElement xmi:type="uml:Class" xmi:id="_PBlEwEmiEeqACsFYZxuD1g" name="MyController">
+      <generalization xmi:type="uml:Generalization" xmi:id="_p1m9kEnGEeqACsFYZxuD1g" general="_jBVNYEnGEeqACsFYZxuD1g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_jBVNYEnGEeqACsFYZxuD1g" name="AbstractController" isAbstract="true">
+      <generalization xmi:type="uml:Generalization" xmi:id="_pqqR0EnGEeqACsFYZxuD1g" general="_tkBQYEnDEeqACsFYZxuD1g"/>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_Hp2GYEmbEeqACsFYZxuD1g" name="FilterBuilder"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_Oa6xkEmbEeqACsFYZxuD1g" name="Long"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_1KW20EmbEeqACsFYZxuD1g" name="Number"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_OjFZoEmcEeqACsFYZxuD1g" name="IDto"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_TrHDYEmcEeqACsFYZxuD1g" name="OrderBuilder"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_e5mVEEmcEeqACsFYZxuD1g" name="PuiLanguage"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_nVC3YEmcEeqACsFYZxuD1g" name="List&lt;IDto>"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_yZH98EmeEeqACsFYZxuD1g" name="Integer"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_T0zDgEmfEeqACsFYZxuD1g" name="List&lt;Object>"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_YwoEUEmfEeqACsFYZxuD1g" name="Class&lt;IDto>"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_dDj5IEmfEeqACsFYZxuD1g" name="Class&lt;? extends IDao&lt;IDto>>"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_g4kb0EmfEeqACsFYZxuD1g" name="SearchResponse&lt;IDto>"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_jJ92sEmfEeqACsFYZxuD1g" name="SearchRequest"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_mrZ9IEmfEeqACsFYZxuD1g" name="IListAdapter&lt;IDto>"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_4uVXEEmfEeqACsFYZxuD1g" name="ITableDtoPK"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_mVEEQEmgEeqACsFYZxuD1g" name="ITableDto"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_ziQeUEmgEeqACsFYZxuD1g" name="List&lt;ITableDto>"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_H5HpwEmhEeqACsFYZxuD1g" name="Map&lt;String, Object>"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_TvezwEmhEeqACsFYZxuD1g" name="List&lt;ITableDtoPk>"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_sX5T8EmhEeqACsFYZxuD1g" name="Class&lt;ITableDtoPk>"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_27pV0Em9EeqACsFYZxuD1g" name="ITableDao"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_6H6dgEm9EeqACsFYZxuD1g" name="IViewDao"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_Ap4VsEm-EeqACsFYZxuD1g" name="Class&lt;ITableDto>"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_GSHwkEm-EeqACsFYZxuD1g" name="Class&lt;IViewDto>"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_kskg0Em-EeqACsFYZxuD1g" name="IViewDto"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_IpHAoEm_EeqACsFYZxuD1g" name="List&lt;IViewDto>"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_H6TkcEnAEeqACsFYZxuD1g" name="MultiValuedAttribute"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_eGmAcEnAEeqACsFYZxuD1g" name="PuiApplicationContext"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_hNMlAEnAEeqACsFYZxuD1g" name="DaoRegistry"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_kfFMgEnAEeqACsFYZxuD1g" name="ServiceRegistry"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_n3jkMEnAEeqACsFYZxuD1g" name="EventLauncher"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_r015IEnAEeqACsFYZxuD1g" name="PuiUserSession"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_0nHNwEnFEeqACsFYZxuD1g" name="SearchResponse&lt;IViewDto>"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_ZI6WwEnGEeqACsFYZxuD1g" name="ExportRequest"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_b1eqsEnGEeqACsFYZxuD1g" name="FileDownload"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_xz4pkCxbEe6dyod91EeCtw" name="SearchResponse&lt;ITableDto>"/>
+</uml:Model>

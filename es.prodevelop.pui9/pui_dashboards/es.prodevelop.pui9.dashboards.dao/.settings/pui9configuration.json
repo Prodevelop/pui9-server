@@ -1,0 +1,271 @@
+{
+  "projectId": "PUI 9 Dashboards",
+  "pui9Version": "1.18.0",
+  "database": {
+    "type": "ORACLE",
+    "host": "vallibona.prodevelop.es",
+    "port": 1521,
+    "name": "vallibona",
+    "schema": "PUI9",
+    "user": "PUI9",
+    "password": "PUI9"
+  },
+  "server": {
+    "generate": true,
+    "geoProject": false,
+    "dtoProject": "es.prodevelop.pui9.dashboards.dto",
+    "daoProject": "es.prodevelop.pui9.dashboards.dao",
+    "boProject": "es.prodevelop.pui9.dashboards.bo",
+    "webProject": "es.prodevelop.pui9.dashboards.web",
+    "superController": "AbstractCommonController"
+  },
+  "client": {
+    "generate": false,
+    "clientProject": "es.prodevelop.pui9.client"
+  },
+  "tables": [
+    {
+      "translationTableName": "",
+      "dbName": "PUI_DASHBOARD",
+      "columns": [
+        {
+          "dbName": "id",
+          "columnVisibility": "completelyhidden",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 0
+        },
+        {
+          "dbName": "name",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 1
+        },
+        {
+          "dbName": "definition",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 2
+        }
+      ]
+    },
+    {
+      "translationTableName": "",
+      "dbName": "PUI_WIDGET",
+      "columns": [
+        {
+          "dbName": "id",
+          "columnVisibility": "completelyhidden",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 0
+        },
+        {
+          "dbName": "name",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 1
+        },
+        {
+          "dbName": "typeid",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 2
+        },
+        {
+          "dbName": "definition",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 3
+        }
+      ]
+    },
+    {
+      "translationTableName": "",
+      "dbName": "PUI_WIDGET_TYPE",
+      "columns": [
+        {
+          "dbName": "id",
+          "columnVisibility": "completelyhidden",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 0
+        },
+        {
+          "dbName": "name",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 1
+        },
+        {
+          "dbName": "type",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 2
+        },
+        {
+          "dbName": "component",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 3
+        },
+        {
+          "dbName": "definition",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 4
+        }
+      ]
+    }
+  ],
+  "views": [
+    {
+      "dbName": "V_PUI_DASHBOARD",
+      "columns": [
+        {
+          "dbName": "id",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 0
+        },
+        {
+          "dbName": "name",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 1
+        },
+        {
+          "dbName": "definition",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 2
+        }
+      ]
+    },
+    {
+      "dbName": "V_PUI_WIDGET",
+      "columns": [
+        {
+          "dbName": "id",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 0
+        },
+        {
+          "dbName": "name",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 1
+        },
+        {
+          "dbName": "typeid",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 2
+        },
+        {
+          "dbName": "type",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 3
+        },
+        {
+          "dbName": "component",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 4
+        },
+        {
+          "dbName": "definition",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 5
+        }
+      ]
+    },
+    {
+      "dbName": "V_PUI_WIDGET_TYPE",
+      "columns": [
+        {
+          "dbName": "id",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 0
+        },
+        {
+          "dbName": "name",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 1
+        },
+        {
+          "dbName": "type",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 2
+        },
+        {
+          "dbName": "component",
+          "columnVisibility": "visible",
+          "nullable": false,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 3
+        },
+        {
+          "dbName": "definition",
+          "columnVisibility": "visible",
+          "nullable": true,
+          "autoincrementable": false,
+          "javaDefaultValue": "",
+          "position": 4
+        }
+      ]
+    }
+  ]
+}

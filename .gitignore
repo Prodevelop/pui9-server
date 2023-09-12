@@ -1,0 +1,6 @@
+bin
+target
+.classpath
+org.eclipse.*
+org.jboss.*
+org.sonarlint.*
