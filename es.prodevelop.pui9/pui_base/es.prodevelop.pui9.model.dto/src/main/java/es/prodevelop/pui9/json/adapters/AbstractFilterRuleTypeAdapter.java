@@ -115,7 +115,7 @@ public class AbstractFilterRuleTypeAdapter extends AbstractPuiGsonTypeAdapter<Ab
 		PuiObjectUtils.populateObject(rule, mapValues);
 
 		Object data;
-		if (TodayRuleData.class.isAssignableFrom(type.dataClass)) {
+		if (type.dataClass != null && TodayRuleData.class.isAssignableFrom(type.dataClass)) {
 			data = new TodayRuleData();
 			PuiObjectUtils.populateObject(data, (Map<String, Object>) rule.getData());
 		} else {
