@@ -2,6 +2,7 @@ package es.prodevelop.pui9.common.configuration;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import es.prodevelop.pui9.order.Order;
 import es.prodevelop.pui9.utils.IPuiObject;
@@ -26,6 +27,7 @@ public class ModelConfiguration implements IPuiObject {
 	private Boolean actionCopy = false;
 	private Integer refreshSeconds;
 	private AlertableModel alertable;
+	private Map<String, Map<String, String>> filterColumnValues;
 	private String extra;
 
 	public Boolean isIsdefault() {
@@ -154,6 +156,14 @@ public class ModelConfiguration implements IPuiObject {
 
 	public void setAlertable(AlertableModel alertable) {
 		this.alertable = alertable;
+	}
+
+	public Map<String, Map<String, String>> getFilterColumnValues() {
+		return filterColumnValues;
+	}
+
+	public void setFilterColumnValues(Map<String, Map<String, String>> filterColumnValues) {
+		this.filterColumnValues = filterColumnValues;
 	}
 
 	public String getExtra() {

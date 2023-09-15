@@ -16,6 +16,7 @@ import com.google.gson.stream.JsonWriter;
 
 import es.prodevelop.pui9.filter.AbstractFilterRule;
 import es.prodevelop.pui9.filter.FilterRuleOperation;
+import es.prodevelop.pui9.filter.TodayRuleData;
 import es.prodevelop.pui9.json.GsonSingleton;
 import es.prodevelop.pui9.utils.PuiObjectUtils;
 
@@ -72,6 +73,9 @@ public class AbstractFilterRuleTypeAdapter extends AbstractPuiGsonTypeAdapter<Ab
 				value = GsonSingleton.getSingleton().getGson().fromJson(in, new TypeReference<List<Object>>() {
 				}.getType());
 				break;
+			case BEGIN_OBJECT:
+				value = GsonSingleton.getSingleton().getGson().fromJson(in, LinkedHashMap.class);
+				break;
 			default:
 				break;
 			}
@@ -84,7 +88,7 @@ public class AbstractFilterRuleTypeAdapter extends AbstractPuiGsonTypeAdapter<Ab
 		}
 
 		FilterRuleOperation type = FilterRuleOperation.valueOf((String) mapValues.get("op"));
-		if (type == null || type.clazz == null) {
+		if (type == null) {
 			return null;
 		}
 
@@ -110,7 +114,15 @@ public class AbstractFilterRuleTypeAdapter extends AbstractPuiGsonTypeAdapter<Ab
 		}
 		PuiObjectUtils.populateObject(rule, mapValues);
 
-		return rule.withData(rule.getData());
+		Object data;
+		if (TodayRuleData.class.isAssignableFrom(type.dataClass)) {
+			data = new TodayRuleData();
+			PuiObjectUtils.populateObject(data, (Map<String, Object>) rule.getData());
+		} else {
+			data = rule.getData();
+		}
+
+		return rule.withData(data);
 	}
 
 	@Override

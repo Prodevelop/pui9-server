@@ -239,6 +239,7 @@ public class PuiDocgenTemplateService extends
 			if (req.isFromClient() && PuiUserSession.getCurrentSession() != null) {
 				req.setZoneId(PuiUserSession.getCurrentSession().getZoneId());
 			}
+			req.setDtoClass(dao.getDtoClass());
 			FilterBuilder finalFilterBuilder = getFinalFilter(template, req.buildSearchFilter(dao.getDtoClass()),
 					req.getParameters());
 

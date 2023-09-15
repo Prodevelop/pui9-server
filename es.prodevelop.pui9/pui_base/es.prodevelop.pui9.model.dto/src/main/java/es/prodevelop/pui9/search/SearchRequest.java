@@ -1,32 +1,20 @@
 package es.prodevelop.pui9.search;
 
-import java.time.Instant;
 import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.temporal.ChronoField;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.gson.JsonSyntaxException;
 
-import es.prodevelop.pui9.filter.AbstractFilterRule;
 import es.prodevelop.pui9.filter.FilterBuilder;
 import es.prodevelop.pui9.filter.FilterGroup;
-import es.prodevelop.pui9.filter.rules.BetweenRule;
-import es.prodevelop.pui9.filter.rules.GreaterEqualsThanRule;
-import es.prodevelop.pui9.filter.rules.GreaterThanRule;
-import es.prodevelop.pui9.filter.rules.LowerEqualsThanRule;
-import es.prodevelop.pui9.filter.rules.LowerThanRule;
-import es.prodevelop.pui9.filter.rules.NotBetweenRule;
 import es.prodevelop.pui9.list.adapters.IListAdapter;
 import es.prodevelop.pui9.list.adapters.ListAdapterRegistry;
 import es.prodevelop.pui9.model.dto.DtoRegistry;
@@ -373,17 +361,13 @@ public class SearchRequest implements IPuiObject {
 
 	/**
 	 * Build the {@link FilterBuilder} object from the Filter of the search and the
-	 * filters in the database of the model
+	 * filters in the database of the model. Set the DtoClass before calling this
+	 * method
 	 * 
 	 * @return The filter as FilterBuilder representation
 	 */
 	public FilterBuilder buildSearchFilter(Class<? extends IDto> dtoClass) {
-		purgueNullRules(this.filter);
-
-		// filters from request
-		modifyDateRules(dtoClass, this.filter);
-
-		// filters from dabatase: substitute every filter parameter with the
+		// filters from database: substitute every filter parameter with the
 		// correct value
 		FilterGroup dbFilter = null;
 		if (this.dbFilters != null) {
@@ -407,8 +391,6 @@ public class SearchRequest implements IPuiObject {
 			if (!dbFiltersJson.equals(IListAdapter.SEARCH_PARAMETER)) {
 				try {
 					dbFilter = FilterGroup.fromJson(dbFiltersJson);
-					purgueBadDatabaseRules(dbFilter);
-					purgueNullRules(dbFilter);
 					setDbFilters(dbFilter);
 				} catch (JsonSyntaxException e) {
 					// do nothing
@@ -432,7 +414,12 @@ public class SearchRequest implements IPuiObject {
 			filters = null;
 		}
 
-		return filters != null ? FilterBuilder.newFilter(filters) : FilterBuilder.newAndFilter();
+		if (filters != null) {
+			filters.cleanRules(dtoClass, zoneId);
+			return FilterBuilder.newFilter(filters);
+		} else {
+			return FilterBuilder.newAndFilter();
+		}
 	}
 
 	/**
@@ -441,7 +428,7 @@ public class SearchRequest implements IPuiObject {
 	 * 
 	 * @return The order as {@link OrderBuilder} representation
 	 */
-	public OrderBuilder createOrderForSearch() {
+	public OrderBuilder buildSearchOrder(Class<? extends IDto> dtoClass) {
 		OrderBuilder orderBuilder = OrderBuilder.newOrder();
 
 		if (!getOrder().isEmpty()) {
@@ -454,128 +441,6 @@ public class SearchRequest implements IPuiObject {
 		}
 
 		return orderBuilder;
-	}
-
-	/**
-	 * Iterate the given filter to remove the bad defined rules: those that contains
-	 * the character {@link IListAdapter#SEARCH_PARAMETER} after processing the
-	 * associated Adapter
-	 */
-	private void purgueBadDatabaseRules(FilterGroup filter) {
-		if (filter == null) {
-			return;
-		}
-
-		filter.getRules().removeIf(
-				rule -> rule.getData() != null && rule.getData().toString().contains(IListAdapter.SEARCH_PARAMETER));
-		filter.getGroups().forEach(this::purgueBadDatabaseRules);
-	}
-
-	private void purgueNullRules(FilterGroup filter) {
-		if (filter == null) {
-			return;
-		}
-
-		filter.getRules().removeIf(Objects::isNull);
-		filter.getGroups().forEach(this::purgueNullRules);
-	}
-
-	private void modifyDateRules(Class<? extends IDto> dtoClass, FilterGroup filter) {
-		if (filter == null) {
-			return;
-		}
-
-		for (int i = 0; i < filter.getRules().size(); i++) {
-			AbstractFilterRule nextRule = filter.getRules().get(i);
-			if (!isDate(dtoClass, nextRule.getField())) {
-				continue;
-			}
-
-			AbstractFilterRule newRule = modifyDateFilters(nextRule);
-			if (!Objects.equals(nextRule, newRule)) {
-				filter.getRules().set(i, newRule);
-			}
-		}
-		filter.getGroups().forEach(group -> modifyDateRules(dtoClass, group));
-	}
-
-	private AbstractFilterRule modifyDateFilters(AbstractFilterRule rule) {
-		if (rule.getOp() == null || !(rule.getData() instanceof String)) {
-			return rule;
-		}
-
-		String value = rule.getData().toString().trim();
-		if (!PuiDateUtil.stringHasHours(value)) {
-			value += " 00";
-		}
-		if (!PuiDateUtil.stringHasMinutes(value)) {
-			value += ":00";
-		}
-		if (!PuiDateUtil.stringHasSeconds(value)) {
-			value += ":00";
-		}
-
-		Integer days = null;
-		try {
-			days = Integer.parseInt(rule.getData().toString());
-		} catch (Exception e) {
-			days = null;
-		}
-
-		ZonedDateTime userZonedDateTime;
-		if (days == null) {
-			userZonedDateTime = PuiDateUtil.stringToZonedDateTime(value, zoneId);
-		} else {
-			userZonedDateTime = ZonedDateTime.now(zoneId).plus(days, ChronoUnit.DAYS);
-		}
-
-		Instant valueStartInstant = userZonedDateTime.withHour(0).withMinute(0).withSecond(0)
-				.with(ChronoField.MILLI_OF_SECOND, 0).toInstant();
-		Instant valueEndInstant = userZonedDateTime.withHour(23).withMinute(59).withSecond(59)
-				.with(ChronoField.MILLI_OF_SECOND, 999).toInstant();
-
-		AbstractFilterRule newRule = rule;
-		switch (rule.getOp()) {
-		case eq:
-		case eqt:
-			newRule = BetweenRule.of(rule.getField(), valueStartInstant, valueEndInstant);
-			break;
-		case ne:
-		case net:
-			newRule = NotBetweenRule.of(rule.getField(), valueStartInstant, valueEndInstant);
-			break;
-		case ltt:
-			newRule = LowerThanRule.of(rule.getField(), valueStartInstant);
-			break;
-		case let:
-			newRule = LowerEqualsThanRule.of(rule.getField(), valueEndInstant);
-			break;
-		case le:
-		case gt:
-			rule.withData(valueEndInstant);
-			break;
-		case gtt:
-			newRule = GreaterThanRule.of(rule.getField(), valueEndInstant);
-			break;
-		case lt:
-		case ge:
-			rule.withData(valueStartInstant);
-			break;
-		case get:
-			newRule = GreaterEqualsThanRule.of(rule.getField(), valueStartInstant);
-			break;
-		default:
-			break;
-		}
-
-		return newRule;
-	}
-
-	private boolean isDate(Class<? extends IDto> dtoClass, String field) {
-		if (DtoRegistry.getFieldNameFromColumnName(dtoClass, field) != null) {
-			field = DtoRegistry.getFieldNameFromColumnName(dtoClass, field);
-		}
-		return DtoRegistry.getDateTimeFields(dtoClass).contains(field);
 	}
 
 	@Override

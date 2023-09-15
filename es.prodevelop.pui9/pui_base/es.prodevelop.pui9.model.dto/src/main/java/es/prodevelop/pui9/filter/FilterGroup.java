@@ -1,19 +1,34 @@
 package es.prodevelop.pui9.filter;
 
 import java.lang.reflect.Field;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import es.prodevelop.pui9.filter.TodayRuleData.TodayRuleTypeEnum;
+import es.prodevelop.pui9.filter.rules.BetweenRule;
 import es.prodevelop.pui9.filter.rules.EqualsRule;
+import es.prodevelop.pui9.filter.rules.GreaterEqualsThanRule;
+import es.prodevelop.pui9.filter.rules.GreaterThanRule;
+import es.prodevelop.pui9.filter.rules.LowerEqualsThanRule;
+import es.prodevelop.pui9.filter.rules.LowerThanRule;
+import es.prodevelop.pui9.filter.rules.NotBetweenRule;
 import es.prodevelop.pui9.json.GsonSingleton;
+import es.prodevelop.pui9.list.adapters.IListAdapter;
 import es.prodevelop.pui9.model.dto.DtoRegistry;
+import es.prodevelop.pui9.model.dto.interfaces.IDto;
 import es.prodevelop.pui9.model.dto.interfaces.ITableDto;
 import es.prodevelop.pui9.search.SearchRequest;
 import es.prodevelop.pui9.utils.IPuiObject;
+import es.prodevelop.pui9.utils.PuiDateUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 
@@ -152,6 +167,133 @@ public class FilterGroup implements IPuiObject {
 		return GsonSingleton.getSingleton().getGson().fromJson(toJson(), FilterGroup.class);
 	}
 
+	public void cleanRules(Class<? extends IDto> dtoClass, ZoneId zoneId) {
+		removeWrongDatabaseRules(this);
+		removeNullRules(this);
+		modifyDateRules(this, dtoClass, zoneId);
+	}
+
+	/**
+	 * Iterate the given filter to remove the bad defined rules: those that contains
+	 * the character {@link IListAdapter#SEARCH_PARAMETER} after processing the
+	 * associated Adapter
+	 */
+	private void removeWrongDatabaseRules(FilterGroup filter) {
+		filter.getRules().removeIf(
+				rule -> rule.getData() != null && rule.getData().toString().contains(IListAdapter.SEARCH_PARAMETER));
+		filter.getGroups().forEach(this::removeWrongDatabaseRules);
+	}
+
+	private void removeNullRules(FilterGroup filter) {
+		filter.getRules().removeIf(Objects::isNull);
+		filter.getGroups().forEach(this::removeNullRules);
+	}
+
+	private void modifyDateRules(FilterGroup filter, Class<? extends IDto> dtoClass, ZoneId zoneId) {
+		for (int i = 0; i < filter.getRules().size(); i++) {
+			AbstractFilterRule nextRule = filter.getRules().get(i);
+			if (!nextRule.isDate(dtoClass)) {
+				continue;
+			}
+
+			AbstractFilterRule newRule = modifyDateRule(nextRule, zoneId);
+			if (newRule != null && !Objects.equals(nextRule, newRule)) {
+				filter.getRules().set(i, newRule);
+			}
+		}
+		filter.getGroups().forEach(group -> modifyDateRules(group, dtoClass, zoneId));
+	}
+
+	private AbstractFilterRule modifyDateRule(AbstractFilterRule rule, ZoneId zoneId) {
+		if (rule.getOp() == null) {
+			return rule;
+		}
+
+		TodayRuleTypeEnum todayRuleType;
+		ZonedDateTime userZonedDateTime;
+		if (rule.getData() instanceof String) {
+			String value = rule.getData().toString().trim();
+
+			if (!PuiDateUtil.stringHasHours(value)) {
+				value += " 00";
+			}
+			if (!PuiDateUtil.stringHasMinutes(value)) {
+				value += ":00";
+			}
+			if (!PuiDateUtil.stringHasSeconds(value)) {
+				value += ":00";
+			}
+
+			todayRuleType = TodayRuleTypeEnum.TODAY;
+			userZonedDateTime = PuiDateUtil.stringToZonedDateTime(value, zoneId);
+		} else if (rule.getData() instanceof TodayRuleData) {
+			TodayRuleData todayRuleData = (TodayRuleData) rule.getData();
+
+			todayRuleType = todayRuleData.getType();
+			Integer unitValue = null;
+			try {
+				unitValue = Integer.parseInt(todayRuleData.getSign() + todayRuleData.getUnitValue());
+			} catch (Exception e) {
+				unitValue = null;
+			}
+
+			userZonedDateTime = ZonedDateTime.now(zoneId).plus(unitValue, todayRuleData.getUnitType().unit);
+		} else {
+			return null;
+		}
+
+		Instant startInstant = null;
+		Instant endInstant = null;
+		switch (todayRuleType) {
+		case TODAY:
+			startInstant = userZonedDateTime.withHour(0).withMinute(0).withSecond(0)
+					.with(ChronoField.MILLI_OF_SECOND, 0).toInstant();
+			endInstant = userZonedDateTime.withHour(23).withMinute(59).withSecond(59)
+					.with(ChronoField.MILLI_OF_SECOND, 999).toInstant();
+			break;
+		case NOW:
+			startInstant = userZonedDateTime.toInstant();
+			endInstant = userZonedDateTime.toInstant();
+			break;
+		}
+
+		AbstractFilterRule newRule = rule;
+		switch (rule.getOp()) {
+		case eq:
+		case eqt:
+			newRule = BetweenRule.of(rule.getField(), startInstant, endInstant);
+			break;
+		case ne:
+		case net:
+			newRule = NotBetweenRule.of(rule.getField(), startInstant, endInstant);
+			break;
+		case ltt:
+			newRule = LowerThanRule.of(rule.getField(), startInstant);
+			break;
+		case let:
+			newRule = LowerEqualsThanRule.of(rule.getField(), endInstant);
+			break;
+		case le:
+		case gt:
+			rule.withData(endInstant);
+			break;
+		case gtt:
+			newRule = GreaterThanRule.of(rule.getField(), endInstant);
+			break;
+		case lt:
+		case ge:
+			rule.withData(startInstant);
+			break;
+		case get:
+			newRule = GreaterEqualsThanRule.of(rule.getField(), startInstant);
+			break;
+		default:
+			break;
+		}
+
+		return newRule;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -172,7 +314,6 @@ public class FilterGroup implements IPuiObject {
 			}
 
 			for (Iterator<FilterGroup> it = getGroups().iterator(); it.hasNext();) {
-
 				FilterGroup next = it.next();
 				sb.append("(" + next.toString() + ")");
 				if (it.hasNext()) {

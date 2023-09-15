@@ -459,7 +459,7 @@ public abstract class AbstractDatabaseDao<T extends IDto> extends AbstractDao<T>
 			req.setZoneId(PuiUserSession.getCurrentSession().getZoneId());
 		}
 		FilterBuilder filterBuilder = req.buildSearchFilter(dtoClass);
-		OrderBuilder orderBuilder = req.createOrderForSearch();
+		OrderBuilder orderBuilder = req.buildSearchOrder(dtoClass);
 
 		if (!ObjectUtils.isEmpty(req.getQueryLang()) && PuiLanguageUtils.hasLanguageSupport(dtoClass)) {
 			FilterBuilder langBuilder = FilterBuilder.newOrFilter()

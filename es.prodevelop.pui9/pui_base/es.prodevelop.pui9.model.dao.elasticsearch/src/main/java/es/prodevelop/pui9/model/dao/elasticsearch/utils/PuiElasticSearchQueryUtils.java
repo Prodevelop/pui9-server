@@ -83,12 +83,13 @@ public class PuiElasticSearchQueryUtils {
 	@SuppressWarnings("unchecked")
 	public <T extends IDto> co.elastic.clients.elasticsearch.core.SearchRequest buildQuery(SearchRequest req) {
 		Class<T> dtoClass = (Class<T>) req.getDtoClass();
+		req.setDtoClass(dtoClass);
 
 		if (req.isFromClient() && PuiUserSession.getCurrentSession() != null) {
 			req.setZoneId(PuiUserSession.getCurrentSession().getZoneId());
 		}
 		FilterBuilder filterBuilder = req.buildSearchFilter(dtoClass);
-		OrderBuilder orderBuilder = req.createOrderForSearch();
+		OrderBuilder orderBuilder = req.buildSearchOrder(dtoClass);
 
 		for (Order order : orderBuilder.getOrders()) {
 			String fieldName = DtoRegistry.getFieldNameFromColumnName(dtoClass, order.getColumn());
