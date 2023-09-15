@@ -130,6 +130,7 @@ public class PuiSessionHandler implements IPuiSessionContext {
 	private void postConstruct() {
 		PuiBackgroundExecutors.getSingleton().registerNewExecutor("SessionsCacheCleaner", true, 0,
 				SESSIONS_CACHE_CLEANER_TIMER_MINUTES, TimeUnit.MINUTES, this::cleanCacheSessions);
+
 		multiInstanceProcessBackExec.registerNewExecutor("SessionsDatabaseCleaner", 0,
 				SESSIONS_DATABASE_CLEANER_TIMER_MINUTES, TimeUnit.MINUTES, this::cleanDatabaseSessions);
 	}

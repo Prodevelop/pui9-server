@@ -4,6 +4,9 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.time.Duration;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -56,6 +59,24 @@ public class PuiMultiInstanceProcessBackgroundExecutors {
 	 * processes can be assigned to this instance
 	 */
 	private Set<String> applicationProcessIdSet;
+
+	/**
+	 * Calculates the amount of minutes of the delay of the next execution at a
+	 * certain hour and minute. Takes into account if the next execution take place
+	 * in the current day or in the following day
+	 * 
+	 * @param hour   The hour of the day to be executed
+	 * @param minute The minute of the day to be executed
+	 * @return The amount of minutes
+	 */
+	public static Long getNextExecutionDelayAsMinutes(Integer hour, Integer minute) {
+		Duration initDelay = Duration.between(LocalDateTime.now(), LocalDate.now().atTime(LocalTime.of(hour, minute)));
+		if (initDelay.toMillis() <= 0) {
+			// if the hour and minute has passed, execute it tomorrow
+			initDelay = initDelay.plusDays(1);
+		}
+		return initDelay.toMinutes();
+	}
 
 	@PostConstruct
 	private void postConstruct() {

@@ -48,17 +48,18 @@ public class CleanDocuments {
 
 	@PostConstruct
 	private void postConstruct() {
-		multiInstanceProcessBackExec.registerNewExecutor("CleanDocuments", 0, 1, TimeUnit.HOURS, () -> {
-			if (!isEnabled()) {
-				return;
-			}
-			try {
-				checkFiles();
-				checkDatabase();
-			} catch (Exception e) {
-				// do nothing
-			}
-		});
+		multiInstanceProcessBackExec.registerNewExecutor("CleanDocuments", 0, TimeUnit.HOURS.toMinutes(1),
+				TimeUnit.MINUTES, () -> {
+					if (!isEnabled()) {
+						return;
+					}
+					try {
+						checkFiles();
+						checkDatabase();
+					} catch (Exception e) {
+						// do nothing
+					}
+				});
 	}
 
 	private boolean isEnabled() {

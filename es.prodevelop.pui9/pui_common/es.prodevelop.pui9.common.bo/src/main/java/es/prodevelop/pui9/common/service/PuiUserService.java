@@ -2,9 +2,6 @@ package es.prodevelop.pui9.common.service;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -82,10 +79,10 @@ public class PuiUserService extends AbstractService<IPuiUserPk, IPuiUser, IVPuiU
 
 	@PostConstruct
 	private void postConstructUserService() {
-		Duration initDelay = Duration.between(LocalDateTime.now(),
-				LocalDate.now().plusDays(1).atTime(LocalTime.of(1, 0)));
-		multiInstanceProcessBackExec.registerNewExecutor("PasswordValidityCheck", initDelay.toMinutes(),
-				TimeUnit.DAYS.toMinutes(1), TimeUnit.MINUTES, this::checkAllPasswordValidity);
+		Long initDelay = PuiMultiInstanceProcessBackgroundExecutors.getNextExecutionDelayAsMinutes(1, 0);
+
+		multiInstanceProcessBackExec.registerNewExecutor("PasswordValidityCheck", initDelay, TimeUnit.DAYS.toMinutes(1),
+				TimeUnit.MINUTES, this::checkAllPasswordValidity);
 		multiInstanceProcessBackExec.registerNewExecutor("CleanResetPasswordToken", 0, TimeUnit.MINUTES.toMinutes(30),
 				TimeUnit.MINUTES, this::cleanResetPasswordToken);
 	}

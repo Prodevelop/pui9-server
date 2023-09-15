@@ -3,11 +3,7 @@ package es.prodevelop.pui9.importexport;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
-import java.time.Duration;
 import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.concurrent.TimeUnit;
 
@@ -55,10 +51,10 @@ public class CleanImportExport {
 
 	@PostConstruct
 	private void postConstruct() {
-		Duration initDelay = Duration.between(LocalDateTime.now(),
-				LocalDate.now().plusDays(1).atTime(LocalTime.of(3, 0)));
-		multiInstanceProcessBackExec.registerNewExecutor("CleanImportExport", initDelay.toMinutes(),
-				TimeUnit.DAYS.toMinutes(1), TimeUnit.MINUTES, () -> {
+		Long initDelay = PuiMultiInstanceProcessBackgroundExecutors.getNextExecutionDelayAsMinutes(3, 0);
+
+		multiInstanceProcessBackExec.registerNewExecutor("CleanImportExport", initDelay, TimeUnit.DAYS.toMinutes(1),
+				TimeUnit.MINUTES, () -> {
 					if (!isEnabled()) {
 						return;
 					}

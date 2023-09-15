@@ -2,10 +2,6 @@ package es.prodevelop.pui9.elasticsearch.synchronization;
 
 import java.lang.Thread.State;
 import java.lang.reflect.Field;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -79,9 +75,9 @@ public class PuiElasticSearchSynchronization {
 
 	@PostConstruct
 	private void postConstruct() {
-		Duration initDelay = Duration.between(LocalDateTime.now(),
-				LocalDate.now().plusDays(1).atTime(LocalTime.of(3, 0)));
-		multiInstanceProcessBackExec.registerNewExecutor("ElasticSearch_NightSynchronizer", initDelay.toMinutes(),
+		Long initDelay = PuiMultiInstanceProcessBackgroundExecutors.getNextExecutionDelayAsMinutes(3, 0);
+
+		multiInstanceProcessBackExec.registerNewExecutor("ElasticSearch_NightSynchronizer", initDelay,
 				TimeUnit.DAYS.toMinutes(1), TimeUnit.MINUTES, () -> synchronize(null, false));
 	}
 

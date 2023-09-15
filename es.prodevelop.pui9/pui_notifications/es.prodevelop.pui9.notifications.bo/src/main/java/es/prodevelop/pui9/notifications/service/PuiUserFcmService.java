@@ -1,9 +1,6 @@
 package es.prodevelop.pui9.notifications.service;
 
-import java.time.Duration;
 import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -49,10 +46,9 @@ public class PuiUserFcmService
 	 */
 	@PostConstruct
 	private void postConstructUserFcmService() {
-		Duration initDelay = Duration.between(LocalDateTime.now(), LocalDate.now().plusDays(1).atStartOfDay());
-		Long delay = TimeUnit.DAYS.toMinutes(1);
+		Long initDelay = PuiMultiInstanceProcessBackgroundExecutors.getNextExecutionDelayAsMinutes(0, 0);
 
-		multiInstanceProcessBackExec.registerNewExecutor("FcmPurgueTokens", initDelay.toMinutes(), delay,
+		multiInstanceProcessBackExec.registerNewExecutor("FcmPurgueTokens", initDelay, TimeUnit.DAYS.toMinutes(1),
 				TimeUnit.MINUTES, this::purgueTokens);
 	}
 
