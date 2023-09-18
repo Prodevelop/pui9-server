@@ -167,10 +167,28 @@ public class FilterGroup implements IPuiObject {
 		return GsonSingleton.getSingleton().getGson().fromJson(toJson(), FilterGroup.class);
 	}
 
+	/**
+	 * Clean the rules of this filter: remove null rules and groups, remove wrong
+	 * database rules and modifies date rules
+	 * 
+	 * @param dtoClass The DTO class related with this filter
+	 * @param zoneId   The ZoneID of the user, to adjust date filters
+	 */
 	public void cleanRules(Class<? extends IDto> dtoClass, ZoneId zoneId) {
-		removeWrongDatabaseRules(this);
 		removeNullRules(this);
+		removeWrongDatabaseRules(this);
 		modifyDateRules(this, dtoClass, zoneId);
+	}
+
+	/**
+	 * Remove null rules and groups
+	 * 
+	 * @param filter
+	 */
+	private void removeNullRules(FilterGroup filter) {
+		filter.getRules().removeIf(Objects::isNull);
+		filter.getGroups().removeIf(Objects::isNull);
+		filter.getGroups().forEach(this::removeNullRules);
 	}
 
 	/**
@@ -184,11 +202,13 @@ public class FilterGroup implements IPuiObject {
 		filter.getGroups().forEach(this::removeWrongDatabaseRules);
 	}
 
-	private void removeNullRules(FilterGroup filter) {
-		filter.getRules().removeIf(Objects::isNull);
-		filter.getGroups().forEach(this::removeNullRules);
-	}
-
+	/**
+	 * Change the rule of the dates, to adjust the real operation
+	 * 
+	 * @param filter
+	 * @param dtoClass
+	 * @param zoneId
+	 */
 	private void modifyDateRules(FilterGroup filter, Class<? extends IDto> dtoClass, ZoneId zoneId) {
 		for (int i = 0; i < filter.getRules().size(); i++) {
 			AbstractFilterRule nextRule = filter.getRules().get(i);
