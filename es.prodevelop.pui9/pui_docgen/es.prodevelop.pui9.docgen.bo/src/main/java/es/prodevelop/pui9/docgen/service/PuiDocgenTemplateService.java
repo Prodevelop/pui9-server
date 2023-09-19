@@ -67,7 +67,7 @@ import es.prodevelop.pui9.exceptions.PuiServiceGetException;
 import es.prodevelop.pui9.exceptions.PuiServiceInsertException;
 import es.prodevelop.pui9.exceptions.PuiServiceUpdateException;
 import es.prodevelop.pui9.file.FileDownload;
-import es.prodevelop.pui9.file.PuiDocumentDefinition;
+import es.prodevelop.pui9.file.AttachmentDefinition;
 import es.prodevelop.pui9.filter.AbstractFilterRule;
 import es.prodevelop.pui9.filter.FilterBuilder;
 import es.prodevelop.pui9.filter.FilterGroup;
@@ -262,7 +262,7 @@ public class PuiDocgenTemplateService extends
 			throws PuiDocgenNoParserException, PuiCommonNoFileException, PuiServiceGetException {
 		FileDownload docGenTemplate = downloadTemplate(pk);
 		PuiDocgenLite docgenLite = new PuiDocgenLite();
-		PuiDocumentDefinition documentDefinition = new PuiDocumentDefinition();
+		AttachmentDefinition documentDefinition = new AttachmentDefinition();
 		documentDefinition.setInputStream(docGenTemplate.getInputStream());
 		documentDefinition.setOriginalFileName(docGenTemplate.getFilename());
 		docgenLite.setFile(documentDefinition);

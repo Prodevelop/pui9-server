@@ -4,7 +4,7 @@ import org.apache.commons.io.FilenameUtils;
 
 import es.prodevelop.pui9.docgen.model.dto.PuiDocgenTemplate;
 import es.prodevelop.pui9.docgen.model.dto.interfaces.IPuiDocgenTemplate;
-import es.prodevelop.pui9.file.PuiDocumentDefinition;
+import es.prodevelop.pui9.file.AttachmentDefinition;
 import es.prodevelop.pui9.utils.PuiObjectUtils;
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -13,16 +13,16 @@ public class PuiDocgenTemplateExtended extends PuiDocgenTemplate {
 	private static final long serialVersionUID = 1L;
 
 	@Schema(hidden = true)
-	private PuiDocumentDefinition file;
+	private AttachmentDefinition file;
 	@Schema(hidden = true)
 	private transient String uniqueFilename;
 
 	@Schema(hidden = true)
-	public PuiDocumentDefinition getFile() {
+	public AttachmentDefinition getFile() {
 		return file;
 	}
 
-	public void setFile(PuiDocumentDefinition document) {
+	public void setFile(AttachmentDefinition document) {
 		this.file = document;
 	}
 

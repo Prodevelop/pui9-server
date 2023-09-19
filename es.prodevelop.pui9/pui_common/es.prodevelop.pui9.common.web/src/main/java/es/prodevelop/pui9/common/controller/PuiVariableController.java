@@ -101,4 +101,11 @@ public class PuiVariableController extends
 		return getService().getVariable(Boolean.class, PuiVariableValues.LDAP_ACTIVE.name());
 	}
 
+	@PuiNoSessionRequired
+	@Operation(summary = "Check if Issue Ticket service is active or not", description = "Check if Issue Ticket service is active or not")
+	@GetMapping(value = "/isIssueTicketActive")
+	public Boolean isIssueTicketActive() {
+		return getService().getVariable(Boolean.class, PuiVariableValues.ISSUE_TICKET_SERVICE_ENABLED.name());
+	}
+
 }

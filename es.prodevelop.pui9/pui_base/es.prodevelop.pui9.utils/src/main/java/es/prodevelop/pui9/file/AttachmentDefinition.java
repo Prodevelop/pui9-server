@@ -3,7 +3,7 @@ package es.prodevelop.pui9.file;
 import java.io.InputStream;
 import java.io.Serializable;
 
-public class PuiDocumentDefinition implements Serializable {
+public class AttachmentDefinition implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

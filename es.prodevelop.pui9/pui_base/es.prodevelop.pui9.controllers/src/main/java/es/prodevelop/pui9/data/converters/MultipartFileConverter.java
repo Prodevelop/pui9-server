@@ -9,13 +9,13 @@ import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.core.convert.converter.GenericConverter;
 import org.springframework.web.multipart.MultipartFile;
 
-import es.prodevelop.pui9.file.PuiDocumentDefinition;
+import es.prodevelop.pui9.file.AttachmentDefinition;
 
 /**
  * This class allows to set a @RequestParam parameter in your controllers
  * indicating that the type of this parameter is a {@link MultipartFile}.
  * Automatically, the value is converted into a Date using the
- * {@link PuiDocumentDefinition} class
+ * {@link AttachmentDefinition} class
  * 
  * @author Marc Gil - mgil@prodevelop.es
  */
@@ -23,7 +23,7 @@ public class MultipartFileConverter implements GenericConverter {
 
 	@Override
 	public Set<ConvertiblePair> getConvertibleTypes() {
-		return Collections.singleton(new ConvertiblePair(MultipartFile.class, PuiDocumentDefinition.class));
+		return Collections.singleton(new ConvertiblePair(MultipartFile.class, AttachmentDefinition.class));
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class MultipartFileConverter implements GenericConverter {
 		}
 
 		MultipartFile mf = (MultipartFile) source;
-		PuiDocumentDefinition pdd = new PuiDocumentDefinition();
+		AttachmentDefinition pdd = new AttachmentDefinition();
 		try {
 			pdd.setInputStream(mf.getInputStream());
 		} catch (IOException e) {

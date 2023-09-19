@@ -67,7 +67,7 @@ import es.prodevelop.pui9.exceptions.PuiServiceException;
 import es.prodevelop.pui9.exceptions.PuiServiceGetException;
 import es.prodevelop.pui9.exceptions.PuiServiceInsertException;
 import es.prodevelop.pui9.file.FileDownload;
-import es.prodevelop.pui9.file.PuiDocumentDefinition;
+import es.prodevelop.pui9.file.AttachmentDefinition;
 import es.prodevelop.pui9.filter.FilterBuilder;
 import es.prodevelop.pui9.model.dto.DtoRegistry;
 import es.prodevelop.pui9.model.dto.interfaces.ITableDto;
@@ -521,7 +521,7 @@ public class PuiDocumentService
 					docLite.setLanguage(document.getLanguage());
 					docLite.setRole(document.getRole());
 
-					PuiDocumentDefinition pdd = new PuiDocumentDefinition();
+					AttachmentDefinition pdd = new AttachmentDefinition();
 					FileDownload file = getFileDownload(document);
 					pdd.setInputStream(file.getInputStream());
 					pdd.setOriginalFileName(file.getFilename());
