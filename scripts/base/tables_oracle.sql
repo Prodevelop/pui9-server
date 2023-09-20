@@ -121,6 +121,7 @@ CREATE TABLE pui_user_model_filter (
 	model VARCHAR2(100) NOT NULL,
 	label VARCHAR2(200) NOT NULL,
 	filter CLOB NOT NULL,
+	isdefault INTEGER DEFAULT 0 NOT NULL,
 	CONSTRAINT pk_pui_user_filter PRIMARY KEY (id),
 	CONSTRAINT fk_user_model_filter_usr FOREIGN KEY (usr) REFERENCES pui_user(usr) ON DELETE CASCADE,
 	CONSTRAINT fk_user_model_filter_model FOREIGN KEY (model) REFERENCES pui_model(model) ON DELETE CASCADE

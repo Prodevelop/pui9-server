@@ -228,9 +228,10 @@ INSERT INTO pui_variable values ('APPLICATION_NAME', 'APPNAME', 'Nombre de la ap
 INSERT INTO pui_variable values ('BASE_CLIENT_URL','http://localhost/admin','URL base de la web cliente');
 INSERT INTO pui_variable values ('DEVELOPMENT_ENVIRONMENT', 'true', 'indica si estamos en el entorno de desarrollo-preproducción o producción (true/false)');
 INSERT INTO pui_variable values ('ELASTICSEARCH_ACTIVE', 'true', 'Si Elastic Search está activado para la aplicación o no (true/false)');
-INSERT INTO pui_variable values ('GRIDFILTER_SHOW_SQL_BTN', 'false' , 'true/false, indica si se debe mostrar el botón SQL en la definición de filtros de usuario');
 INSERT INTO pui_variable values ('GRIDFILTER_SHOW_SUBGROUP_BTN', 'false', 'true/false, indica si se debe mostrar el botón añadir subgrupo en la definición de filtros de usuario');
 INSERT INTO pui_variable values ('IMPORTEXPORT_PATH', '/var/www/html/app/importexport', 'ruta absoluta donde se almacenan los ficheros de import/export');
+INSERT INTO pui_variable values ('ISSUE_TICKET_SERVICE_ENABLED', 'false', 'Habilita/Deshabilita el componente para mandar incidencias al CAU (true/false)');
+INSERT INTO pui_variable values ('ISSUE_TICKET_SERVICE_EMAIL', '-', 'Email del servicio de incidencias del CAU');
 INSERT INTO pui_variable values ('LDAP_ACTIVE', 'false', 'Indica si el LDAP está activo o no (true/false)');
 INSERT INTO pui_variable values ('LDAP_DOMAIN', 'prode_domi.es', 'Dominio a usar en el LDAP. Si no se quiere, especificar ''-''');
 INSERT INTO pui_variable values ('LDAP_PASSWORD', 'OqF6SOhFeHNuP9/HFe4jcw==', 'Password del usuario de conexión al LDAP. Si no se quiere, especificar ''-''');
