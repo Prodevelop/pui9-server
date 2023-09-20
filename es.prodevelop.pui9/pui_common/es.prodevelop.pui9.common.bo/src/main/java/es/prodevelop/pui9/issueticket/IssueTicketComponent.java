@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Component;
-import org.springframework.util.ObjectUtils;
 
 import es.prodevelop.pui9.common.dto.issue.IssueTicket;
 import es.prodevelop.pui9.common.dto.issue.IssueUrgencyEnum;
@@ -64,10 +63,8 @@ public class IssueTicketComponent {
 		sb.append("<p>" + issueTicket.getName() + "</p>");
 		sb.append("<p><b>" + fieldNamesList.get(3) + "</b></p>");
 		sb.append("<p>" + issueTicket.getEmail() + "</p>");
-		if (!ObjectUtils.isEmpty(issueTicket.getPhone())) {
-			sb.append("<p><b>" + fieldNamesList.get(4) + "</b></p>");
-			sb.append("<p>" + issueTicket.getPhone() + "</p>");
-		}
+		sb.append("<p><b>" + fieldNamesList.get(4) + "</b></p>");
+		sb.append("<p>" + issueTicket.getPhone() + "</p>");
 
 		PuiMailConfiguration config = PuiMailConfiguration.builder().withSubject(issueTicket.getSubject())
 				.withContent(sb.toString()).withIsHtml(true).withTo(to)
