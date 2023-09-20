@@ -18,6 +18,16 @@ public class PuiCommonResourceBundle_es extends PuiCommonResourceBundle {
 	}
 
 	@Override
+	protected String getIssueTicketEmailFields() {
+		return "Descripción,Urgencia,Nombre,Email,Teléfono";
+	}
+
+	@Override
+	protected String getIssueTicketUrgency() {
+		return "{'MAXIMUM':'Máxima', 'HIGH': 'Alta', 'MEDIUM': 'Media', 'LOW': 'Baja'}";
+	}
+
+	@Override
 	protected String getInvalidPasswordMessage_202() {
 		return "El password no cumple con los requisitos: {0}";
 	}

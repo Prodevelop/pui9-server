@@ -29,6 +29,8 @@ public abstract class PuiCommonResourceBundle extends AbstractPuiListResourceBun
 
 	public static final String requestResetPasswordSubject = "requestResetPasswordSubject";
 	public static final String passwordExpirationSubject = "passwordExpirationSubject";
+	public static final String issueTicketEmailFields = "issueTicketEmailFields";
+	public static final String issueTicketUrgency = "issueTicketUrgency";
 
 	@Override
 	protected Map<Object, String> getMessages() {
@@ -37,6 +39,8 @@ public abstract class PuiCommonResourceBundle extends AbstractPuiListResourceBun
 		// messages
 		messages.put(requestResetPasswordSubject, getRequestResetPasswordSubject());
 		messages.put(passwordExpirationSubject, getPasswordExpirationSubject());
+		messages.put(issueTicketEmailFields, getIssueTicketEmailFields());
+		messages.put(issueTicketUrgency, getIssueTicketUrgency());
 
 		// Exceptions
 		messages.put(PuiCommonInvalidPasswordException.CODE, getInvalidPasswordMessage_202());
@@ -60,6 +64,10 @@ public abstract class PuiCommonResourceBundle extends AbstractPuiListResourceBun
 	protected abstract String getRequestResetPasswordSubject();
 
 	protected abstract String getPasswordExpirationSubject();
+
+	protected abstract String getIssueTicketEmailFields();
+
+	protected abstract String getIssueTicketUrgency();
 
 	protected abstract String getInvalidPasswordMessage_202();
 
