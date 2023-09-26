@@ -52,29 +52,6 @@ public class CodegenModelsDatabaseUtils {
 		}
 	}
 
-	public List<String> loadTables() {
-		return loadEntities(EntityTypeEnum.TABLE);
-	}
-
-	public List<String> loadViews() {
-		return loadEntities(EntityTypeEnum.VIEW);
-	}
-
-	private List<String> loadEntities(EntityTypeEnum entityType) {
-		List<String> list = new ArrayList<>();
-
-		try (ResultSet rs = conn.getMetaData().getTables(null, conn.getSchema(), "%",
-				new String[] { entityType.name() })) {
-			while (rs.next()) {
-				list.add(rs.getString(EntityMetadataEnum.TABLE_NAME.name()));
-			}
-		} catch (SQLException e) {
-			// do nothing
-		}
-
-		return list;
-	}
-
 	public boolean loadTable(Table table) {
 		boolean exists = modifyRealTableName(table, EntityTypeEnum.TABLE);
 		if (!exists) {
@@ -97,7 +74,7 @@ public class CodegenModelsDatabaseUtils {
 	}
 
 	private void loadColumns(Entity entity) {
-		try (ResultSet rs = conn.getMetaData().getColumns(null, conn.getSchema(), entity.getDbName(), "%")) {
+		try (ResultSet rs = conn.getMetaData().getColumns(null, null, entity.getDbName(), "%")) {
 			List<String> columns = new ArrayList<>();
 			while (rs.next()) {
 				Column column = new Column();
@@ -229,7 +206,7 @@ public class CodegenModelsDatabaseUtils {
 	}
 
 	private void loadPrimaryKeys(Table table) {
-		try (ResultSet rs = conn.getMetaData().getPrimaryKeys(null, conn.getSchema(), table.getDbName())) {
+		try (ResultSet rs = conn.getMetaData().getPrimaryKeys(null, null, table.getDbName())) {
 			while (rs.next()) {
 				table.addPrimaryKeyName(rs.getString(ColumnMetadataEnum.COLUMN_NAME.name()));
 			}
@@ -260,8 +237,7 @@ public class CodegenModelsDatabaseUtils {
 	}
 
 	private boolean existsTable(String entityName, EntityTypeEnum entityType) {
-		try (ResultSet rs = conn.getMetaData().getTables(null, conn.getSchema(), entityName,
-				new String[] { entityType.name() })) {
+		try (ResultSet rs = conn.getMetaData().getTables(null, null, entityName, new String[] { entityType.name() })) {
 			return rs.next();
 		} catch (SQLException e) {
 			return false;
