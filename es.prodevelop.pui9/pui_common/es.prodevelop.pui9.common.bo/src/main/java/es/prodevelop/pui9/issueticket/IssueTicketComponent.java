@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ObjectUtils;
 
 import es.prodevelop.pui9.common.dto.issue.IssueTicket;
 import es.prodevelop.pui9.common.dto.issue.IssueUrgencyEnum;
@@ -67,14 +68,17 @@ public class IssueTicketComponent {
 		sb.append("<p>" + issueTicket.getPhone() + "</p>");
 
 		PuiMailConfiguration config = PuiMailConfiguration.builder().withSubject(issueTicket.getSubject())
-				.withContent(sb.toString()).withIsHtml(true).withTo(to)
-				.withAttachment(issueTicket.getFiles().stream().map(f -> {
-					try {
-						return PuiMailAttachment.getFileFromInputStream(f.getInputStream(), f.getOriginalFileName());
-					} catch (IOException e) {
-						return null;
-					}
-				}).filter(Objects::nonNull).collect(Collectors.toList()));
+				.withContent(sb.toString()).withIsHtml(true).withTo(to);
+		if (!ObjectUtils.isEmpty(issueTicket.getFiles())) {
+			config.withAttachment(issueTicket.getFiles().stream().map(f -> {
+				try {
+					return PuiMailAttachment.getFileFromInputStream(f.getInputStream(), f.getOriginalFileName());
+				} catch (IOException e) {
+					return null;
+				}
+			}).filter(Objects::nonNull).collect(Collectors.toList()));
+		}
+
 		PuiMailSender.getSingleton().send(config);
 	}
 

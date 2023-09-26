@@ -37,7 +37,7 @@ public class IssueTicketController extends AbstractPuiController {
 	@Operation(summary = "Send a new issue ticket", description = "Create a new issue ticket and send it to the CAU")
 	@PostMapping(value = "", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public void createIssueTicket(
-			@Parameter(description = "The issue ticket information") @RequestParam MultipartFile[] files,
+			@Parameter(description = "The issue ticket information") @RequestParam(required = false) MultipartFile[] files,
 			IssueTicket ticket) throws PuiServiceException {
 		issueTicket.sendIssueTicket(ticket);
 	}
