@@ -202,10 +202,10 @@ public class PuiInterceptor implements HandlerInterceptor {
 	 * The order to get the language is the following:
 	 * <p>
 	 * <ol>
-	 * <li><b>Request Header language ('Accept-Language' header): </b>
-	 * Accept-Language:en-US,en;q=0.8,en-GB;q=0.6,es;q=0.4,ca;q=0.2</li>
 	 * <li><b>URL Parameter: </b>
 	 * http://localhost:8080/appname/controller/action?<b>lang=en</b></li>
+	 * <li><b>Request Header language ('Accept-Language' header): </b>
+	 * Accept-Language:en-US,en;q=0.8,en-GB;q=0.6,es;q=0.4,ca;q=0.2</li>
 	 * <li><b>User language: </b>the language registered by the user</li>
 	 * <li><b>Default language in DB: </b>The language set as default in the DB</li>
 	 * </ol>
@@ -214,11 +214,11 @@ public class PuiInterceptor implements HandlerInterceptor {
 	 * @return The language to use in the request
 	 */
 	protected PuiLanguage getLanguageForRequest(HttpServletRequest request) {
-		// From header
-		PuiLanguage lang = getLanguageFromHeaders(request);
+		// URL parameter
+		PuiLanguage lang = getLanguageFromUrlParameter(request);
 		if (lang == null) {
-			// From URL parameter
-			lang = getLanguageFromUrlParameter(request);
+			// Request language
+			lang = getLanguageFromHeaders(request);
 		}
 		if (lang == null) {
 			// From User language
