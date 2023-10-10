@@ -54,25 +54,29 @@ public class ListAdapterRegistry {
 		}
 
 		Class<? extends IDto> dtoClass = (Class<? extends IDto>) pt.getActualTypeArguments()[0];
-		if (listAdapters.containsKey(dtoClass)) {
-			throw new IllegalArgumentException("Duplicated List Adapter for class " + dtoClass);
-		}
+		synchronized (listAdapters) {
+			if (listAdapters.containsKey(dtoClass)) {
+				throw new IllegalArgumentException("Duplicated List Adapter for class " + dtoClass);
+			}
 
-		listAdapters.put(dtoClass, listAdapter);
+			listAdapters.put(dtoClass, listAdapter);
+		}
 	}
 
 	public IListAdapter<? extends IDto> getAdapter(Class<? extends IDto> dtoClass) {
-		if (!listAdapters.containsKey(dtoClass) && !dtoClass.isInterface()) {
-			for (Iterator<Entry<Class<? extends IDto>, IListAdapter<? extends IDto>>> it = listAdapters.entrySet()
-					.iterator(); it.hasNext();) {
-				Entry<Class<? extends IDto>, IListAdapter<? extends IDto>> entry = it.next();
-				if (entry.getKey().isAssignableFrom(dtoClass)) {
-					listAdapters.put(dtoClass, entry.getValue());
-					break;
+		synchronized (listAdapters) {
+			if (!listAdapters.containsKey(dtoClass) && !dtoClass.isInterface()) {
+				for (Iterator<Entry<Class<? extends IDto>, IListAdapter<? extends IDto>>> it = listAdapters.entrySet()
+						.iterator(); it.hasNext();) {
+					Entry<Class<? extends IDto>, IListAdapter<? extends IDto>> entry = it.next();
+					if (entry.getKey().isAssignableFrom(dtoClass)) {
+						listAdapters.put(dtoClass, entry.getValue());
+						break;
+					}
 				}
 			}
+			return listAdapters.get(dtoClass);
 		}
-		return listAdapters.get(dtoClass);
 	}
 
 }
