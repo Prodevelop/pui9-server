@@ -26,6 +26,5 @@
 		<module>es.prodevelop.pui9.services</module>
 		<module>es.prodevelop.pui9.controllers</module>
 		<module>es.prodevelop.pui9.elasticsearch</module>
-		<module>es.prodevelop.pui9.test</module>
 	</modules>
 </project>

@@ -22,6 +22,8 @@ import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.jndi.JndiTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
@@ -38,6 +40,7 @@ import co.elastic.clients.transport.ElasticsearchTransport;
 import co.elastic.clients.transport.rest_client.RestClientTransport;
 
 @Component
+@PropertySource("classpath:elastic.properties")
 public class PuiElasticSearchManager {
 
 	private static final String URL_PREFIX = "jdbc:es://";
@@ -51,15 +54,20 @@ public class PuiElasticSearchManager {
 
 	private final Logger logger = LogManager.getLogger(this.getClass());
 
-	private String username = null;
-	private volatile String password = null;
-	private String url = null;
-
-	private ElasticsearchClient client;
-
-	@Autowired
+	@Autowired(required = false)
 	@Qualifier("elasticsearchJndiName")
 	private String elasticsearchJndiName;
+
+	@Value("${elastic.url}")
+	private String url = null;
+
+	@Value("${elastic.username}")
+	private String username = null;
+
+	@Value("${elastic.password}")
+	private volatile String password = null;
+
+	private ElasticsearchClient client;
 
 	@PostConstruct
 	private void postConstruct() {
@@ -67,21 +75,22 @@ public class PuiElasticSearchManager {
 	}
 
 	private void fillManager() {
-		DataSource ds;
+		if (!ObjectUtils.isEmpty(elasticsearchJndiName)) {
+			DataSource ds;
+			try {
+				JndiTemplate jndi = new JndiTemplate();
+				ds = (DataSource) jndi.lookup(elasticsearchJndiName);
+			} catch (NamingException e) {
+				throw new IllegalArgumentException(e.getMessage());
+			}
 
-		try {
-			JndiTemplate jndi = new JndiTemplate();
-			ds = (DataSource) jndi.lookup(elasticsearchJndiName);
-		} catch (NamingException e) {
-			throw new IllegalArgumentException(e.getMessage());
+			url = getFieldValue(ds, DATASOURCE_URL_FIELDNAME);
+			if (url == null) {
+				url = getFieldValue(ds, DATASOURCE_CONNECTION_STRING_FIELDNAME);
+			}
+			username = getFieldValue(ds, DATASOURCE_USERNAME_FIELDNAME);
+			password = getFieldValue(ds, DATASOURCE_PASSWORD_FIELDNAME);
 		}
-
-		url = getFieldValue(ds, DATASOURCE_URL_FIELDNAME);
-		if (url == null) {
-			url = getFieldValue(ds, DATASOURCE_CONNECTION_STRING_FIELDNAME);
-		}
-		username = getFieldValue(ds, DATASOURCE_USERNAME_FIELDNAME);
-		password = getFieldValue(ds, DATASOURCE_PASSWORD_FIELDNAME);
 	}
 
 	public ElasticsearchClient getClient() {

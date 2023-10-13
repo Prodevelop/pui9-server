@@ -9,7 +9,6 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Primary;
 import org.springframework.jndi.JndiTemplate;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -135,7 +134,8 @@ public abstract class AbstractAppSpringConfiguration {
 
 	/**
 	 * A list with the overrided PUI controllers. An overrided controller, should be
-	 * declared with {@link Primary} annotation
+	 * declared with {@link org.springframework.context.annotation.Primary}
+	 * annotation
 	 * 
 	 * @return
 	 */
