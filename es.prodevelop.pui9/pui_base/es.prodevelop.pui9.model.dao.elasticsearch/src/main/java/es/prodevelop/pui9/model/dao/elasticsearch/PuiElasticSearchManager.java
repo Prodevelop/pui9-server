@@ -58,13 +58,13 @@ public class PuiElasticSearchManager {
 	@Qualifier("elasticsearchJndiName")
 	private String elasticsearchJndiName;
 
-	@Value("${elastic.url}")
+	@Value("${elastic.url:#{null}}")
 	private String url = null;
 
-	@Value("${elastic.username}")
+	@Value("${elastic.username:#{null}}")
 	private String username = null;
 
-	@Value("${elastic.password}")
+	@Value("${elastic.password:#{null}}")
 	private volatile String password = null;
 
 	private ElasticsearchClient client;
