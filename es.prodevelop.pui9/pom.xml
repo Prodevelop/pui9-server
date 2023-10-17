@@ -40,53 +40,50 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
 
-		<maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
-		<maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
-		<maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
-		<maven-javadoc-plugin.version>3.4.1</maven-javadoc-plugin.version>
-		<maven-release-plugin.version>2.5.3</maven-release-plugin.version>
-		<maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-		<maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+		<maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
+		<maven-failsafe-plugin.version>3.1.2</maven-failsafe-plugin.version>
+		<maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
+		<maven-javadoc-plugin.version>3.6.0</maven-javadoc-plugin.version>
+		<maven-release-plugin.version>3.0.1</maven-release-plugin.version>
+		<maven-source-plugin.version>3.3.0</maven-source-plugin.version>
+		<maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
 		<nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
 
 		<commons-beanutils.version>1.9.4</commons-beanutils.version>
-		<commons-codec.version>1.15</commons-codec.version>
-		<commons-compress.version>1.22</commons-compress.version>
-		<commons-fileupload.version>1.4</commons-fileupload.version>
-		<commons-io.version>2.11.0</commons-io.version>
-		<commons-lang3.version>3.12.0</commons-lang3.version>
-		<elasticsearch-java.version>8.6.1</elasticsearch-java.version>
-		<firebase-admin.version>9.1.1</firebase-admin.version>
+		<commons-codec.version>1.16.0</commons-codec.version>
+		<commons-compress.version>1.24.0</commons-compress.version>
+		<commons-fileupload.version>1.5</commons-fileupload.version>
+		<commons-io.version>2.14.0</commons-io.version>
+		<commons-lang3.version>3.13.0</commons-lang3.version>
+		<elasticsearch-java.version>8.10.3</elasticsearch-java.version>
+		<firebase-admin.version>9.2.0</firebase-admin.version>
 		<freemarker.version>2.3.32</freemarker.version>
 		<fr.opensagres.xdocreport.version>2.0.4</fr.opensagres.xdocreport.version>
 		<gson.version>2.10.1</gson.version>
-		<gt-jdbc.version>27.2</gt-jdbc.version>
-		<guava.version>31.1-jre</guava.version>
+		<gt-jdbc.version>29.2</gt-jdbc.version>
+		<guava.version>32.1.3-jre</guava.version>
 		<itextpdf.version>5.5.13.3</itextpdf.version>
-		<jackson.version>2.14.2</jackson.version>
-		<jasperreports.version>6.20.0</jasperreports.version>
+		<jackson.version>2.15.3</jackson.version>
+		<jasperreports.version>6.20.6</jasperreports.version>
 		<javax.servlet-api.version>4.0.1</javax.servlet-api.version>
 		<javax.websocket-client-api.version>1.1</javax.websocket-client-api.version>
-		<jetty-websocket.version>9.4.50.v20221201</jetty-websocket.version>
-		<jjwt-impl.version>0.11.5</jjwt-impl.version>
+		<jjwt-impl.version>0.12.3</jjwt-impl.version>
 		<jooq.version>3.14.16</jooq.version> <!-- 3.15.x needs Java 1.11 -->
-		<jsqlparser.version>4.5</jsqlparser.version>
-		<junit-jupiter.version>5.9.2</junit-jupiter.version>
-		<junit-platform.version>1.9.2</junit-platform.version>
-		<log4j.version>2.19.0</log4j.version>
+		<jsqlparser.version>4.7</jsqlparser.version>
+		<log4j.version>2.20.0</log4j.version>
 		<mail.version>1.6.2</mail.version>
-		<mssql-jdbc.version>11.2.3.jre8</mssql-jdbc.version>
-		<ojdbc8.version>21.8.0.0</ojdbc8.version>
-		<org.springframework.security.version>5.8.1</org.springframework.security.version>
-		<org.springframework.version>5.3.25</org.springframework.version>
-		<poi.version>5.2.3</poi.version>
-		<postgresql.version>42.5.4</postgresql.version>
+		<mssql-jdbc.version>12.4.1.jre8</mssql-jdbc.version>
+		<ojdbc8.version>23.3.0.23.09</ojdbc8.version>
+		<org.springframework.security.version>5.8.7</org.springframework.security.version>
+		<org.springframework.version>5.3.30</org.springframework.version>
+		<poi.version>5.2.4</poi.version>
+		<postgresql.version>42.6.0</postgresql.version>
 		<qrgen.version>1.4</qrgen.version>
 		<reflections.version>0.10.2</reflections.version>
 		<simple-odf.version>0.8.2-incubating</simple-odf.version>
-		<springdoc-openapi-ui.version>1.6.15</springdoc-openapi-ui.version>
-		<swagger-annotations.version>2.2.8</swagger-annotations.version>
-		<thumbnailator.version>0.4.19</thumbnailator.version>
+		<springdoc-openapi-ui.version>1.7.0</springdoc-openapi-ui.version>
+		<swagger-annotations.version>2.2.16</swagger-annotations.version>
+		<thumbnailator.version>0.4.20</thumbnailator.version>
 		<totp.version>1.7.1</totp.version>
 		<velocity.version>1.7</velocity.version>
 	</properties>

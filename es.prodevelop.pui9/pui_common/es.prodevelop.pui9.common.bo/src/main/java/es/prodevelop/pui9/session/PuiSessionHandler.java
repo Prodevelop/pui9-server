@@ -194,7 +194,7 @@ public class PuiSessionHandler implements IPuiSessionContext {
 
 			IPuiSession puiSession;
 			try {
-				puiSession = puiSessionDao.findOne(new PuiSessionPk(jwsClaims.getBody().getId()));
+				puiSession = puiSessionDao.findOne(new PuiSessionPk(jwsClaims.getPayload().getId()));
 			} catch (PuiDaoFindException e) {
 				puiSession = null;
 			}
@@ -262,7 +262,7 @@ public class PuiSessionHandler implements IPuiSessionContext {
 				}
 				return null;
 			}
-			uuid = jwsClaims.getBody().getId();
+			uuid = jwsClaims.getPayload().getId();
 		} else {
 			// it's a session maybe cached in other server, or an old session still not
 			// cached
@@ -354,20 +354,20 @@ public class PuiSessionHandler implements IPuiSessionContext {
 					return;
 				}
 
-				if (jwsClaims.getBody().containsKey(JWT_CLAIM_TIMEZONE)) {
-					pus.withZoneId(ZoneId.of(jwsClaims.getBody().get(JWT_CLAIM_TIMEZONE, String.class)));
+				if (jwsClaims.getPayload().containsKey(JWT_CLAIM_TIMEZONE)) {
+					pus.withZoneId(ZoneId.of(jwsClaims.getPayload().get(JWT_CLAIM_TIMEZONE, String.class)));
 				}
-				if (jwsClaims.getBody().containsKey(JWT_CLAIM_PERSISTENT)) {
-					pus.withPersistent(jwsClaims.getBody().get(JWT_CLAIM_PERSISTENT, Boolean.class));
+				if (jwsClaims.getPayload().containsKey(JWT_CLAIM_PERSISTENT)) {
+					pus.withPersistent(jwsClaims.getPayload().get(JWT_CLAIM_PERSISTENT, Boolean.class));
 				}
-				if (jwsClaims.getBody().containsKey(JWT_CLAIM_IP)) {
-					pus.withIp(jwsClaims.getBody().get(JWT_CLAIM_IP, String.class));
+				if (jwsClaims.getPayload().containsKey(JWT_CLAIM_IP)) {
+					pus.withIp(jwsClaims.getPayload().get(JWT_CLAIM_IP, String.class));
 				}
-				if (jwsClaims.getBody().containsKey(JWT_CLAIM_USER_AGENT)) {
-					pus.withUserAgent(jwsClaims.getBody().get(JWT_CLAIM_USER_AGENT, String.class));
+				if (jwsClaims.getPayload().containsKey(JWT_CLAIM_USER_AGENT)) {
+					pus.withUserAgent(jwsClaims.getPayload().get(JWT_CLAIM_USER_AGENT, String.class));
 				}
-				if (jwsClaims.getBody().containsKey(JWT_CLAIM_CLIENT)) {
-					pus.withClient(jwsClaims.getBody().get(JWT_CLAIM_CLIENT, String.class));
+				if (jwsClaims.getPayload().containsKey(JWT_CLAIM_CLIENT)) {
+					pus.withClient(jwsClaims.getPayload().get(JWT_CLAIM_CLIENT, String.class));
 				}
 
 				sessions.add(pus);
@@ -394,10 +394,10 @@ public class PuiSessionHandler implements IPuiSessionContext {
 		}
 
 		JwtBuilder builder = Jwts.builder();
-		builder.setIssuer(JWT_ISSUER);
-		builder.setIssuedAt(Date.from(userSession.getCreation()));
-		builder.setId(userSession.getUuid());
-		builder.setSubject(userSession.getUsr());
+		builder.issuer(JWT_ISSUER);
+		builder.issuedAt(Date.from(userSession.getCreation()));
+		builder.id(userSession.getUuid());
+		builder.subject(userSession.getUsr());
 		builder.claim(JWT_CLAIM_TIMEZONE, userSession.getZoneId().getId());
 		builder.claim(JWT_CLAIM_PERSISTENT, userSession.isPersistent());
 		builder.claim(JWT_CLAIM_IP, userSession.getIp());
@@ -437,7 +437,7 @@ public class PuiSessionHandler implements IPuiSessionContext {
 	 * @return The Pui Session Data
 	 */
 	private Authentication recreateSession(String jwt, Jws<Claims> jwsClaims, IPuiSession puiSession) {
-		String usr = jwsClaims.getBody().getSubject();
+		String usr = jwsClaims.getPayload().getSubject();
 
 		// simulate a user login
 		PuiUserSession userSession = (PuiUserSession) userDetailsService.loadUserByUsername(usr);
@@ -445,25 +445,25 @@ public class PuiSessionHandler implements IPuiSessionContext {
 		UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userSession, null,
 				new NullAuthoritiesMapper().mapAuthorities(userSession.getAuthorities()));
 
-		if (jwsClaims.getBody().containsKey(JWT_CLAIM_TIMEZONE)) {
-			userSession.withZoneId(ZoneId.of(jwsClaims.getBody().get(JWT_CLAIM_TIMEZONE, String.class)));
+		if (jwsClaims.getPayload().containsKey(JWT_CLAIM_TIMEZONE)) {
+			userSession.withZoneId(ZoneId.of(jwsClaims.getPayload().get(JWT_CLAIM_TIMEZONE, String.class)));
 		}
-		if (jwsClaims.getBody().containsKey(JWT_CLAIM_PERSISTENT)) {
-			userSession.withPersistent(jwsClaims.getBody().get(JWT_CLAIM_PERSISTENT, Boolean.class));
+		if (jwsClaims.getPayload().containsKey(JWT_CLAIM_PERSISTENT)) {
+			userSession.withPersistent(jwsClaims.getPayload().get(JWT_CLAIM_PERSISTENT, Boolean.class));
 		}
-		if (jwsClaims.getBody().containsKey(JWT_CLAIM_IP)) {
-			userSession.withIp(jwsClaims.getBody().get(JWT_CLAIM_IP, String.class));
+		if (jwsClaims.getPayload().containsKey(JWT_CLAIM_IP)) {
+			userSession.withIp(jwsClaims.getPayload().get(JWT_CLAIM_IP, String.class));
 		}
-		if (jwsClaims.getBody().containsKey(JWT_CLAIM_USER_AGENT)) {
-			userSession.withUserAgent(jwsClaims.getBody().get(JWT_CLAIM_USER_AGENT, String.class));
+		if (jwsClaims.getPayload().containsKey(JWT_CLAIM_USER_AGENT)) {
+			userSession.withUserAgent(jwsClaims.getPayload().get(JWT_CLAIM_USER_AGENT, String.class));
 		}
-		if (jwsClaims.getBody().containsKey(JWT_CLAIM_CLIENT)) {
-			userSession.withClient(jwsClaims.getBody().get(JWT_CLAIM_CLIENT, String.class));
+		if (jwsClaims.getPayload().containsKey(JWT_CLAIM_CLIENT)) {
+			userSession.withClient(jwsClaims.getPayload().get(JWT_CLAIM_CLIENT, String.class));
 		}
 
-		userSession.withUuid(!ObjectUtils.isEmpty(jwsClaims.getBody().getId()) ? jwsClaims.getBody().getId()
+		userSession.withUuid(!ObjectUtils.isEmpty(jwsClaims.getPayload().getId()) ? jwsClaims.getPayload().getId()
 				: UUID.randomUUID().toString());
-		userSession.withCreation(jwsClaims.getBody().getIssuedAt().toInstant());
+		userSession.withCreation(jwsClaims.getPayload().getIssuedAt().toInstant());
 		if (puiSession != null) {
 			userSession.withExpiration(puiSession.getExpiration());
 			userSession.withLastUse(puiSession.getLastuse());
@@ -487,7 +487,7 @@ public class PuiSessionHandler implements IPuiSessionContext {
 	protected Jws<Claims> getJwsClaims(String jwt) throws PuiServiceNoSessionException {
 		try {
 			byte[] decoded = Decoders.BASE64.decode(getSecretJwt());
-			return Jwts.parserBuilder().setSigningKey(decoded).build().parseClaimsJws(jwt);
+			return Jwts.parser().verifyWith(Keys.hmacShaKeyFor(decoded)).build().parseSignedClaims(jwt);
 		} catch (JwtException e) {
 			throw new PuiServiceNoSessionException();
 		}

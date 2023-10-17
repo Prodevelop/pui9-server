@@ -12,6 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -24,7 +25,7 @@ import org.jooq.Record;
 import org.jooq.impl.DSL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.event.ContextStartedEvent;
+import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.stereotype.Component;
@@ -34,6 +35,7 @@ import es.prodevelop.pui9.common.model.dao.interfaces.IPuiElasticsearchViewsDao;
 import es.prodevelop.pui9.common.model.dto.interfaces.IPuiElasticsearchViews;
 import es.prodevelop.pui9.common.model.dto.interfaces.IPuiModel;
 import es.prodevelop.pui9.common.service.interfaces.IPuiModelService;
+import es.prodevelop.pui9.components.PuiApplicationContext;
 import es.prodevelop.pui9.db.helpers.IDatabaseHelper;
 import es.prodevelop.pui9.elasticsearch.interfaces.IPuiElasticSearchEnablement;
 import es.prodevelop.pui9.exceptions.PuiDaoFindException;
@@ -48,6 +50,7 @@ import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.Function;
 import net.sf.jsqlparser.expression.operators.relational.ComparisonOperator;
 import net.sf.jsqlparser.expression.operators.relational.EqualsTo;
+import net.sf.jsqlparser.expression.operators.relational.ExpressionList;
 import net.sf.jsqlparser.parser.CCJSqlParserManager;
 import net.sf.jsqlparser.schema.Column;
 import net.sf.jsqlparser.schema.Table;
@@ -56,8 +59,6 @@ import net.sf.jsqlparser.statement.create.view.CreateView;
 import net.sf.jsqlparser.statement.select.Join;
 import net.sf.jsqlparser.statement.select.PlainSelect;
 import net.sf.jsqlparser.statement.select.Select;
-import net.sf.jsqlparser.statement.select.SelectBody;
-import net.sf.jsqlparser.statement.select.SelectExpressionItem;
 import net.sf.jsqlparser.statement.select.SelectItem;
 import net.sf.jsqlparser.statement.select.SetOperationList;
 
@@ -111,7 +112,11 @@ public class PuiElasticsearchViewsAnalysis {
 	private Map<String, Map<String, List<LinkedList<JoinTableDef>>>> mapInfo = new LinkedHashMap<>();
 
 	@EventListener
-	public void onApplicationEvent(ContextStartedEvent event) {
+	public void onApplicationEvent(ContextRefreshedEvent event) {
+		if (!Objects.equals(event.getApplicationContext(), PuiApplicationContext.getInstance().getAppContext())) {
+			return;
+		}
+
 		refresh();
 	}
 
@@ -210,7 +215,7 @@ public class PuiElasticsearchViewsAnalysis {
 				if (stm instanceof CreateView) {
 					parseCreateView(viewName, (CreateView) stm);
 				} else if (stm instanceof Select) {
-					parseSelectBody(viewName, ((Select) stm).getSelectBody());
+					parseSelectBody(viewName, ((Select) stm));
 				}
 			} catch (JSQLParserException e) {
 				logger.debug(viewName + ": " + e.getCause().getMessage(), e);
@@ -229,11 +234,11 @@ public class PuiElasticsearchViewsAnalysis {
 	 * @param createView The Create code
 	 */
 	private void parseCreateView(String viewName, CreateView createView) {
-		if (createView.getSelect().getSelectBody() instanceof PlainSelect) {
-			parseSelectBody(viewName, createView.getSelect().getSelectBody());
-		} else if (createView.getSelect().getSelectBody() instanceof SetOperationList) {
-			SetOperationList set = (SetOperationList) createView.getSelect().getSelectBody();
-			for (SelectBody selectBody : set.getSelects()) {
+		if (createView.getSelect() instanceof PlainSelect) {
+			parseSelectBody(viewName, createView.getSelect());
+		} else if (createView.getSelect() instanceof SetOperationList) {
+			SetOperationList set = (SetOperationList) createView.getSelect();
+			for (Select selectBody : set.getSelects()) {
 				parseSelectBody(viewName, selectBody);
 			}
 		}
@@ -242,16 +247,16 @@ public class PuiElasticsearchViewsAnalysis {
 	/**
 	 * Parse an statement of type Select for the given view
 	 * 
-	 * @param viewName   The analyzed view
-	 * @param selectBody The Select code
+	 * @param viewName The analyzed view
+	 * @param select   The Select code
 	 */
-	private void parseSelectBody(String viewName, SelectBody selectBody) {
-		if (selectBody instanceof PlainSelect) {
-			parsePlainSelect(viewName, (PlainSelect) selectBody);
-		} else if (selectBody instanceof SetOperationList) {
-			SetOperationList set = (SetOperationList) selectBody;
-			for (SelectBody select : set.getSelects()) {
-				parseSelectBody(viewName, select);
+	private void parseSelectBody(String viewName, Select select) {
+		if (select instanceof PlainSelect) {
+			parsePlainSelect(viewName, (PlainSelect) select);
+		} else if (select instanceof SetOperationList) {
+			SetOperationList set = (SetOperationList) select;
+			for (Select sel : set.getSelects()) {
+				parseSelectBody(viewName, sel);
 			}
 		}
 	}
@@ -285,13 +290,8 @@ public class PuiElasticsearchViewsAnalysis {
 		addView(fromTableName, viewName);
 		addTableOrderList(fromTableName, viewName);
 
-		for (SelectItem si : plainSelect.getSelectItems()) {
-			if (!(si instanceof SelectExpressionItem)) {
-				continue;
-			}
-
-			SelectExpressionItem sei = (SelectExpressionItem) si;
-			Column c = lookForColumn(sei.getExpression());
+		for (SelectItem<?> si : plainSelect.getSelectItems()) {
+			Column c = lookForColumn(si.getExpression());
 			if (c == null) {
 				continue;
 			}
@@ -301,8 +301,8 @@ public class PuiElasticsearchViewsAnalysis {
 					|| c.getTable().getName().equals(fromTableAlias)) {
 				String name = c.getColumnName().toLowerCase();
 				String alias = name;
-				if (sei.getAlias() != null) {
-					alias = sei.getAlias().getName().toLowerCase();
+				if (si.getAlias() != null) {
+					alias = si.getAlias().getName().toLowerCase();
 				}
 				if (!columnNameAliasMap.containsKey(name)) {
 					columnNameAliasMap.put(name, alias);
@@ -421,8 +421,8 @@ public class PuiElasticsearchViewsAnalysis {
 		} else if (expression instanceof Function) {
 			// not supported
 			Function f = (Function) expression;
-			for (Expression e : f.getParameters().getExpressions()) {
-				Column c = lookForColumn(e);
+			for (Object o : f.getParameters()) {
+				Column c = lookForColumn((ExpressionList<?>) o);
 				if (c != null) {
 					return c;
 				}

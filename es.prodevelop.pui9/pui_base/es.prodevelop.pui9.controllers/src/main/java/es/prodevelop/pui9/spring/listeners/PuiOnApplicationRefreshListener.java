@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -29,7 +30,7 @@ public class PuiOnApplicationRefreshListener {
 
 	@EventListener
 	public void onApplicationEvent(ContextRefreshedEvent event) {
-		if (!event.getApplicationContext().equals(PuiApplicationContext.getInstance().getAppContext())) {
+		if (!Objects.equals(event.getApplicationContext(), PuiApplicationContext.getInstance().getAppContext())) {
 			return;
 		}
 

@@ -171,12 +171,12 @@ public class PuiKeycloakLogin extends PuiLogin {
 			KeyFactory rsaKeyFac = KeyFactory.getInstance("RSA");
 			PublicKey publicKey = rsaKeyFac.generatePublic(keySpec);
 
-			jwsClaims = Jwts.parserBuilder().setSigningKey(publicKey).build().parseClaimsJws(jwt);
+			jwsClaims = Jwts.parser().verifyWith(publicKey).build().parseSignedClaims(jwt);
 		} catch (JwtException | NoSuchAlgorithmException | InvalidKeySpecException e) {
 			throw new PuiServiceIncorrectLoginException();
 		}
 
-		return jwsClaims.getBody().get("preferred_username", String.class);
+		return jwsClaims.getPayload().get("preferred_username", String.class);
 	}
 
 }

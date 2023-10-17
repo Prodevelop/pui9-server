@@ -296,7 +296,7 @@ public class PuiFcmClient {
 			WebpushNotification webPush = WebpushNotification.builder().setTitle(title).setBody(body).build();
 			multicastMessageBuilder.setWebpushConfig(WebpushConfig.builder().setNotification(webPush).build());
 
-			FirebaseMessaging.getInstance().sendMulticastAsync(multicastMessageBuilder.build());
+			FirebaseMessaging.getInstance().sendEachForMulticastAsync(multicastMessageBuilder.build());
 		});
 	}
 
@@ -318,7 +318,7 @@ public class PuiFcmClient {
 		partitionedTokens.forEach(tokenList -> {
 			try {
 				BatchResponse br = FirebaseMessaging.getInstance()
-						.sendMulticast(MulticastMessage.builder().addAllTokens(tokenList).build(), true);
+						.sendEachForMulticast(MulticastMessage.builder().addAllTokens(tokenList).build(), true);
 				IntStream.range(0, br.getResponses().size()).boxed()
 						.collect(Collectors.toMap(i -> i, br.getResponses()::get)).entrySet().stream()
 						.filter(entry -> entry.getValue().getException() != null)
