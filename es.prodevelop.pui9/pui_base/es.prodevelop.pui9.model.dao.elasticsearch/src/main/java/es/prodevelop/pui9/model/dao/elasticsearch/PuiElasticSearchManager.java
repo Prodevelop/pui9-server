@@ -40,7 +40,7 @@ import co.elastic.clients.transport.ElasticsearchTransport;
 import co.elastic.clients.transport.rest_client.RestClientTransport;
 
 @Component
-@PropertySource("classpath:elastic.properties")
+@PropertySource(value = "classpath:elastic.properties", ignoreResourceNotFound = true)
 public class PuiElasticSearchManager {
 
 	private static final String URL_PREFIX = "jdbc:es://";
