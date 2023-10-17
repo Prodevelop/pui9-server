@@ -197,6 +197,19 @@ public class PuiModelService extends AbstractService<IPuiModelPk, IPuiModel, IVP
 	}
 
 	@Override
+	public PuiModelConfiguration getPuiModelConfiguration(String model) {
+		Map<String, PuiModelConfiguration> config = new LinkedHashMap<>();
+		config.put(model, getInternalModelConfigurations().get(model));
+
+		String json = GsonSingleton.getSingleton().getGson().toJson(config);
+		config = GsonSingleton.getSingleton().getGson().fromJson(json, modelConfigType);
+
+		fillUserInformation(config);
+
+		return config.get(model);
+	}
+
+	@Override
 	public Map<String, PuiModelConfiguration> getOriginalPuiModelConfigurations() {
 		String json = GsonSingleton.getSingleton().getGson().toJson(getInternalModelConfigurations());
 		return GsonSingleton.getSingleton().getGson().fromJson(json, modelConfigType);

@@ -55,6 +55,13 @@ public interface IPuiModelService extends IService<IPuiModelPk, IPuiModel, IVPui
 	Map<String, PuiModelConfiguration> getPuiModelConfigurations();
 
 	/**
+	 * Get the PUI Model Configuration (user based configuration)
+	 * 
+	 * @return The model configuration
+	 */
+	PuiModelConfiguration getPuiModelConfiguration(String model);
+
+	/**
 	 * Get the copy of the original PUI Models Configuration, without user based
 	 * information
 	 * 

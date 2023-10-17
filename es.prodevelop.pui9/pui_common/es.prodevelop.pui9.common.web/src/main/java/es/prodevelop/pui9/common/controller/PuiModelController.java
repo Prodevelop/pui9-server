@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import es.prodevelop.pui9.annotations.PuiApiKey;
@@ -19,6 +20,7 @@ import es.prodevelop.pui9.common.model.views.dto.interfaces.IVPuiModel;
 import es.prodevelop.pui9.common.service.interfaces.IPuiModelService;
 import es.prodevelop.pui9.controller.AbstractCommonController;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 /**
@@ -65,6 +67,20 @@ public class PuiModelController extends
 	@GetMapping(value = "/getModelConfigurations", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Map<String, PuiModelConfiguration> getModelConfigurations() {
 		return getService().getPuiModelConfigurations();
+	}
+
+	/**
+	 * Get all the model configuration customized for the logged user, with all of
+	 * the grid filters and configurations
+	 * 
+	 * @return A Map with all of the filters and configurations of the models for
+	 *         logged user
+	 */
+	@Operation(summary = "All the model configuration", description = "Get the configuration of all the models")
+	@GetMapping(value = "/getModelConfiguration/{model}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public PuiModelConfiguration getModelConfiguration(
+			@Parameter(description = "The name of the model to get", required = true) @PathVariable String model) {
+		return getService().getPuiModelConfiguration(model);
 	}
 
 	/**
