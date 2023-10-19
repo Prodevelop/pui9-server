@@ -93,8 +93,8 @@
 		<qrgen.version>1.4</qrgen.version>
 		<reflections.version>0.10.2</reflections.version>
 		<simple-odf.version>0.8.2-incubating</simple-odf.version>
-		<springdoc-openapi-ui.version>1.7.0</springdoc-openapi-ui.version>
-		<swagger-annotations.version>2.2.16</swagger-annotations.version>
+		<springdoc-openapi-ui.version>1.6.15</springdoc-openapi-ui.version>
+		<swagger-annotations.version>2.2.8</swagger-annotations.version>
 		<thumbnailator.version>0.4.20</thumbnailator.version>
 		<totp.version>1.7.1</totp.version>
 		<velocity.version>1.7</velocity.version>
