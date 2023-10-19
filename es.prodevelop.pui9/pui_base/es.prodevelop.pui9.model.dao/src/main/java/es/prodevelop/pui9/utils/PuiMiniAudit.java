@@ -61,6 +61,20 @@ public class PuiMiniAudit {
 	}
 
 	/**
+	 * Fill the information for a modification in the given DTO. Using the provided
+	 * date and user fields
+	 * 
+	 * @param dto       The DTO to set the insertion information
+	 * @param userField The user attribute
+	 * @param dateField The date attribute
+	 */
+	public static void fillModifyRegistry(IDto dto, String userField, String dateField) {
+		String usr = PuiUserSession.getCurrentSession() != null ? PuiUserSession.getCurrentSession().getUsername()
+				: null;
+		fillModifyRegistry(dto, userField, dateField, usr);
+	}
+
+	/**
 	 * Fill the information for a modification in the given DTO. Using by default
 	 * the session of the user that fired the request. Using the default field
 	 * names: {@link PuiMiniAudit#USR_MODIF} and {@link PuiMiniAudit#FEC_MODIF}
@@ -90,9 +104,9 @@ public class PuiMiniAudit {
 	 * user. Using the provided date and user fields
 	 * 
 	 * @param dto       The DTO to set the modify information
-	 * @param userField The user to be set
+	 * @param userField The user attribute
 	 * @param dateField The date attribute
-	 * @param usrValue  The user attribute
+	 * @param usrValue  The user to be set
 	 */
 	public static void fillModifyRegistry(IDto dto, String userField, String dateField, String usrValue) {
 		if (usrValue == null) {
@@ -118,6 +132,20 @@ public class PuiMiniAudit {
 
 	/**
 	 * Fill the information for an insertion of the given DTO. Using the provided
+	 * date and user fields
+	 * 
+	 * @param dto       The DTO to set the insertion information
+	 * @param userField The user attribute
+	 * @param dateField The date attribute
+	 */
+	public static void fillNewRegistry(IDto dto, String userField, String dateField) {
+		String usr = PuiUserSession.getCurrentSession() != null ? PuiUserSession.getCurrentSession().getUsername()
+				: null;
+		fillModifyRegistry(dto, userField, dateField, usr);
+	}
+
+	/**
+	 * Fill the information for an insertion of the given DTO. Using the provided
 	 * user. Using the default field names: {@link PuiMiniAudit#USR_ALTA} and
 	 * {@link PuiMiniAudit#FEC_ALTA}
 	 * 
@@ -133,9 +161,9 @@ public class PuiMiniAudit {
 	 * user. Using the provided date and user fields
 	 * 
 	 * @param dto       The DTO to set the insertion information
-	 * @param userField The user to be set
+	 * @param userField The user attribute
 	 * @param dateField The date attribute
-	 * @param usrValue  The user attribute
+	 * @param usrValue  The user to be set
 	 */
 	public static void fillNewRegistry(IDto dto, String userField, String dateField, String usrValue) {
 		if (usrValue == null) {
