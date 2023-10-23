@@ -51,6 +51,9 @@ public class DeleteAlertsListener extends PuiListener<DeleteDaoEvent> {
 			models.forEach(model -> {
 				List<IPuiAlertConfiguration> pacs = puiAlertConfigurationService
 						.getPuiAlertConfigurationsFromModel(model);
+				if (pacs == null) {
+					return;
+				}
 
 				pacs.forEach(pac -> {
 					String pk = puiAlertConfigurationService.createAlertPk(tableDto);

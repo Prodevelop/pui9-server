@@ -53,6 +53,10 @@ public class InsertAlertsListener extends PuiListener<InsertDaoEvent> {
 			models.forEach(model -> {
 				List<IPuiAlertConfiguration> pacs = puiAlertConfigurationService
 						.getPuiAlertConfigurationsFromModel(model);
+				if (pacs == null) {
+					return;
+				}
+
 				List<IPuiAlert> puiAlertsToCreate = new ArrayList<>();
 
 				pacs.forEach(pac -> {

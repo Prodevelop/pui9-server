@@ -63,6 +63,9 @@ public class UpdateAlertsListener extends PuiListener<UpdateDaoEvent> {
 			models.forEach(model -> {
 				List<IPuiAlertConfiguration> pacs = puiAlertConfigurationService
 						.getPuiAlertConfigurationsFromModel(model);
+				if (pacs == null) {
+					return;
+				}
 
 				pacs.forEach(pac -> {
 					Field alertableField = DtoRegistry.getJavaFieldFromColumnName(tableDto.getClass(),
