@@ -194,6 +194,7 @@ public class PuiLanguageService
 		}
 
 		if (allLangs.isEmpty()) {
+			PuiLanguageUtils.addLanguage(PuiLanguage.DEFAULT_LANG);
 			return;
 		}
 

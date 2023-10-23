@@ -62,7 +62,9 @@ public class PuiInterceptor implements HandlerInterceptor {
 			return true;
 		}
 
-		cleanPreviousRequests(request);
+		cleanContextData();
+		PuiLanguage lang = getLanguage(request);
+		setLanguageToThreadLocal(lang);
 
 		if (getPuiRequestMapping().isWebServiceSecured(handler)) {
 			if (isApiKeyRequest(request, handler)) {
@@ -75,7 +77,7 @@ public class PuiInterceptor implements HandlerInterceptor {
 					setContextSession(request);
 				}
 				checkUserPermission(handler);
-				setLanguageToCurrentSession(request);
+				setLanguageToCurrentSession(lang);
 				return true;
 			} else {
 				throw new PuiServiceNotAllowedException();
@@ -97,17 +99,12 @@ public class PuiInterceptor implements HandlerInterceptor {
 			if (isOpenapiRequest(request)) {
 				getPuiOpenapiLogin().finishSession();
 			} else {
-				removeContextSession();
+				cleanContextData();
 			}
 		}
 
 		LanguageThreadLocal.getSingleton().removeData();
 
-	}
-
-	protected void cleanPreviousRequests(HttpServletRequest request) {
-		removeContextSession();
-		setLanguageToThreadLocal(request);
 	}
 
 	protected boolean isApiKeyRequest(HttpServletRequest request, Object handler) {
@@ -141,12 +138,13 @@ public class PuiInterceptor implements HandlerInterceptor {
 	}
 
 	/**
-	 * Remove the session from current context
+	 * Clean the current context data
 	 */
-	protected void removeContextSession() {
+	protected void cleanContextData() {
 		if (getPuiSessionContext() != null) {
 			getPuiSessionContext().removeContextSession();
 		}
+		LanguageThreadLocal.getSingleton().removeData();
 	}
 
 	/**
@@ -175,10 +173,25 @@ public class PuiInterceptor implements HandlerInterceptor {
 		}
 	}
 
-	protected void setLanguageToThreadLocal(HttpServletRequest request) {
-		LanguageThreadLocal.getSingleton().setData(request.getHeader(HttpHeaders.ACCEPT_LANGUAGE));
+	/**
+	 * Get the language for the current request
+	 * 
+	 * @param request The current request
+	 * @return The language to be set
+	 */
+	protected PuiLanguage getLanguage(HttpServletRequest request) {
+		PuiLanguage lang = getLanguageForRequest(request);
+		if (lang == null) {
+			lang = PuiLanguage.DEFAULT_LANG;
+		}
+		return lang;
 	}
 
+	/**
+	 * Set the Language to the current Thread Local
+	 * 
+	 * @param request The request
+	 */
 	protected void setLanguageToThreadLocal(PuiLanguage lang) {
 		LanguageThreadLocal.getSingleton().setData(lang);
 	}
@@ -187,15 +200,10 @@ public class PuiInterceptor implements HandlerInterceptor {
 	 * If using a session, set the language for it. If no language could be
 	 * obtained, {@link PuiLanguage#DEFAULT_LANG} will be set
 	 * 
-	 * @param request The request servlet
+	 * @param lang The language to set
 	 */
-	protected void setLanguageToCurrentSession(HttpServletRequest request) {
-		PuiLanguage lang = getLanguageForRequest(request);
-		if (lang == null) {
-			lang = PuiLanguage.DEFAULT_LANG;
-		}
+	protected void setLanguageToCurrentSession(PuiLanguage lang) {
 		PuiUserSession.getCurrentSession().withLanguage(lang);
-		setLanguageToThreadLocal(lang);
 	}
 
 	/**
