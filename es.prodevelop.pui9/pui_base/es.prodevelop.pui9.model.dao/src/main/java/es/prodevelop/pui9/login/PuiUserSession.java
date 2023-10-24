@@ -63,19 +63,21 @@ public class PuiUserSession implements UserDetails, CredentialsContainer {
 		PuiLanguage threadLang = LanguageThreadLocal.getSingleton().getData();
 		PuiLanguage dbDefaultLang = PuiLanguageUtils.getDefaultLanguage();
 
-		PuiLanguage selected;
-		if (sessionLang != null) {
+		PuiLanguage selected = null;
+		if (sessionLang != null && PuiLanguageUtils.existLanguage(sessionLang)) {
 			selected = !Objects.equals(sessionLang, threadLang) ? sessionLang : threadLang;
-		} else if (threadLang != null) {
-			selected = threadLang;
-		} else if (dbDefaultLang != null) {
-			selected = dbDefaultLang;
-		} else {
-			selected = PuiLanguage.DEFAULT_LANG;
 		}
 
-		if (!PuiLanguageUtils.existLanguage(selected)) {
+		if (selected == null && threadLang != null && PuiLanguageUtils.existLanguage(threadLang)) {
+			selected = threadLang;
+		}
+
+		if (selected == null && dbDefaultLang != null && PuiLanguageUtils.existLanguage(dbDefaultLang)) {
 			selected = dbDefaultLang;
+		}
+
+		if (selected == null) {
+			selected = PuiLanguage.DEFAULT_LANG;
 		}
 
 		return selected;
