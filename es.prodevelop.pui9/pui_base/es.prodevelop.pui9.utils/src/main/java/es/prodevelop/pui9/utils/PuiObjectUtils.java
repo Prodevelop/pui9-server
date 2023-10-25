@@ -135,6 +135,10 @@ public class PuiObjectUtils {
 					}
 				}
 
+				if (val != null && !field.getType().isAssignableFrom(val.getClass()) && val instanceof String) {
+					val = guessValueType((String) val, field.getType());
+				}
+
 				if (val != null) {
 					if (Primitives.isWrapperType(fieldType) && !Primitives.isWrapperType(val.getClass())) {
 						val = convertToWrapper(val);
@@ -243,6 +247,38 @@ public class PuiObjectUtils {
 			return Double.valueOf((double) value);
 		} else if (boolean.class.equals(value.getClass())) {
 			return Boolean.valueOf((boolean) value);
+		} else {
+			return null;
+		}
+	}
+
+	private static Object guessValueType(String value, Class<?> type) {
+		if (value == null) {
+			return null;
+		}
+
+		if (Integer.class.equals(type)) {
+			return Integer.valueOf(value);
+		} else if (int.class.equals(type)) {
+			return Integer.parseInt(value);
+		} else if (Long.class.equals(type)) {
+			return Long.valueOf(value);
+		} else if (long.class.equals(type)) {
+			return Long.parseLong(value);
+		} else if (Float.class.equals(type)) {
+			return Float.valueOf(value);
+		} else if (float.class.equals(type)) {
+			return Float.parseFloat(value);
+		} else if (Double.class.equals(type)) {
+			return Double.valueOf(value);
+		} else if (double.class.equals(type)) {
+			return Double.parseDouble(value);
+		} else if (Boolean.class.equals(type)) {
+			return Boolean.valueOf(value);
+		} else if (boolean.class.equals(type)) {
+			return Boolean.parseBoolean(value);
+		} else if (BigDecimal.class.equals(type)) {
+			return new BigDecimal(value);
 		} else {
 			return null;
 		}
