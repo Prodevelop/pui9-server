@@ -82,9 +82,11 @@ public class ThreadDaoEvents {
 		}
 
 		try {
-			OrderedEvent threadEvent = queue.take();
-			threadEvent.event.setTransactionId(transactionId);
-			eventLauncher.fireSync(threadEvent.event);
+			while (!queue.isEmpty()) {
+				OrderedEvent threadEvent = queue.take();
+				threadEvent.event.setTransactionId(transactionId);
+				eventLauncher.fireSync(threadEvent.event);
+			}
 		} catch (InterruptedException e) {
 			Thread.currentThread().interrupt();
 		}
