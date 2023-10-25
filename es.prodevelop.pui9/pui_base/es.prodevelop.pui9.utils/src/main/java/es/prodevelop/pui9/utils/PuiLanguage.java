@@ -1,7 +1,9 @@
 package es.prodevelop.pui9.utils;
 
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.Locale;
+import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -11,7 +13,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  * 
  * @author Marc Gil - mgil@prodevelop.es
  */
-public class PuiLanguage implements Comparable<PuiLanguage>, Serializable {
+public class PuiLanguage implements Comparable<PuiLanguage>, Comparator<PuiLanguage>, Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -84,17 +86,21 @@ public class PuiLanguage implements Comparable<PuiLanguage>, Serializable {
 			return false;
 		}
 
-		return this.isocode.equalsIgnoreCase(((PuiLanguage) obj).isocode);
+		PuiLanguage other = (PuiLanguage) obj;
+
+		return Objects.equals(this.isocode, other.isocode);
 	}
 
 	@Override
 	public int hashCode() {
 		HashCodeBuilder hcBuilder = new HashCodeBuilder();
 		hcBuilder.append(isocode);
-		hcBuilder.append(country);
-		hcBuilder.append(name);
-		hcBuilder.append(isdefault);
 		return hcBuilder.toHashCode();
+	}
+
+	@Override
+	public int compare(PuiLanguage o1, PuiLanguage o2) {
+		return o1.isocode.compareTo(o2.isocode);
 	}
 
 	@Override
