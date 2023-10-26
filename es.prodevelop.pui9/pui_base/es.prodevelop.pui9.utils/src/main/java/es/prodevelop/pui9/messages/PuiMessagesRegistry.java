@@ -43,17 +43,17 @@ public class PuiMessagesRegistry {
 	public void setAvailableLanguages(String... langs) {
 		availableLanguages = langs;
 
-		// remove the languages that will not available
-		for (Iterator<String> it = map.keySet().iterator(); it.hasNext();) {
-			if (!Arrays.asList(availableLanguages).contains(it.next())) {
-				it.remove();
+		synchronized (map) {
+			// remove the languages that will not available
+			for (Iterator<String> it = map.keySet().iterator(); it.hasNext();) {
+				if (!Arrays.asList(availableLanguages).contains(it.next())) {
+					it.remove();
+				}
 			}
-		}
 
-		// add the new available languages
-		for (String lang : availableLanguages) {
-			if (!map.containsKey(lang)) {
-				map.put(lang, new LinkedHashMap<>());
+			// add the new available languages
+			for (String lang : availableLanguages) {
+				map.computeIfAbsent(lang, l -> new LinkedHashMap<>());
 				Map<String, ResourceBundle> oneLang = map.values().iterator().next();
 				for (String baseMap : oneLang.keySet()) {
 					addFileMessages(lang, baseMap);
@@ -92,13 +92,16 @@ public class PuiMessagesRegistry {
 	 * @param baseName The base name of the filt to be added
 	 */
 	private void addFileMessages(String lang, String baseName) {
-		try {
-			if (!map.containsKey(lang)) {
-				map.put(lang, new LinkedHashMap<>());
+		synchronized (map) {
+			try {
+				if (!map.containsKey(lang)) {
+					map.put(lang, new LinkedHashMap<>());
+				}
+				map.get(lang).put(baseName, ResourceBundle.getBundle(baseName, new Locale(lang)));
+			} catch (MissingResourceException e) {
+				map.get(lang).put(baseName,
+						ResourceBundle.getBundle(baseName, new Locale(defaultLanguage.getIsocode())));
 			}
-			map.get(lang).put(baseName, ResourceBundle.getBundle(baseName, new Locale(lang)));
-		} catch (MissingResourceException e) {
-			map.get(lang).put(baseName, ResourceBundle.getBundle(baseName, new Locale(defaultLanguage.getIsocode())));
 		}
 	}
 
@@ -131,18 +134,20 @@ public class PuiMessagesRegistry {
 			return "";
 		}
 
-		if (lang == null || !map.containsKey(lang.getIsocode())) {
-			lang = defaultLanguage;
-		}
+		synchronized (map) {
+			if (lang == null || !map.containsKey(lang.getIsocode())) {
+				lang = defaultLanguage;
+			}
 
-		try {
-			if (map.get(lang.getIsocode()).containsKey(baseName)) {
-				return map.get(lang.getIsocode()).get(baseName).getString(key);
-			} else {
+			try {
+				if (map.get(lang.getIsocode()).containsKey(baseName)) {
+					return map.get(lang.getIsocode()).get(baseName).getString(key);
+				} else {
+					return null;
+				}
+			} catch (MissingResourceException e) {
 				return null;
 			}
-		} catch (MissingResourceException e) {
-			return null;
 		}
 	}
 
@@ -158,21 +163,23 @@ public class PuiMessagesRegistry {
 			return "";
 		}
 
-		if (lang == null || !map.containsKey(lang.getIsocode())) {
-			lang = defaultLanguage;
-		}
-
-		String val = null;
-		for (ResourceBundle rb : map.get(lang.getIsocode()).values()) {
-			try {
-				val = rb.getString(key);
-				break;
-			} catch (MissingResourceException e) {
-				// do nothing, continue with following resource bundle
+		synchronized (map) {
+			if (lang == null || !map.containsKey(lang.getIsocode())) {
+				lang = defaultLanguage;
 			}
-		}
 
-		return val;
+			String val = null;
+			for (ResourceBundle rb : map.get(lang.getIsocode()).values()) {
+				try {
+					val = rb.getString(key);
+					break;
+				} catch (MissingResourceException e) {
+					// do nothing, continue with following resource bundle
+				}
+			}
+
+			return val;
+		}
 	}
 
 }
