@@ -1,27 +1,25 @@
 package es.prodevelop.pui9.data.converters;
 
 import java.nio.charset.StandardCharsets;
-import java.time.Instant;
 import java.util.Collections;
 import java.util.Set;
 
 import org.springframework.core.convert.TypeDescriptor;
 
-import es.prodevelop.pui9.utils.PuiDateUtil;
+import es.prodevelop.pui9.docgen.dto.DocgenParameterList;
+import es.prodevelop.pui9.json.GsonSingleton;
 
 /**
  * This class allows to set a @RequestParam parameter in your controllers
- * indicating that the type of this parameter is a {@link Instant}.
- * Automatically, the value is converted into a Date using the
- * {@link PuiDateUtil} class (allows multiple formats)
+ * indicating that the type of this parameter is a {@link DocgenParameterList}
  * 
  * @author Marc Gil - mgil@prodevelop.es
  */
-public class InstantConverter implements IPuiGenericConverter {
+public class DocgenParameterListConverter implements IPuiGenericConverter {
 
 	@Override
 	public Set<ConvertiblePair> getConvertibleTypes() {
-		return Collections.singleton(new ConvertiblePair(String.class, Instant.class));
+		return Collections.singleton(new ConvertiblePair(String.class, DocgenParameterList.class));
 	}
 
 	@Override
@@ -30,7 +28,7 @@ public class InstantConverter implements IPuiGenericConverter {
 			return null;
 		}
 		String val = new String(source.toString().getBytes(), StandardCharsets.UTF_8);
-		return PuiDateUtil.stringToInstant(val);
+		return GsonSingleton.getSingleton().getGson().fromJson(val, DocgenParameterList.class);
 	}
 
 }

@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.Set;
 
 import org.springframework.core.convert.TypeDescriptor;
-import org.springframework.core.convert.converter.GenericConverter;
 
 import es.prodevelop.pui9.json.GsonSingleton;
 import es.prodevelop.pui9.model.dto.DtoFactory;
@@ -18,7 +17,7 @@ import es.prodevelop.pui9.model.dto.interfaces.IDto;
  * 
  * @author Marc Gil - mgil@prodevelop.es
  */
-public class DtoConverter implements GenericConverter {
+public class DtoConverter implements IPuiGenericConverter {
 
 	@Override
 	public Set<ConvertiblePair> getConvertibleTypes() {

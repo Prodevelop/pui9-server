@@ -1,12 +1,15 @@
 package es.prodevelop.pui9.spring.configuration;
 
+import java.lang.reflect.Modifier;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
+import org.reflections.Reflections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -34,11 +37,7 @@ import org.springframework.web.servlet.mvc.method.pui9.PuiRequestMappingHandlerA
 import org.springframework.web.servlet.mvc.method.pui9.PuiRequestMappingHandlerMapping;
 import org.springframework.web.servlet.resource.ResourceUrlProvider;
 
-import es.prodevelop.pui9.data.converters.DtoConverter;
-import es.prodevelop.pui9.data.converters.InstantConverter;
-import es.prodevelop.pui9.data.converters.LocalDateConverter;
-import es.prodevelop.pui9.data.converters.MapConverter;
-import es.prodevelop.pui9.data.converters.MultipartFileConverter;
+import es.prodevelop.pui9.data.converters.IPuiGenericConverter;
 import es.prodevelop.pui9.data.converters.PuiGsonHttpMessageConverter;
 import es.prodevelop.pui9.spring.configuration.annotations.PuiSpringConfiguration;
 
@@ -192,15 +191,16 @@ public class PuiRootSpringConfiguration extends WebMvcConfigurationSupport {
 	 * @return list of all the own Generic Converters
 	 */
 	private List<GenericConverter> getPuiGenericConverters() {
-		List<GenericConverter> converters = new ArrayList<>();
-
-		converters.add(new DtoConverter());
-		converters.add(new InstantConverter());
-		converters.add(new LocalDateConverter());
-		converters.add(new MapConverter());
-		converters.add(new MultipartFileConverter());
-
-		return converters;
+		Reflections ref = new Reflections("es.prodevelop");
+		Set<Class<? extends IPuiGenericConverter>> convertersClasses = ref.getSubTypesOf(IPuiGenericConverter.class);
+		convertersClasses.removeIf(tac -> tac.isInterface() || Modifier.isAbstract(tac.getModifiers()));
+		return convertersClasses.stream().map(tac -> {
+			try {
+				return tac.newInstance();
+			} catch (InstantiationException | IllegalAccessException e) {
+				return null;
+			}
+		}).filter(Objects::nonNull).collect(Collectors.toList());
 	}
 
 }

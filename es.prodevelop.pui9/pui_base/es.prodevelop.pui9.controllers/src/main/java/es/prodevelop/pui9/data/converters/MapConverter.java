@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.springframework.core.convert.TypeDescriptor;
-import org.springframework.core.convert.converter.GenericConverter;
 
 import es.prodevelop.pui9.json.GsonSingleton;
 
@@ -15,7 +14,7 @@ import es.prodevelop.pui9.json.GsonSingleton;
  * 
  * @author Marc Gil - mgil@prodevelop.es
  */
-public class MapConverter implements GenericConverter {
+public class MapConverter implements IPuiGenericConverter {
 
 	@Override
 	public Set<ConvertiblePair> getConvertibleTypes() {

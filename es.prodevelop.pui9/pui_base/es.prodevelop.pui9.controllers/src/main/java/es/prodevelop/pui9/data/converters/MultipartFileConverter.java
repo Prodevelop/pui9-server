@@ -6,7 +6,6 @@ import java.util.Set;
 
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.core.convert.TypeDescriptor;
-import org.springframework.core.convert.converter.GenericConverter;
 import org.springframework.web.multipart.MultipartFile;
 
 import es.prodevelop.pui9.file.AttachmentDefinition;
@@ -19,7 +18,7 @@ import es.prodevelop.pui9.file.AttachmentDefinition;
  * 
  * @author Marc Gil - mgil@prodevelop.es
  */
-public class MultipartFileConverter implements GenericConverter {
+public class MultipartFileConverter implements IPuiGenericConverter {
 
 	@Override
 	public Set<ConvertiblePair> getConvertibleTypes() {

@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.Set;
 
 import org.springframework.core.convert.TypeDescriptor;
-import org.springframework.core.convert.converter.GenericConverter;
 
 import es.prodevelop.pui9.utils.PuiDateUtil;
 
@@ -19,7 +18,7 @@ import es.prodevelop.pui9.utils.PuiDateUtil;
  * 
  * @author Marc Gil - mgil@prodevelop.es
  */
-public class LocalDateConverter implements GenericConverter {
+public class LocalDateConverter implements IPuiGenericConverter {
 
 	@Override
 	public Set<ConvertiblePair> getConvertibleTypes() {
