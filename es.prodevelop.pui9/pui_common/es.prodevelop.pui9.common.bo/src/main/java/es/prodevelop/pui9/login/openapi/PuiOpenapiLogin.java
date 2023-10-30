@@ -1,5 +1,6 @@
 package es.prodevelop.pui9.login.openapi;
 
+import java.util.Base64;
 import java.util.Collections;
 import java.util.Objects;
 
@@ -8,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
-import org.springframework.util.Base64Utils;
 import org.springframework.util.ObjectUtils;
 
 import es.prodevelop.pui9.enums.Pui9KnownClients;
@@ -86,7 +86,7 @@ public class PuiOpenapiLogin implements IPuiOpenapiLogin {
 	}
 
 	private String getUser(String authorization) throws PuiServiceIncorrectUserPasswordException {
-		String decoded = new String(Base64Utils.decodeFromString(authorization));
+		String decoded = new String(Base64.getDecoder().decode(authorization));
 		String[] splits = decoded.split(":");
 		if (splits.length != 2) {
 			throw new PuiServiceIncorrectUserPasswordException();
@@ -96,7 +96,7 @@ public class PuiOpenapiLogin implements IPuiOpenapiLogin {
 	}
 
 	private String getPassword(String authorization) throws PuiServiceIncorrectUserPasswordException {
-		String decoded = new String(Base64Utils.decodeFromString(authorization));
+		String decoded = new String(Base64.getDecoder().decode(authorization));
 		String[] splits = decoded.split(":");
 		if (splits.length != 2) {
 			throw new PuiServiceIncorrectUserPasswordException();
