@@ -17,36 +17,18 @@
 	<dependencies>
 		<dependency>
 			<groupId>es.prodevelop</groupId>
+			<artifactId>es.prodevelop.pui9.docgen.thirdparty</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>es.prodevelop</groupId>
 			<artifactId>es.prodevelop.pui9.docgen.dao</artifactId>
 			<version>${project.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.freemarker</groupId>
-					<artifactId>freemarker</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>es.prodevelop</groupId>
 			<artifactId>es.prodevelop.pui9.common.bo</artifactId>
 			<version>${project.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.odftoolkit</groupId>
-			<artifactId>simple-odf</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>fr.opensagres.xdocreport</groupId>
-			<artifactId>fr.opensagres.xdocreport.document.odt</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>fr.opensagres.xdocreport</groupId>
-			<artifactId>fr.opensagres.xdocreport.template.freemarker</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>fr.opensagres.xdocreport</groupId>
-			<artifactId>fr.opensagres.xdocreport.converter.odt.odfdom</artifactId>
 		</dependency>
 	</dependencies>
 </project>

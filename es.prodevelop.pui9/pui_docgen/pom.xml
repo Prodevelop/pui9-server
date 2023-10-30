@@ -15,6 +15,7 @@
 	</parent>
 
 	<modules>
+		<module>es.prodevelop.pui9.docgen.thirdparty</module>
 		<module>es.prodevelop.pui9.docgen.dto</module>
 		<module>es.prodevelop.pui9.docgen.dao</module>
 		<module>es.prodevelop.pui9.docgen.bo</module>

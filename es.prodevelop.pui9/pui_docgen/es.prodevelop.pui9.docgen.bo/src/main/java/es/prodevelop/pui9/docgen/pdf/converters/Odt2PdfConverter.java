@@ -7,14 +7,14 @@ import java.io.InputStream;
 
 import org.springframework.stereotype.Component;
 
-import fr.opensagres.xdocreport.converter.ConverterTypeTo;
-import fr.opensagres.xdocreport.converter.ConverterTypeVia;
-import fr.opensagres.xdocreport.converter.Options;
-import fr.opensagres.xdocreport.core.XDocReportException;
-import fr.opensagres.xdocreport.core.document.DocumentKind;
-import fr.opensagres.xdocreport.document.IXDocReport;
-import fr.opensagres.xdocreport.document.registry.XDocReportRegistry;
-import fr.opensagres.xdocreport.template.TemplateEngineKind;
+import es.prodevelop.xdocreport.converter.ConverterTypeTo;
+import es.prodevelop.xdocreport.converter.ConverterTypeVia;
+import es.prodevelop.xdocreport.converter.Options;
+import es.prodevelop.xdocreport.core.XDocReportException;
+import es.prodevelop.xdocreport.core.document.DocumentKind;
+import es.prodevelop.xdocreport.document.IXDocReport;
+import es.prodevelop.xdocreport.document.registry.XDocReportRegistry;
+import es.prodevelop.xdocreport.template.TemplateEngineKind;
 
 @Component
 public class Odt2PdfConverter extends AbstractPdfConverter {
