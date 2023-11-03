@@ -75,6 +75,7 @@ import es.prodevelop.pui9.model.dto.DtoFactory;
 import es.prodevelop.pui9.model.dto.DtoRegistry;
 import es.prodevelop.pui9.model.dto.interfaces.IDto;
 import es.prodevelop.pui9.model.dto.interfaces.ITableDto;
+import es.prodevelop.pui9.model.dto.interfaces.IViewDto;
 import es.prodevelop.pui9.order.Order;
 import es.prodevelop.pui9.search.ExportColumnDefinition;
 import es.prodevelop.pui9.search.ExportRequest;
@@ -210,11 +211,11 @@ public class PuiImportExportAction {
 	private void checkColumns(String model, List<String> exportColumns)
 			throws PuiCommonImportExportPkNotIncludedException, PuiCommonImportExportInvalidColumnException,
 			PuiCommonImportExportInvalidModelException {
+		Class<? extends ITableDto> dtoClass = getTableDtoClass(model);
 		List<String> columnNames = getExportableColumns(model).stream().map(ExportColumnDefinition::getName)
 				.collect(Collectors.toList());
-		List<String> pkColumnNames = DtoRegistry.getPkFields(getTableDtoClass(model)).stream()
-				.map(pkField -> DtoRegistry.getColumnNameFromFieldName(getTableDtoClass(model), pkField))
-				.collect(Collectors.toList());
+		List<String> pkColumnNames = DtoRegistry.getPkFields(dtoClass).stream()
+				.map(pkField -> DtoRegistry.getColumnNameFromFieldName(dtoClass, pkField)).collect(Collectors.toList());
 
 		// pk is included?
 		if (pkColumnNames.size() != exportColumns.stream().filter(pkColumnNames::contains).count()) {
@@ -320,93 +321,6 @@ public class PuiImportExportAction {
 		}
 	}
 
-	/**
-	 * Convert an String into an Integer
-	 * 
-	 * @param value The String to be converted
-	 * @return The corresponding Integer
-	 * @throws IllegalFormatConversionException If the String could not be converted
-	 *                                          into an Integer
-	 */
-	private Integer stringAsInteger(String value) throws IllegalFormatConversionException {
-		if (ObjectUtils.isEmpty(value)) {
-			return null;
-		}
-
-		try {
-			return Integer.valueOf(value);
-		} catch (Exception e) {
-			throw new IllegalFormatConversionException('a', Integer.class);
-		}
-	}
-
-	/**
-	 * Convert an String into a Long
-	 * 
-	 * @param value The String to be converted
-	 * @return The corresponding Long
-	 * @throws IllegalFormatConversionException If the String could not be converted
-	 *                                          into a Long
-	 */
-	private Long stringAsLong(String value) throws IllegalFormatConversionException {
-		if (ObjectUtils.isEmpty(value)) {
-			return null;
-		}
-
-		try {
-			return Long.valueOf(value);
-		} catch (Exception e) {
-			throw new IllegalFormatConversionException('a', Long.class);
-		}
-	}
-
-	/**
-	 * Convert an String into an Instant
-	 * 
-	 * @param value The String to be converted
-	 * @return The corresponding Instant
-	 * @throws IllegalFormatConversionException If the String could not be converted
-	 *                                          into an Instant
-	 */
-	private Instant stringAsInstant(String value) throws IllegalFormatConversionException {
-		if (ObjectUtils.isEmpty(value)) {
-			return null;
-		}
-
-		try {
-			return Instant.parse(value);
-		} catch (Exception e1) {
-			try {
-				LocalDateTime ldt = PuiDateUtil.stringToLocalDateTime(value,
-						PuiUserSession.getCurrentSession() != null ? PuiUserSession.getCurrentSession().getZoneId()
-								: ZoneId.systemDefault());
-				if (ldt == null) {
-					throw new IllegalFormatConversionException('a', Instant.class);
-				}
-				ZonedDateTime zdt = ZonedDateTime.of(ldt,
-						PuiUserSession.getCurrentSession() != null ? PuiUserSession.getCurrentSession().getZoneId()
-								: ZoneId.systemDefault());
-				return zdt.toInstant();
-			} catch (Exception e2) {
-				throw new IllegalFormatConversionException('a', Instant.class);
-			}
-		}
-	}
-
-	/**
-	 * Convert an Instant as String
-	 * 
-	 * @param value The Instant to be converted
-	 * @param dtf   The format of the converted String
-	 * @return The converted String
-	 */
-	private String instantAsString(Instant value, DateTimeFormatter dtf) {
-		ZonedDateTime zdt = PuiDateUtil.getInstantAtZoneId(value,
-				PuiUserSession.getCurrentSession() != null ? PuiUserSession.getCurrentSession().getZoneId()
-						: ZoneId.systemDefault());
-		return PuiDateUtil.temporalAccessorToString(zdt, dtf);
-	}
-
 	@Component
 	public class ExportUtil {
 
@@ -457,7 +371,7 @@ public class PuiImportExportAction {
 				searchReq.setPage(SearchRequest.DEFAULT_PAGE);
 				searchReq.setRows(req.getRows());
 				searchReq.setPerformCount(false);
-				List<Object> recordsFromTable = findFromTable(searchReq);
+				List<ITableDto> recordsFromTable = findFromTable(searchReq);
 
 				List<List<Pair<String, Object>>> data = convertData(bakColumns, recordsFromTable);
 				generateTableContent(writer, req.getModel(), data);
@@ -480,18 +394,20 @@ public class PuiImportExportAction {
 				req.setExportColumns(new ArrayList<>());
 			}
 
-			DtoRegistry.getPkFields(getTableDtoClass(req.getModel())).stream()
-					.map(pkField -> DtoRegistry.getColumnNameFromFieldName(getTableDtoClass(req.getModel()), pkField))
-					.filter(pk -> !req.getExportColumns().stream().map(ExportColumnDefinition::getName)
-							.collect(Collectors.toList()).contains(pk))
+			Class<? extends ITableDto> tableDto = getTableDtoClass(req.getModel());
+
+			DtoRegistry.getPkFields(tableDto).stream()
+					.map(pkField -> DtoRegistry.getColumnNameFromFieldName(tableDto, pkField))
+					.filter(pk -> req.getExportColumns().stream().map(ExportColumnDefinition::getName)
+							.noneMatch(name -> Objects.equals(name, pk)))
 					.forEach(pk -> req.getExportColumns().add(0, ExportColumnDefinition.of(pk, pk, -1, null)));
 
 			// include mandatory columns
 			iterateAllTableDtoInterfaces(req.getModel(),
 					superDtoIface -> DtoRegistry.getNotNullFields(superDtoIface).stream()
 							.map(notNull -> DtoRegistry.getColumnNameFromFieldName(superDtoIface, notNull))
-							.filter(notNull -> !req.getExportColumns().stream().map(ExportColumnDefinition::getName)
-									.collect(Collectors.toList()).contains(notNull))
+							.filter(notNull -> req.getExportColumns().stream().map(ExportColumnDefinition::getName)
+									.noneMatch(name -> Objects.equals(name, notNull)))
 							.forEach(notNull -> req.getExportColumns()
 									.add(ExportColumnDefinition.of(notNull, notNull, -1, null))));
 		}
@@ -506,7 +422,7 @@ public class PuiImportExportAction {
 		}
 
 		@SuppressWarnings({ "rawtypes", "unchecked" })
-		private List<Object> findFromTable(SearchRequest req) {
+		private List<ITableDto> findFromTable(SearchRequest req) {
 			try {
 				Class<? extends IService> serviceClass = serviceRegistry.getServiceFromModelId(req.getModel());
 				IService service = PuiApplicationContext.getInstance().getBean(serviceClass);
@@ -517,14 +433,13 @@ public class PuiImportExportAction {
 		}
 
 		@SuppressWarnings({ "unchecked", "rawtypes" })
-		private void findFromView(ExportRequest req, Consumer<List<Object>> consumer) {
+		private void findFromView(ExportRequest req, Consumer<List<IViewDto>> consumer) {
 			Class<? extends IService> serviceClass = serviceRegistry.getServiceFromModelId(req.getModel());
 			IService service = PuiApplicationContext.getInstance().getBean(serviceClass);
 			service.getViewDao().executePaginagedOperation(req, null, consumer);
 		}
 
-		@SuppressWarnings("unchecked")
-		private FilterBuilder mountFilterWithPks(String model, List<Object> recordsFromView) {
+		private FilterBuilder mountFilterWithPks(String model, List<IViewDto> recordsFromView) {
 			FilterBuilder filterBuilder = FilterBuilder.newOrFilter();
 			if (ObjectUtils.isEmpty(recordsFromView)) {
 				return filterBuilder;
@@ -536,8 +451,7 @@ public class PuiImportExportAction {
 			if (pkFieldNames.size() == 1) {
 				// the PK is simple
 				String pkFieldName = pkFieldNames.iterator().next();
-				Field pkField = DtoRegistry.getJavaFieldFromFieldName((Class<IDto>) recordsFromView.get(0).getClass(),
-						pkFieldName);
+				Field pkField = DtoRegistry.getJavaFieldFromFieldName(recordsFromView.get(0).getClass(), pkFieldName);
 				boolean isNumeric = DtoRegistry.getNumericFields(dtoClass).contains(pkFieldName);
 				boolean isString = DtoRegistry.getStringFields(dtoClass).contains(pkFieldName);
 				if (isNumeric) {
@@ -566,7 +480,7 @@ public class PuiImportExportAction {
 				recordsFromView.forEach(rec -> {
 					FilterBuilder fbRecord = FilterBuilder.newAndFilter();
 					pkFieldNames.forEach(pkName -> {
-						Field pkField = DtoRegistry.getJavaFieldFromFieldName((Class<IDto>) rec.getClass(), pkName);
+						Field pkField = DtoRegistry.getJavaFieldFromFieldName(rec.getClass(), pkName);
 						try {
 							if (DtoRegistry.getStringFields(dtoClass).contains(pkName)) {
 								fbRecord.addEqualsExact(pkName, (String) pkField.get(rec));
@@ -585,15 +499,16 @@ public class PuiImportExportAction {
 		}
 
 		private List<List<Pair<String, Object>>> convertData(List<ExportColumnDefinition> exportColumns,
-				List<Object> data) {
+				List<ITableDto> data) {
 			List<List<Pair<String, Object>>> list = new ArrayList<>();
 
 			data.forEach(d -> {
 				List<Pair<String, Object>> newData = new ArrayList<>();
 				exportColumns.forEach(ec -> {
+					String fieldName = DtoRegistry.getFieldNameFromColumnName(d.getClass(), ec.getName());
 					Object value;
 					try {
-						value = PropertyUtils.getProperty(d, ec.getName());
+						value = PropertyUtils.getProperty(d, fieldName);
 					} catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
 						value = null;
 					}
@@ -640,8 +555,8 @@ public class PuiImportExportAction {
 					? PuiUserSession.getCurrentSession().getDateformat() + " HH:mm:ss"
 					: "yyyy-MM-dd HH:mm:ss");
 
-			data.forEach(record -> {
-				record.forEach(pair -> {
+			data.forEach(rec -> {
+				rec.forEach(pair -> {
 					AtomicReference<Class<? extends IDto>> superInterface = new AtomicReference<>();
 					AtomicReference<String> fieldname = new AtomicReference<>();
 					iterateAllTableDtoInterfaces(model, superIface -> {
@@ -678,6 +593,20 @@ public class PuiImportExportAction {
 			});
 		}
 
+		/**
+		 * Convert an Instant as String
+		 * 
+		 * @param value The Instant to be converted
+		 * @param dtf   The format of the converted String
+		 * @return The converted String
+		 */
+		private String instantAsString(Instant value, DateTimeFormatter dtf) {
+			ZonedDateTime zdt = PuiDateUtil.getInstantAtZoneId(value,
+					PuiUserSession.getCurrentSession() != null ? PuiUserSession.getCurrentSession().getZoneId()
+							: ZoneId.systemDefault());
+			return PuiDateUtil.temporalAccessorToString(zdt, dtf);
+		}
+
 	}
 
 	@Component
@@ -706,10 +635,10 @@ public class PuiImportExportAction {
 			List<String> columnNames = readColumnNames(reader);
 			List<String> columnTitles = readColumnTitles(reader);
 			checkColumns(model, columnNames);
+			List<String> pkFields = DtoRegistry.getPkFields(getTableDtoClass(model));
 
 			ImportData importData = new ImportData(PuiUserSession.getCurrentSession().getUsr(), model,
-					PuiUserSession.getSessionLanguage().getIsocode(), DtoRegistry.getPkFields(getTableDtoClass(model)),
-					columnNames, columnTitles);
+					PuiUserSession.getSessionLanguage().getIsocode(), pkFields, columnNames, columnTitles);
 			readRecords(reader, importData);
 
 			FilterBuilder filterBuilder = mountFilterWithPks(importData);
@@ -792,8 +721,9 @@ public class PuiImportExportAction {
 			try {
 				AtomicReference<String> language = new AtomicReference<>();
 				int i = 1;
+				Class<? extends ITableDto> dtoClass = getTableDtoClass(importData.getModel());
 				while (reader.readRecord()) {
-					ImportDataRecord record = new ImportDataRecord();
+					ImportDataRecord rec = new ImportDataRecord();
 					importData.getColumns().forEach(col -> {
 						String value;
 						try {
@@ -829,9 +759,9 @@ public class PuiImportExportAction {
 							val = asString(value);
 						}
 
-						record.addAttribute(col, new ImportDataAttribute(val, hasError));
+						rec.addAttribute(col, new ImportDataAttribute(val, hasError));
 						if (hasError) {
-							record.setStatus(ImportDataRecordStatus.ERROR);
+							rec.setStatus(ImportDataRecordStatus.ERROR);
 						}
 
 						if (IDto.LANG_COLUMN_NAME.equals(col) && language.get() == null) {
@@ -841,7 +771,8 @@ public class PuiImportExportAction {
 
 					StringBuilder pkBuilder = new StringBuilder();
 					for (Iterator<String> pkIt = importData.getPks().iterator(); pkIt.hasNext();) {
-						ImportDataAttribute ida = record.getAttributes().get(pkIt.next());
+						String colName = DtoRegistry.getColumnNameFromFieldName(dtoClass, pkIt.next());
+						ImportDataAttribute ida = rec.getAttributes().get(colName);
 						if (ida.getValue() != null) {
 							pkBuilder.append(ida.getValue());
 							if (pkIt.hasNext()) {
@@ -854,14 +785,14 @@ public class PuiImportExportAction {
 					}
 
 					if (pkBuilder.indexOf(NEW_RECORD_PREFIX) >= 0) {
-						if (record.getStatus().equals(ImportDataRecordStatus.ERROR)) {
-							record.setStatus(ImportDataRecordStatus.NEW_ERROR);
+						if (rec.getStatus().equals(ImportDataRecordStatus.ERROR)) {
+							rec.setStatus(ImportDataRecordStatus.NEW_ERROR);
 						} else {
-							record.setStatus(ImportDataRecordStatus.NEW);
+							rec.setStatus(ImportDataRecordStatus.NEW);
 						}
 					}
 
-					importData.addRecord(pkBuilder.toString(), record);
+					importData.addRecord(pkBuilder.toString(), rec);
 				}
 
 				if (language.get() != null) {
@@ -883,18 +814,19 @@ public class PuiImportExportAction {
 
 			if (importData.getPks().size() == 1) {
 				// the PK is simple
-				String pkName = importData.getPks().get(0);
-				boolean isNumeric = DtoRegistry.getNumericFields(dtoClass).contains(pkName);
-				boolean isString = DtoRegistry.getStringFields(dtoClass).contains(pkName);
+				String pkFieldName = importData.getPks().get(0);
+				boolean isNumeric = DtoRegistry.getNumericFields(dtoClass).contains(pkFieldName);
+				boolean isString = DtoRegistry.getStringFields(dtoClass).contains(pkFieldName);
+				String pkColName = DtoRegistry.getColumnNameFromFieldName(dtoClass, pkFieldName);
 				if (isNumeric) {
 					List<Number> pks = new ArrayList<>();
 					importData.getRecords().keySet().stream().filter(pk -> !pk.startsWith(NEW_RECORD_PREFIX))
 							.forEach(pk -> pks.add(Integer.parseInt(pk)));
-					filterBuilder.addIn(pkName, pks);
+					filterBuilder.addIn(pkColName, pks);
 				} else if (isString) {
 					List<String> pks = new ArrayList<>();
 					importData.getRecords().keySet().forEach(pks::add);
-					filterBuilder.addIn(pkName, pks);
+					filterBuilder.addIn(pkColName, pks);
 				}
 			} else {
 				// the PK is composed
@@ -903,7 +835,9 @@ public class PuiImportExportAction {
 							FilterBuilder fbRecord = FilterBuilder.newAndFilter();
 							String[] pkValues = pkRec.split(PK_SEPARATOR);
 							for (int i = 0; i < pkValues.length; i++) {
-								fbRecord.addEqualsExact(importData.getPks().get(i), pkValues[i]);
+								String pkColName = DtoRegistry.getColumnNameFromFieldName(dtoClass,
+										importData.getPks().get(i));
+								fbRecord.addEqualsExact(pkColName, pkValues[i]);
 							}
 							filterBuilder.addGroup(fbRecord);
 						});
@@ -924,18 +858,16 @@ public class PuiImportExportAction {
 		}
 
 		private void compareRecords(ImportData importData, List<ITableDto> dtos) {
-			DateTimeFormatter dtf = DateTimeFormatter
-					.ofPattern(PuiUserSession.getCurrentSession().getDateformat() + " HH:mm:ss");
 			Class<? extends ITableDto> dtoClass = getTableDtoClass(importData.getModel());
 
 			for (ITableDto dto : dtos) {
 				StringBuilder pkBuilder = new StringBuilder();
-				for (String pk : importData.getPks()) {
+				for (String pkField : importData.getPks()) {
 					if (pkBuilder.length() > 0) {
 						pkBuilder.append(PK_SEPARATOR);
 					}
 					try {
-						pkBuilder.append(DtoRegistry.getJavaFieldFromColumnName(dtoClass, pk).get(dto));
+						pkBuilder.append(DtoRegistry.getJavaFieldFromFieldName(dtoClass, pkField).get(dto));
 					} catch (IllegalArgumentException | IllegalAccessException e) {
 						pkBuilder = null;
 						break;
@@ -953,34 +885,31 @@ public class PuiImportExportAction {
 
 				boolean recordHasChanged = false;
 				AtomicBoolean recordHasErrror = new AtomicBoolean(idr.getStatus().equals(ImportDataRecordStatus.ERROR));
-				for (String attr : idr.getAttributes().keySet()) {
-					ImportDataAttribute ida = idr.getAttributes().get(attr);
+				for (String colName : idr.getAttributes().keySet()) {
+					ImportDataAttribute ida = idr.getAttributes().get(colName);
 
 					AtomicReference<Class<? extends IDto>> superInterface = new AtomicReference<>();
 					iterateAllTableDtoInterfaces(importData.getModel(), superIface -> {
-						if (!DtoRegistry.getAllFields(superIface).contains(attr)
-								&& !DtoRegistry.getAllColumnNames(superIface).contains(attr)) {
+						if (!DtoRegistry.getAllColumnNames(superIface).contains(colName)) {
 							return;
 						}
 
 						superInterface.set(superIface);
 					});
 
+					String fieldName = DtoRegistry.getFieldNameFromColumnName(dtoClass, colName);
+
 					Object dtoAttrValue;
-					Field field = DtoRegistry.getJavaFieldFromColumnName(superInterface.get(), attr);
+					Field field = DtoRegistry.getJavaFieldFromFieldName(superInterface.get(), fieldName);
 					if (field == null) {
-						field = DtoRegistry.getJavaFieldFromLangColumnName(superInterface.get(), attr);
+						field = DtoRegistry.getJavaFieldFromFieldName(superInterface.get(), fieldName);
 					}
 
 					try {
-						dtoAttrValue = PropertyUtils.getProperty(dto, attr);
-						if (DtoRegistry.getDateTimeFields(superInterface.get()).contains(field.getName())) {
-							String str = instantAsString((Instant) dtoAttrValue, dtf);
-							dtoAttrValue = stringAsInstant(str);
-						} else if (DtoRegistry.getStringFields(superInterface.get()).contains(field.getName())) {
-							if (ObjectUtils.isEmpty(dtoAttrValue)) {
-								dtoAttrValue = null;
-							}
+						dtoAttrValue = PropertyUtils.getProperty(dto, fieldName);
+						if (DtoRegistry.getStringFields(superInterface.get()).contains(fieldName)
+								&& ObjectUtils.isEmpty(dtoAttrValue)) {
+							dtoAttrValue = null;
 						}
 					} catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException
 							| NoSuchMethodException e) {
@@ -1007,7 +936,7 @@ public class PuiImportExportAction {
 							break;
 						}
 					} else if (dtoAttrValue != null && ida.getValue() == null) {
-						if (DtoRegistry.getNotNullFields(superInterface.get()).contains(attr)) {
+						if (DtoRegistry.getNotNullFields(superInterface.get()).contains(fieldName)) {
 							ida.setStatus(ImportDataAttributeStatus.ERROR);
 							recordHasErrror.set(true);
 							break;
@@ -1040,7 +969,9 @@ public class PuiImportExportAction {
 				}
 			}
 
-			importData.getRecords().values().forEach(rec -> {
+			importData.getRecords().values().forEach(rec ->
+
+			{
 				switch (rec.getStatus()) {
 				case UNMODIFIED:
 					importData.addUnmodifiedRecord();
@@ -1104,21 +1035,20 @@ public class PuiImportExportAction {
 				throw new PuiCommonImportExportWithErrorsException();
 			}
 
-			for (ImportDataRecord record : importData.getRecords().values()) {
-				if (record.getStatus().equals(ImportDataRecordStatus.ERROR)) {
+			for (ImportDataRecord rec : importData.getRecords().values()) {
+				if (rec.getStatus().equals(ImportDataRecordStatus.ERROR)) {
 					throw new PuiCommonImportExportWithErrorsException();
 				}
-				if (record.getStatus().equals(ImportDataRecordStatus.MODIFIED)
-						|| record.getStatus().equals(ImportDataRecordStatus.NEW)) {
-					record.getAttributes().forEach(
+				if (rec.getStatus().equals(ImportDataRecordStatus.MODIFIED)
+						|| rec.getStatus().equals(ImportDataRecordStatus.NEW)) {
+					rec.getAttributes().forEach(
 							(field, attr) -> iterateAllTableDtoInterfaces(importData.getModel(), superInterface -> {
 								if (!DtoRegistry.getAllFields(superInterface).contains(field)) {
 									return;
 								}
-								if (DtoRegistry.getDateTimeFields(superInterface).contains(field)) {
-									if (attr.getValue() instanceof String) {
-										attr.setValue(stringAsInstant((String) attr.getValue()));
-									}
+								if (DtoRegistry.getDateTimeFields(superInterface).contains(field)
+										&& attr.getValue() instanceof String) {
+									attr.setValue(stringAsInstant((String) attr.getValue()));
 								}
 								if (DtoRegistry.getFloatingFields(superInterface).contains(field)
 										&& attr.getValue() instanceof Integer) {
@@ -1133,11 +1063,11 @@ public class PuiImportExportAction {
 		private void executeImport(IPuiImportexportPk pk, ImportData importData) throws PuiServiceException {
 			List<ITableDto> updateRecords = new ArrayList<>();
 			List<ITableDto> insertRecords = new ArrayList<>();
-			for (ImportDataRecord record : importData.getRecords().values()) {
-				if (record.getStatus().equals(ImportDataRecordStatus.MODIFIED)) {
-					updateRecords.add(modifyRecord(importData.getModel(), importData.getLanguage(), record));
-				} else if (record.getStatus().equals(ImportDataRecordStatus.NEW)) {
-					insertRecords.add(createRecord(importData.getModel(), importData.getLanguage(), record));
+			for (ImportDataRecord rec : importData.getRecords().values()) {
+				if (rec.getStatus().equals(ImportDataRecordStatus.MODIFIED)) {
+					updateRecords.add(populateNewRecord(importData.getModel(), importData.getLanguage(), rec));
+				} else if (rec.getStatus().equals(ImportDataRecordStatus.NEW)) {
+					insertRecords.add(populateNewRecord(importData.getModel(), importData.getLanguage(), rec));
 				}
 			}
 
@@ -1150,21 +1080,9 @@ public class PuiImportExportAction {
 					Collections.singletonMap(IPuiImportexport.EXECUTED_FIELD, PuiConstants.TRUE_INT));
 		}
 
-		private ITableDto modifyRecord(String model, String language, ImportDataRecord record) {
+		private ITableDto populateNewRecord(String model, String language, ImportDataRecord rec) {
 			Map<String, Object> mapValues = new LinkedHashMap<>();
-			record.getAttributes().forEach((attribute, value) -> mapValues.put(attribute, value.getValue()));
-
-			if (daoRegistry.hasLanguageSupport(daoRegistry.getTableDaoFromModelId(model))) {
-				mapValues.put(IDto.LANG_COLUMN_NAME, language);
-			}
-
-			Class<? extends ITableDto> dtoClass = daoRegistry.getTableDtoFromModelId(model, false);
-			return DtoFactory.createInstanceFromInterface(dtoClass, mapValues);
-		}
-
-		private ITableDto createRecord(String model, String language, ImportDataRecord record) {
-			Map<String, Object> mapValues = new LinkedHashMap<>();
-			record.getAttributes().forEach((attribute, value) -> mapValues.put(attribute, value.getValue()));
+			rec.getAttributes().forEach((attribute, value) -> mapValues.put(attribute, value.getValue()));
 
 			if (daoRegistry.hasLanguageSupport(daoRegistry.getTableDaoFromModelId(model))) {
 				mapValues.put(IDto.LANG_COLUMN_NAME, language);
@@ -1178,6 +1096,79 @@ public class PuiImportExportAction {
 			String importTimeStr = PuiDateUtil.temporalAccessorToString(importTime,
 					DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
 			return importTimeStr + "_" + user;
+		}
+
+		/**
+		 * Convert an String into an Integer
+		 * 
+		 * @param value The String to be converted
+		 * @return The corresponding Integer
+		 * @throws IllegalFormatConversionException If the String could not be converted
+		 *                                          into an Integer
+		 */
+		private Integer stringAsInteger(String value) throws IllegalFormatConversionException {
+			if (ObjectUtils.isEmpty(value)) {
+				return null;
+			}
+
+			try {
+				return Integer.valueOf(value);
+			} catch (Exception e) {
+				throw new IllegalFormatConversionException('a', Integer.class);
+			}
+		}
+
+		/**
+		 * Convert an String into a Long
+		 * 
+		 * @param value The String to be converted
+		 * @return The corresponding Long
+		 * @throws IllegalFormatConversionException If the String could not be converted
+		 *                                          into a Long
+		 */
+		private Long stringAsLong(String value) throws IllegalFormatConversionException {
+			if (ObjectUtils.isEmpty(value)) {
+				return null;
+			}
+
+			try {
+				return Long.valueOf(value);
+			} catch (Exception e) {
+				throw new IllegalFormatConversionException('a', Long.class);
+			}
+		}
+
+		/**
+		 * Convert an String into an Instant
+		 * 
+		 * @param value The String to be converted
+		 * @return The corresponding Instant
+		 * @throws IllegalFormatConversionException If the String could not be converted
+		 *                                          into an Instant
+		 */
+		private Instant stringAsInstant(String value) throws IllegalFormatConversionException {
+			if (ObjectUtils.isEmpty(value)) {
+				return null;
+			}
+
+			try {
+				return Instant.parse(value);
+			} catch (Exception e1) {
+				try {
+					LocalDateTime ldt = PuiDateUtil.stringToLocalDateTime(value,
+							PuiUserSession.getCurrentSession() != null ? PuiUserSession.getCurrentSession().getZoneId()
+									: ZoneId.systemDefault());
+					if (ldt == null) {
+						throw new IllegalFormatConversionException('a', Instant.class);
+					}
+					ZonedDateTime zdt = ZonedDateTime.of(ldt,
+							PuiUserSession.getCurrentSession() != null ? PuiUserSession.getCurrentSession().getZoneId()
+									: ZoneId.systemDefault());
+					return zdt.toInstant();
+				} catch (Exception e2) {
+					throw new IllegalFormatConversionException('a', Instant.class);
+				}
+			}
 		}
 
 	}
