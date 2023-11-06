@@ -3,6 +3,7 @@ package es.prodevelop.pui9.utils;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.security.SecureRandom;
+import java.time.Instant;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -125,6 +126,9 @@ public class PuiObjectUtils {
 				}
 				if (field.getType().equals(Integer.class) && (val instanceof Double)) {
 					val = Integer.valueOf(((Double) val).intValue());
+				}
+				if (field.getType().equals(Instant.class) && (val instanceof String)) {
+					val = PuiDateUtil.stringToInstant((String) val);
 				}
 				if (Enum.class.isAssignableFrom(fieldType)) {
 					for (Object enumVal : fieldType.getEnumConstants()) {

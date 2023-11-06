@@ -1085,14 +1085,15 @@ public class PuiImportExportAction {
 		}
 
 		private ITableDto populateNewRecord(String model, String language, ImportDataRecord rec) {
+			Class<? extends ITableDto> dtoClass = getTableDtoClass(model);
 			Map<String, Object> mapValues = new LinkedHashMap<>();
-			rec.getAttributes().forEach((attribute, value) -> mapValues.put(attribute, value.getValue()));
+			rec.getAttributes().forEach((attribute, value) -> mapValues
+					.put(DtoRegistry.getFieldNameFromColumnName(dtoClass, attribute), value.getValue()));
 
 			if (daoRegistry.hasLanguageSupport(daoRegistry.getTableDaoFromModelId(model))) {
 				mapValues.put(IDto.LANG_COLUMN_NAME, language);
 			}
 
-			Class<? extends ITableDto> dtoClass = daoRegistry.getTableDtoFromModelId(model, false);
 			return DtoFactory.createInstanceFromInterface(dtoClass, mapValues);
 		}
 
