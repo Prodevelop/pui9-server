@@ -131,15 +131,17 @@ public class PuiImportExportAction {
 	 * 
 	 * @param force If set to true, the cache is forced to be reloaded
 	 */
-	public synchronized void reloadModels(boolean force) {
+	public void reloadModels(boolean force) {
 		if (force || ObjectUtils.isEmpty(modelsCache)) {
 			if (force) {
 				modelService.reloadModels(true);
 			}
-			modelsCache.clear();
-			modelsCache.addAll(modelService.getOriginalPuiModelConfigurations().entrySet().stream()
-					.filter(entry -> entry.getValue().getDefaultConfiguration().isActionImportExport())
-					.map(Entry::getKey).collect(Collectors.toList()));
+			synchronized (modelsCache) {
+				modelsCache.clear();
+				modelsCache.addAll(modelService.getOriginalPuiModelConfigurations().entrySet().stream()
+						.filter(entry -> entry.getValue().getDefaultConfiguration().isActionImportExport())
+						.map(Entry::getKey).collect(Collectors.toList()));
+			}
 		}
 	}
 
@@ -159,11 +161,13 @@ public class PuiImportExportAction {
 	 *                                                    configured for
 	 *                                                    import/export
 	 */
-	private synchronized void checkModelAvailable(String model) throws PuiCommonImportExportInvalidModelException {
+	private void checkModelAvailable(String model) throws PuiCommonImportExportInvalidModelException {
 		reloadModels(false);
 
-		if (!modelsCache.contains(model)) {
-			throw new PuiCommonImportExportInvalidModelException(model);
+		synchronized (modelsCache) {
+			if (!modelsCache.contains(model)) {
+				throw new PuiCommonImportExportInvalidModelException(model);
+			}
 		}
 	}
 

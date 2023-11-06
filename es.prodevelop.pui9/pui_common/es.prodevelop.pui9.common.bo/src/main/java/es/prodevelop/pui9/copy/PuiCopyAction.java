@@ -48,23 +48,27 @@ public class PuiCopyAction {
 	/**
 	 * Reload the models cache
 	 */
-	public synchronized void reloadModels(boolean force) {
+	public void reloadModels(boolean force) {
 		if (force || ObjectUtils.isEmpty(modelsCache)) {
 			if (force) {
 				modelService.reloadModels(true);
 			}
-			modelsCache.clear();
-			modelsCache.addAll(modelService.getOriginalPuiModelConfigurations().entrySet().stream()
-					.filter(entry -> entry.getValue().getDefaultConfiguration().isActionCopy()).map(Entry::getKey)
-					.collect(Collectors.toList()));
+			synchronized (modelsCache) {
+				modelsCache.clear();
+				modelsCache.addAll(modelService.getOriginalPuiModelConfigurations().entrySet().stream()
+						.filter(entry -> entry.getValue().getDefaultConfiguration().isActionCopy()).map(Entry::getKey)
+						.collect(Collectors.toList()));
+			}
 		}
 	}
 
 	private void checkModelAvailable(String model) throws PuiCommonCopyInvalidModelException {
 		reloadModels(false);
 
-		if (!modelsCache.contains(model)) {
-			throw new PuiCommonCopyInvalidModelException(model);
+		synchronized (modelsCache) {
+			if (!modelsCache.contains(model)) {
+				throw new PuiCommonCopyInvalidModelException(model);
+			}
 		}
 	}
 
