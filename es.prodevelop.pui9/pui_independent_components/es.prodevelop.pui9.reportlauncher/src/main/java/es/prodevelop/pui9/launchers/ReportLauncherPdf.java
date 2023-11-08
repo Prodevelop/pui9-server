@@ -102,7 +102,7 @@ public class ReportLauncherPdf extends AbstractReportLauncher {
 
 	private JasperPrint getCompiledReport(Connection connection) throws JRException {
 		Map<String, Object> params = data.getParameters();
-		params.put(JRParameter.REPORT_LOCALE, new Locale("es", "ES"));
+		params.computeIfAbsent(JRParameter.REPORT_LOCALE, k -> new Locale("es", "ES"));
 
 		InputStream is = PuiClassLoaderUtils.getClassLoader().getResourceAsStream(data.getReportPath());
 		if (isCompiledFile(data.getReportPath())) {
