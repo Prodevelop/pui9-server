@@ -28,8 +28,8 @@ import es.prodevelop.pui9.annotations.PuiGenerated;
 import es.prodevelop.pui9.classpath.PuiClassLoaderUtils;
 import es.prodevelop.pui9.common.enums.PuiVariableValues;
 import es.prodevelop.pui9.common.exceptions.PuiCommonNoFileException;
-import es.prodevelop.pui9.common.model.dao.interfaces.IPuiModelDao;
 import es.prodevelop.pui9.common.model.dto.interfaces.IPuiModel;
+import es.prodevelop.pui9.common.service.interfaces.IPuiModelService;
 import es.prodevelop.pui9.common.service.interfaces.IPuiVariableService;
 import es.prodevelop.pui9.components.PuiApplicationContext;
 import es.prodevelop.pui9.docgen.dto.DocgenMapping;
@@ -66,8 +66,8 @@ import es.prodevelop.pui9.exceptions.PuiServiceException;
 import es.prodevelop.pui9.exceptions.PuiServiceGetException;
 import es.prodevelop.pui9.exceptions.PuiServiceInsertException;
 import es.prodevelop.pui9.exceptions.PuiServiceUpdateException;
-import es.prodevelop.pui9.file.FileDownload;
 import es.prodevelop.pui9.file.AttachmentDefinition;
+import es.prodevelop.pui9.file.FileDownload;
 import es.prodevelop.pui9.filter.AbstractFilterRule;
 import es.prodevelop.pui9.filter.FilterBuilder;
 import es.prodevelop.pui9.filter.FilterGroup;
@@ -89,7 +89,7 @@ public class PuiDocgenTemplateService extends
 	private IPuiVariableService variableService;
 
 	@Autowired
-	private IPuiModelDao puimodelDao;
+	private IPuiModelService modelService;
 
 	@Autowired
 	private IPuiDocgenAttributeDao docgenAttributeDao;
@@ -470,7 +470,7 @@ public class PuiDocgenTemplateService extends
 			throws PuiServiceGetException, PuiDocgenModelNotExistsException {
 		List<IPuiModel> puiModels;
 		try {
-			puiModels = puimodelDao.findByModel(model);
+			puiModels = modelService.getTableDao().findByModel(model);
 		} catch (PuiDaoFindException e) {
 			throw new PuiServiceGetException(e);
 		}
@@ -523,7 +523,7 @@ public class PuiDocgenTemplateService extends
 	private Class<? extends IDao> getDaoClassFromModel(String model) throws PuiDocgenModelNotExistsException {
 		List<IPuiModel> puiModels;
 		try {
-			puiModels = puimodelDao.findByModel(model);
+			puiModels = modelService.getTableDao().findByModel(model);
 		} catch (PuiDaoFindException e) {
 			throw new PuiDocgenModelNotExistsException(model);
 		}
