@@ -24,13 +24,17 @@
  */
 package es.prodevelop.xdocreport.core.registry;
 
-import java.util.Iterator;
+import java.lang.reflect.Modifier;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
+import org.reflections.Reflections;
+import org.reflections.util.ConfigurationBuilder;
 
+import es.prodevelop.pui9.classpath.PuiClassLoaderUtils;
 import es.prodevelop.xdocreport.core.discovery.IBaseDiscovery;
-import es.prodevelop.xdocreport.core.internal.JDKServiceLoader;
 import es.prodevelop.xdocreport.core.logging.LogUtils;
 
 public abstract class AbstractRegistry<Discovery extends IBaseDiscovery> {
@@ -55,16 +59,21 @@ public abstract class AbstractRegistry<Discovery extends IBaseDiscovery> {
 	protected void initializeIfNeeded() {
 		if (!initialized) {
 			onStartInitialization();
-			// getClass().getClassLoader() to work under OSGi context
 
-			Iterator<Discovery> discoveries = JDKServiceLoader.lookupProviders(registryType,
-					getClass().getClassLoader());
-			if (LOGGER.isEnabled(Level.TRACE)) {
-				LOGGER.trace("discoveries found ? " + discoveries.hasNext());
-			}
+			Reflections reflections = new Reflections(ConfigurationBuilder.build()
+					.addClassLoaders(PuiClassLoaderUtils.getClassLoader()).forPackages("es.prodevelop.xdocreport"));
+			List<Class<? extends Discovery>> classes = reflections.getSubTypesOf(registryType).stream()
+					.filter(c -> !c.isInterface() && !Modifier.isAbstract(c.getModifiers()))
+					.collect(Collectors.toList());
 
-			while (discoveries.hasNext()) {
-				Discovery instance = discoveries.next();
+			classes.forEach(cl -> {
+				Discovery instance;
+				try {
+					instance = cl.newInstance();
+				} catch (InstantiationException | IllegalAccessException e) {
+					return;
+				}
+
 				try {
 					boolean result = registerInstance(instance);
 					if (LOGGER.isEnabled(Level.TRACE)) {
@@ -73,7 +82,8 @@ public abstract class AbstractRegistry<Discovery extends IBaseDiscovery> {
 				} catch (Throwable e) {
 					LOGGER.warn("Error while registration of Discovery instance  " + instance, e);
 				}
-			}
+			});
+
 			onEndInitialization();
 			initialized = true;
 		}
