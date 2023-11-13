@@ -78,7 +78,7 @@ public class StylesHelper {
 	 * @return
 	 */
 	public static ParagraphProperties createParagraphProperties(String style) {
-		Map<String, String> stylesMap = StylesHelper.parse(style);
+		Map<String, String> stylesMap = parse(style);
 		if (!stylesMap.isEmpty()) {
 			ParagraphProperties properties = new ParagraphProperties();
 			processContainerproperties(properties, stylesMap);
@@ -94,7 +94,7 @@ public class StylesHelper {
 	 * @return
 	 */
 	public static HeaderProperties createHeaderProperties(String style) {
-		Map<String, String> stylesMap = StylesHelper.parse(style);
+		Map<String, String> stylesMap = parse(style);
 		if (!stylesMap.isEmpty()) {
 			HeaderProperties properties = new HeaderProperties();
 			processContainerproperties(properties, stylesMap);
@@ -110,7 +110,7 @@ public class StylesHelper {
 	 * @return
 	 */
 	public static ListItemProperties createListItemProperties(String style) {
-		Map<String, String> stylesMap = StylesHelper.parse(style);
+		Map<String, String> stylesMap = parse(style);
 		if (!stylesMap.isEmpty()) {
 			ListItemProperties properties = new ListItemProperties();
 			processContainerproperties(properties, stylesMap);
@@ -126,7 +126,7 @@ public class StylesHelper {
 	 * @return
 	 */
 	public static ListProperties createListProperties(String style) {
-		Map<String, String> stylesMap = StylesHelper.parse(style);
+		Map<String, String> stylesMap = parse(style);
 		if (!stylesMap.isEmpty()) {
 			ListProperties properties = new ListProperties();
 			processContainerproperties(properties, stylesMap);
@@ -142,7 +142,7 @@ public class StylesHelper {
 	 * @return
 	 */
 	public static SpanProperties createSpanProperties(String style) {
-		Map<String, String> stylesMap = StylesHelper.parse(style);
+		Map<String, String> stylesMap = parse(style);
 		if (!stylesMap.isEmpty()) {
 			SpanProperties properties = new SpanProperties();
 			processContainerproperties(properties, stylesMap);

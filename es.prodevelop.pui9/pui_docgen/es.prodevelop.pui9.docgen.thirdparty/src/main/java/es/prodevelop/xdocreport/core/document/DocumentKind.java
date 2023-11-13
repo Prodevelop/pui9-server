@@ -29,10 +29,7 @@ package es.prodevelop.xdocreport.core.document;
  */
 public enum DocumentKind {
 
-	ODT("application/vnd.oasis.opendocument.text"), ODS("application/vnd.oasis.opendocument.spreadsheet"),
-	ODP("application/vnd.oasis.opendocument.presentation"),
-	DOCX("application/vnd.openxmlformats-officedocument.wordprocessingml.document"),
-	PPTX("application/vnd.openxmlformats-officedocument.presentationml.presentation");
+	ODT("application/vnd.oasis.opendocument.text");
 
 	private final String mimeType;
 

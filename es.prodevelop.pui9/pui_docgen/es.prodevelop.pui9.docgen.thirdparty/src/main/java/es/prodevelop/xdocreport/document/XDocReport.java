@@ -413,7 +413,7 @@ public class XDocReport {
 	}
 
 	/**
-	 * Generate report and convert it to another format (PDF, XHTML) without cache.
+	 * Generate report and convert it to another format (PDF) without cache.
 	 *
 	 * @param sourceStream       the input stream of the template report (docx, odt,
 	 *                           etc).
@@ -437,7 +437,7 @@ public class XDocReport {
 	}
 
 	/**
-	 * Generate report and convert it to another format (PDF, XHTML) without cache
+	 * Generate report and convert it to another format (PDF) without cache
 	 * by setting the registry.
 	 *
 	 * @param sourceStream       the input stream of the template report (docx, odt,

@@ -29,5 +29,6 @@ package es.prodevelop.xdocreport.converter;
  */
 public enum ConverterTypeVia {
 
-	FOP, XSL, ODFDOM, XWPF, DOCX4J, OpenXMLFormats
+	ODFDOM;
+
 }

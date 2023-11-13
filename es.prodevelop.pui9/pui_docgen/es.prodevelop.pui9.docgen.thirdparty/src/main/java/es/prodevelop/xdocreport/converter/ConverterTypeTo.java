@@ -29,8 +29,6 @@ package es.prodevelop.xdocreport.converter;
  */
 public enum ConverterTypeTo {
 
-	XHTML(MimeMappingConstants.XHTML_MIME_TYPE, MimeMappingConstants.XHTML_EXTENSION),
-	FO(MimeMappingConstants.XML_MIME_TYPE, MimeMappingConstants.FO_EXTENSION),
 	PDF(MimeMappingConstants.PDF_MIME_TYPE, MimeMappingConstants.PDF_EXTENSION);
 
 	private final String mimeType;

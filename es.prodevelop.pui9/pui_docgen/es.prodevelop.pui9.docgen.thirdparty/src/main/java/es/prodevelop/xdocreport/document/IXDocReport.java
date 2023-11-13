@@ -282,7 +282,7 @@ public interface IXDocReport extends Serializable {
 	IConverter getConverter(Options options) throws XDocConverterException;
 
 	/**
-	 * Generate report and Convert it to another format (PDF, XHTML, etc).
+	 * Generate report and Convert it to another format (PDF, etc).
 	 *
 	 * @param context
 	 * @param options
@@ -295,7 +295,7 @@ public interface IXDocReport extends Serializable {
 			throws XDocReportException, XDocConverterException, IOException;
 
 	/**
-	 * Generate report and Convert it to another format (PDF, XHTML, etc).
+	 * Generate report and Convert it to another format (PDF, etc).
 	 *
 	 * @param contextMap
 	 * @param options
