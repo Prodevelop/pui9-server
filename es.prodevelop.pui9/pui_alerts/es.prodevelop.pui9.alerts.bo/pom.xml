@@ -5,7 +5,7 @@
 	<artifactId>es.prodevelop.pui9.alerts.bo</artifactId>
 	<packaging>jar</packaging>
 
-	<name>PUI9 Dashboards BO</name>
+	<name>PUI9 Alerts BO</name>
 	<description>Business layer for Alerts of PUI9</description>
 
 	<parent>

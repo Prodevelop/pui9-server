@@ -5,7 +5,7 @@
 	<artifactId>es.prodevelop.pui9.alerts.dto</artifactId>
 	<packaging>jar</packaging>
 
-	<name>PUI9 Dashboards DTO</name>
+	<name>PUI9 Alerts DTO</name>
 	<description>Data transfer layer for Alerts of PUI9</description>
 
 	<parent>
